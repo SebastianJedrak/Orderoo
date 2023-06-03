@@ -1,4 +1,5 @@
 import { ProductItemType } from "../../types";
+import {FormControlLabel, Checkbox} from "@mui/material"
 
 type Props = {
   productItem: ProductItemType;
@@ -6,5 +7,5 @@ type Props = {
 
 export default function ProductItem({productItem}: Props) {
   console.log(productItem);
-  return <div>ProductItem</div>;
+  return <FormControlLabel control={<Checkbox />} label={productItem.productName} />;
 }
