@@ -1,8 +1,12 @@
-import React from "react";
-import { Paper } from "@mui/material";
+import { Paper, Box } from "@mui/material";
+import products from "../data/products.json";
 
 function Products() {
-  return <Paper></Paper>;
+const productsItems = products.products
+console.log(productsItems);
+  return <Paper>
+    {productsItems.map(product => <Box>{product.productName}</Box>)}
+  </Paper>;
 }
 
 export default Products;
