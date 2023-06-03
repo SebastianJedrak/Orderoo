@@ -1,6 +1,18 @@
 {
-  "internet": [],
-  "telewizja": [],
-  "abonament_telefoniczny": [],
-  "Dekoder4K": []
+  "internet": {
+    "productId": 1,
+    "price": { "2023": "39", "2024": "49", "2025": "59" }
+  },
+  "telewizja": {
+    "productId": 2,
+    "price": { "2023": "39", "2024": "49", "2025": "59" }
+  },
+  "abonamentTelefoniczny": {
+    "productId": 3,
+    "price": { "2023": "29", "2024": "29", "2025": "29" }
+  },
+  "dekoder4k": {
+    "productId": 3,
+    "price": { "2023": "29", "2024": "29", "2025": "29" }
+  }
 }
