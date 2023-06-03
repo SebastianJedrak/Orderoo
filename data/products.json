@@ -1,22 +1,47 @@
 {
-  "internet": {
-    "productId": 1,
-    "name": "Internet",
-    "price": { "2023": "39", "2024": "49", "2025": "59" }
-  },
-  "telewizja": {
-    "productId": 2,
-    "name": "Telewizja",
-    "price": { "2023": "39", "2024": "49", "2025": "59" }
-  },
-  "abonamentTelefoniczny": {
-    "productId": 3,
-    "name": "Abonament telefoniczny",
-    "price": { "2023": "29", "2024": "29", "2025": "29" }
-  },
-  "dekoder4k": {
-    "productId": 4,
-    "name": "Dekoder 4K",
-    "price": { "2023": "29", "2024": "29", "2025": "29" }
-  }
+  "products": [
+    {
+      "internet": {
+        "productId": 1,
+        "productName": "Internet",
+        "productPrice": { "2023": "39", "2024": "49", "2025": "59" }
+      }
+    },
+    {
+      "telewizja": {
+        "productId": 2,
+        "productName": "Telewizja",
+        "productPrice": { "2023": "39", "2024": "49", "2025": "59" }
+      }
+    },
+    {
+      "abonamentTelefoniczny": {
+        "productId": 3,
+        "productName": "Abonament telefoniczny",
+        "productPrice": { "2023": "29", "2024": "29", "2025": "29" }
+      }
+    },
+    {
+      "dekoder4k": {
+        "productId": 4,
+        "productName": "Dekoder 4K",
+        "productPrice": { "2023": "29", "2024": "29", "2025": "29" }
+      }
+    }
+  ],
+
+  "packages": [
+    {
+      "packageId": 1,
+      "packageName": "Internet + telewizja",
+      "packagePrice": { "2023": "79", "2024": "89", "2025": "99" },
+      "productIncludedId": [1, 2]
+    },
+    {
+      "packageId": 2,
+      "packageName": "Internet + Abonament telefoniczny",
+      "packagePrice": { "2023": "64", "2024": "64", "2025": "64" },
+      "productIncludedId": [1, 3]
+    }
+  ]
 }
