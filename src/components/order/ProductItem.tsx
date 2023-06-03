@@ -1,11 +1,17 @@
 import { ProductItemType } from "../../types";
-import {FormControlLabel, Checkbox} from "@mui/material"
+import { FormControlLabel, Checkbox } from "@mui/material";
 
 type Props = {
   productItem: ProductItemType;
 };
 
-export default function ProductItem({productItem}: Props) {
+export default function ProductItem({ productItem }: Props) {
   console.log(productItem);
-  return <FormControlLabel control={<Checkbox />} label={productItem.productName} />;
+  return (
+    <FormControlLabel
+      sx={{ width: "max-content" }}
+      control={<Checkbox />}
+      label={productItem.productName}
+    />
+  );
 }
