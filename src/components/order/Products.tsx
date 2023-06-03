@@ -11,7 +11,7 @@ import ProductItem from "./ProductItem";
 function Products() {
   const productsItems = products.productItems;
   return (
-    <Paper elevation={3} sx={{ margin: 5, padding: 5 }}>
+    <Paper component="section" elevation={3} sx={{ margin: 5, padding: 5 }}>
       <Typography variant="h5" gutterBottom textAlign="center">Place your order</Typography>
       <FormGroup>
         {productsItems.map((product) => (
