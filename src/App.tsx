@@ -1,13 +1,13 @@
-import './App.css';
-import Box from '@mui/material/Box/Box';
-import Header from './components/Header';
-import Products from './components/Products';
+import "./App.css";
+import Box from "@mui/material/Box/Box";
+import Header from "./components/Header";
+import Products from "./components/order/Products";
 
 function App() {
   return (
-    <Box >
-      <Header/>
-      <Products/>
+    <Box>
+      <Header />
+      <Products />
     </Box>
   );
 }
