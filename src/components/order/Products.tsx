@@ -44,7 +44,7 @@ function Products() {
           defaultValue=""
         >
           {productItems?.[0].productPrice.map((year) => (
-            <MenuItem value={year.year}>{year.year}</MenuItem>
+            <MenuItem key={year.year} value={year.year}>{year.year}</MenuItem>
           ))}
         </Select>
 
