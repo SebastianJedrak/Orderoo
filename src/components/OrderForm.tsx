@@ -13,18 +13,21 @@ import {
 } from "@mui/material";
 import { useContext, useState } from "react";
 import { ProductsContext } from "../ctx/ProductsContext";
+import { OrderType } from "../types";
 
 function Products() {
   const data = useContext(ProductsContext);
   const productItems = data?.productItems;
 
   // Form control
-  const [formValues, setFormValues] = useState(4)
-  const [isError, setIsError] = useState(false)
+  const [formValues, setFormValues] = useState<OrderType | null>(null);
+  const [isError, setIsError] = useState(false);
+  const [selectedYear, setSelectedYear] = useState<number | null>(null);
+  const [orderedItems, setOrderedItems] = useState<number[] | null>(null);
 
   const submitHandler = (e: React.MouseEvent) => {
     e.preventDefault();
-    if (formValues === null) setIsError(true)
+    if (formValues === null) setIsError(true);
     fetch("/orders.json", {
       method: "POST",
       body: JSON.stringify(formValues),
