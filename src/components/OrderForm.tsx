@@ -12,7 +12,7 @@ import {
   Checkbox,
   SelectChangeEvent,
 } from "@mui/material";
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { ProductsContext } from "../ctx/ProductsContext";
 import { OrderType } from "../types";
 
@@ -40,19 +40,23 @@ function Products() {
       setOrderedItems([...orderedItems].filter((value) => value !== targetId));
   };
 
+  useEffect(
+    () => setFormValues({ selectedYear, orderedItems }),
+    [selectedYear, orderedItems]
+  );
+
   const submitHandler = (e: React.MouseEvent) => {
     e.preventDefault();
-    console.log(selectedYear);
-    console.log(orderedItems);
+    console.log(formValues);
 
-    // if (orderedItems === null) setIsError(true);
-    // fetch("/orders.json", {
-    //   method: "POST",
-    //   body: JSON.stringify(formValues),
-    //   headers: {
-    //     "Content-Type": "application/json",
-    //   },
-    // });
+    if (orderedItems === null) setIsError(true);
+    fetch("/orders.json", {
+      method: "POST",
+      body: JSON.stringify(formValues),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
   };
 
   return (
