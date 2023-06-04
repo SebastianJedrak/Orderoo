@@ -1,7 +1,11 @@
-import React from 'react'
+import { Paper } from "@mui/material";
 
 export default function Packages() {
   return (
-    <div>Packages</div>
-  )
+    <Paper
+      component="section"
+      elevation={3}
+      sx={{ margin: 5, padding: 5 }}
+    ></Paper>
+  );
 }
