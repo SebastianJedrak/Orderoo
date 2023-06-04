@@ -1,10 +1,11 @@
 import { createContext, useEffect, useState } from "react";
+import { ProductsType } from "../types";
 
-export const ProductsContext = createContext(null);
+export const ProductsContext = createContext<(ProductsType | null)>(null);
 
 export default function ProductsProvider(props: {
   children: React.ReactNode}) {
-  const [data, setData] = useState(null);
+  const [data, setData] = useState<(ProductsType | null)>(null);
 
   useEffect(() => {
     async function getData() {
@@ -12,7 +13,7 @@ export default function ProductsProvider(props: {
         const response = await window.fetch("../data/products.json");
         if (!response.ok) throw new Error("Failed to fetch data");
         const data = await response.json();
-        // setData(data);
+        setData(data);
       } catch (error: any) {
         console.error(`Something goes wrong ${error.message}`);
       }
