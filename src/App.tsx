@@ -1,7 +1,7 @@
 import "./App.css";
 import Box from "@mui/material/Box/Box";
 import Header from "./components/Header";
-import Products from "./components/order/Products";
+import OrderForm from "./components/OrderForm"
 import PackagesAccordion from "./components/PackagesAccordion";
 import ProductsProvider from "./ctx/ProductsContext";
 
@@ -10,7 +10,7 @@ function App() {
     <ProductsProvider>
       <Box>
         <Header />
-        <Products />
+        <OrderForm />
         <PackagesAccordion />
       </Box>
     </ProductsProvider>
