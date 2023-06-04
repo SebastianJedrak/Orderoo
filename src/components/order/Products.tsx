@@ -23,8 +23,21 @@ function Products() {
 
       {/* Select year */}
       <FormControl fullWidth>
-        <InputLabel size="small" id="select-year-label">Select year</InputLabel>
-        <Select sx={{width: "150px"}} size="small" labelId="select-year-label" label="Select year" id="select-year">
+        <InputLabel
+          sx={{ margin: "10px 0" }}
+          size="small"
+          id="select-year-label"
+        >
+          Select year
+        </InputLabel>
+        <Select
+          sx={{ width: "150px", margin: "10px 0" }}
+          size="small"
+          labelId="select-year-label"
+          label="Select year"
+          id="select-year"
+          defaultValue = ""
+        >
           {Object.keys(productsItems[0].productPrice).map((year) => (
             <MenuItem key={year} value={year}>
               {year}
