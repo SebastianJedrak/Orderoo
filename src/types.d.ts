@@ -1,7 +1,14 @@
-export type ProductItemType = 
-  {
+export type ProductsType = {
+  productItems: {
     productId: number;
     productName: string;
-    productPrice: { "2023": string; "2024": string; "2025": string };
-  }
-;
+    productPrice: { year: string; price: string }[];
+  }[];
+  packages: {
+    packageId: number;
+    packageName: string;
+    packagePrice: { year: string; price: string }[];
+    productsIncludedId: number[];
+    productsFreeId: (number | null)[];
+  }[];
+};
