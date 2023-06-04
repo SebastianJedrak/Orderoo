@@ -59,6 +59,14 @@ function Products() {
   const submitHandler = (e: React.MouseEvent) => {
     e.preventDefault();
     // Validation
+    if (
+      formValues?.orderedItems.length === 0 &&
+      formValues?.selectedYear === ""
+    ) {
+      setIsCheckboxError(true);
+      setIsYearError(true);
+      return;
+    }
     if (formValues?.orderedItems.length === 0) return setIsCheckboxError(true);
     if (formValues?.selectedYear === "") return setIsYearError(true);
     console.log(formValues);
@@ -70,18 +78,19 @@ function Products() {
       <Typography variant="h5" gutterBottom textAlign="center">
         Place Your Order
       </Typography>
-      <form>
+      <form method="POST">
         {/* Select year */}
-        <FormControl fullWidth error={isYearError}    sx={{ margin: "20px 0" }} variant="standard"> 
-          <InputLabel
-         
-            size="small"
-            id="select-year-label"
-          >
+        <FormControl
+          fullWidth
+          error={isYearError}
+          sx={{ margin: "20px 0" }}
+          variant="standard"
+        >
+          <InputLabel size="small" id="select-year-label">
             Select year
           </InputLabel>
           <Select
-            sx={{ width: "150px"}}
+            sx={{ width: "150px" }}
             size="small"
             labelId="select-year-label"
             label="Select year"
