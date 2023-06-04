@@ -11,6 +11,8 @@ import {
   FormControlLabel,
   Checkbox,
   SelectChangeEvent,
+  FormLabel,
+  FormHelperText,
 } from "@mui/material";
 import { useContext, useEffect, useState } from "react";
 import { ProductsContext } from "../ctx/ProductsContext";
@@ -33,6 +35,10 @@ function Products() {
   const handleChangeCheckbox = (
     event: React.SyntheticEvent<Element, Event>
   ) => {
+    // Reset error
+    if (isError) setIsError(false);
+
+    // Get data
     const target = event.target as HTMLInputElement;
     const targetId = Number(target.value);
     if (target.checked) setOrderedItems([...orderedItems, targetId]);
@@ -47,16 +53,8 @@ function Products() {
 
   const submitHandler = (e: React.MouseEvent) => {
     e.preventDefault();
+    if (formValues?.orderedItems.length === 0) return setIsError(true);
     console.log(formValues);
-
-    if (orderedItems === null) setIsError(true);
-    fetch("/orders.json", {
-      method: "POST",
-      body: JSON.stringify(formValues),
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
   };
 
   return (
@@ -69,14 +67,14 @@ function Products() {
         {/* Select year */}
         <FormControl fullWidth>
           <InputLabel
-            sx={{ margin: "10px 0" }}
+            sx={{ margin: "20px 0" }}
             size="small"
             id="select-year-label"
           >
             Select year
           </InputLabel>
           <Select
-            sx={{ width: "150px", margin: "10px 0" }}
+            sx={{ width: "150px", margin: "20px 0" }}
             size="small"
             labelId="select-year-label"
             label="Select year"
@@ -88,8 +86,10 @@ function Products() {
             <MenuItem value="2024">2024</MenuItem>
             <MenuItem value="2025">2025</MenuItem>
           </Select>
-
-          {/* Checkbox items*/}
+        </FormControl>
+        {/* Checkbox items*/}
+        <FormControl fullWidth error={isError} variant="standard">
+          <FormLabel>Choose your items</FormLabel>
           <FormGroup>
             {productItems?.map((product) => (
               <FormControlLabel
@@ -102,15 +102,19 @@ function Products() {
               />
             ))}
           </FormGroup>
-
-          {/* Summary and order*/}
-          <Stack spacing={1} display="flex" alignItems="end">
-            <Typography variant="h6"> 19$</Typography>
-            <Button onClick={submitHandler} type="submit" variant="contained">
-              Order!
-            </Button>
-          </Stack>
+          <FormHelperText
+            sx={{ visibility: `${isError ? "visible" : "hidden"}` }}
+          >
+            You need to choose minimum one item to order
+          </FormHelperText>
         </FormControl>
+        {/* Summary and order*/}
+        <Stack spacing={1} display="flex" alignItems="end">
+          <Typography variant="h6"> 19$</Typography>
+          <Button onClick={submitHandler} type="submit" variant="contained">
+            Order!
+          </Button>
+        </Stack>
       </form>
     </Paper>
   );
