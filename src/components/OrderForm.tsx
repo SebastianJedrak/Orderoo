@@ -19,13 +19,13 @@ function Products() {
   const productItems = data?.productItems;
 
   // Form control
-  const [formValues, setFormValues] = useState(null)
+  const [formValues, setFormValues] = useState(4)
   const [isError, setIsError] = useState(false)
 
   const submitHandler = (e: React.MouseEvent) => {
     e.preventDefault();
     if (formValues === null) setIsError(true)
-    fetch(".orders.json", {
+    fetch("/orders.json", {
       method: "POST",
       body: JSON.stringify(formValues),
       headers: {
@@ -41,7 +41,6 @@ function Products() {
         Place Your Order
       </Typography>
       <form>
-        {" "}
         {/* Select year */}
         <FormControl fullWidth>
           <InputLabel
@@ -74,6 +73,7 @@ function Products() {
                 sx={{ width: "max-content" }}
                 control={<Checkbox />}
                 label={product.productName}
+                value={product.productName}
               />
             ))}
           </FormGroup>

@@ -12,3 +12,8 @@ export type ProductsType = {
     productsFreeId: (number | null)[];
   }[];
 };
+
+export type OrderType = {
+  selectedYear: number,
+  orderedItems: number[],
+}
