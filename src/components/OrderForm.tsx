@@ -24,11 +24,16 @@ function Products() {
 
   // Form control
   const [formValues, setFormValues] = useState<OrderType | null>(null);
-  const [isError, setIsError] = useState(false);
-  const [selectedYear, setSelectedYear] = useState("2023");
+  const [isCheckboxError, setIsCheckboxError] = useState(false);
+  const [isYearError, setIsYearError] = useState(false);
+  const [selectedYear, setSelectedYear] = useState("");
   const [orderedItems, setOrderedItems] = useState<number[] | []>([]);
 
   const handleChangeYear = (e: SelectChangeEvent) => {
+    // Reset error
+    if (isYearError) setIsYearError(false);
+
+    // Get data
     setSelectedYear(e.target.value as string);
   };
 
@@ -36,7 +41,7 @@ function Products() {
     event: React.SyntheticEvent<Element, Event>
   ) => {
     // Reset error
-    if (isError) setIsError(false);
+    if (isCheckboxError) setIsCheckboxError(false);
 
     // Get data
     const target = event.target as HTMLInputElement;
@@ -53,7 +58,9 @@ function Products() {
 
   const submitHandler = (e: React.MouseEvent) => {
     e.preventDefault();
-    if (formValues?.orderedItems.length === 0) return setIsError(true);
+    // Validation
+    if (formValues?.orderedItems.length === 0) return setIsCheckboxError(true);
+    if (formValues?.selectedYear === "") return setIsYearError(true);
     console.log(formValues);
   };
 
@@ -65,16 +72,16 @@ function Products() {
       </Typography>
       <form>
         {/* Select year */}
-        <FormControl fullWidth>
+        <FormControl fullWidth error={isYearError}    sx={{ margin: "20px 0" }} variant="standard"> 
           <InputLabel
-            sx={{ margin: "20px 0" }}
+         
             size="small"
             id="select-year-label"
           >
             Select year
           </InputLabel>
           <Select
-            sx={{ width: "150px", margin: "20px 0" }}
+            sx={{ width: "150px"}}
             size="small"
             labelId="select-year-label"
             label="Select year"
@@ -86,9 +93,14 @@ function Products() {
             <MenuItem value="2024">2024</MenuItem>
             <MenuItem value="2025">2025</MenuItem>
           </Select>
+          <FormHelperText
+            sx={{ visibility: `${isYearError ? "visible" : "hidden"}` }}
+          >
+            You need to choose year of order
+          </FormHelperText>
         </FormControl>
         {/* Checkbox items*/}
-        <FormControl fullWidth error={isError} variant="standard">
+        <FormControl fullWidth error={isCheckboxError} variant="standard">
           <FormLabel>Choose your items</FormLabel>
           <FormGroup>
             {productItems?.map((product) => (
@@ -103,7 +115,7 @@ function Products() {
             ))}
           </FormGroup>
           <FormHelperText
-            sx={{ visibility: `${isError ? "visible" : "hidden"}` }}
+            sx={{ visibility: `${isCheckboxError ? "visible" : "hidden"}` }}
           >
             You need to choose minimum one item to order
           </FormHelperText>
