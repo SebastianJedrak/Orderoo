@@ -10,6 +10,7 @@ import {
   FormControl,
   FormControlLabel,
   Checkbox,
+  SelectChangeEvent
 } from "@mui/material";
 import { useContext, useState } from "react";
 import { ProductsContext } from "../ctx/ProductsContext";
@@ -22,12 +23,22 @@ function Products() {
   // Form control
   const [formValues, setFormValues] = useState<OrderType | null>(null);
   const [isError, setIsError] = useState(false);
-  const [selectedYear, setSelectedYear] = useState<number | null>(null);
+  const [selectedYear, setSelectedYear] = useState("2023");
   const [orderedItems, setOrderedItems] = useState<number[] | null>(null);
+
+  const handleChangeYear = (e: SelectChangeEvent) => {
+    setSelectedYear(e.target.value as string);
+  };
+
+  const handleChangeCheckbox = (event: React.SyntheticEvent<Element, Event>) => {
+  const target = event.target as HTMLInputElement
+    console.log(target.value);
+  };
 
   const submitHandler = (e: React.MouseEvent) => {
     e.preventDefault();
-    if (formValues === null) setIsError(true);
+
+    if (orderedItems === null) setIsError(true);
     fetch("/orders.json", {
       method: "POST",
       body: JSON.stringify(formValues),
@@ -59,13 +70,12 @@ function Products() {
             labelId="select-year-label"
             label="Select year"
             id="select-year"
-            defaultValue=""
+            value={selectedYear}
+            onChange={handleChangeYear}
           >
-            {productItems?.[0].productPrice.map((year) => (
-              <MenuItem key={year.year} value={year.year}>
-                {year.year}
-              </MenuItem>
-            ))}
+            <MenuItem value="2023">2023</MenuItem>
+            <MenuItem value="2024">2024</MenuItem>
+            <MenuItem value="2025">2025</MenuItem>
           </Select>
 
           {/* Checkbox items*/}
@@ -76,7 +86,8 @@ function Products() {
                 sx={{ width: "max-content" }}
                 control={<Checkbox />}
                 label={product.productName}
-                value={product.productName}
+                value={product.productId}
+                onChange={handleChangeCheckbox}
               />
             ))}
           </FormGroup>

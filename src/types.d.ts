@@ -14,6 +14,6 @@ export type ProductsType = {
 };
 
 export type OrderType = {
-  selectedYear: number,
+  selectedYear: string,
   orderedItems: number[],
 }
