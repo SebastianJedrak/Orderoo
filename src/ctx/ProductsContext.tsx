@@ -10,7 +10,7 @@ export default function ProductsProvider(props: {
   useEffect(() => {
     async function getData() {
       try {
-        const response = await window.fetch("../data/products.json");
+        const response = await window.fetch("/products.json");
         if (!response.ok) throw new Error("Failed to fetch data");
         const data = await response.json();
         setData(data);
@@ -20,6 +20,8 @@ export default function ProductsProvider(props: {
     }
     getData();
   }, []);
+
+  console.log(data);
 
   return (
     <ProductsContext.Provider value={data}>
