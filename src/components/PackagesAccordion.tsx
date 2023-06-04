@@ -3,7 +3,6 @@ import {
   AccordionDetails,
   AccordionSummary,
   Paper,
-  Box,
   Typography,
 } from "@mui/material";
 import { useContext } from "react";
@@ -11,7 +10,7 @@ import { ProductsContext } from "../ctx/ProductsContext";
 
 export default function Packages() {
   const data = useContext(ProductsContext);
-  const productItems = data?.productItems;
+  // const productItems = data?.productItems;
   const packages = data?.packages;
 
   return (
