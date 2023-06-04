@@ -23,7 +23,7 @@ function Products() {
       
       {/* Header */}
       <Typography variant="h5" gutterBottom textAlign="center">
-        Place your order
+        Place Your Order
       </Typography>
 
       {/* Select year */}

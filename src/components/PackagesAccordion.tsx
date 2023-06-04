@@ -2,7 +2,8 @@ import {
   Accordion,
   AccordionDetails,
   AccordionSummary,
-  Paper, Box,
+  Paper,
+  Box,
   Typography,
 } from "@mui/material";
 import { useContext } from "react";
@@ -14,12 +15,18 @@ export default function Packages() {
   const packages = data?.packages;
 
   return (
-    <Box component="section" sx={{ margin: 5 }}>
+    <Paper component="section" elevation={3} sx={{ margin: 5, padding: 5 }}>
+      {/* Header */}
+      <Typography variant="h5" gutterBottom textAlign="center">
+        Our Packages
+      </Typography>
+
+      {/* Accordion */}
       {packages?.map((packageItem) => (
-        <Accordion 
-        key={packageItem.packageId}
-        // expanded={expanded === "panel1"}
-        // onChange={handleChange("panel1")}
+        <Accordion
+          key={packageItem.packageId}
+          // expanded={expanded === "panel1"}
+          // onChange={handleChange("panel1")}
         >
           <AccordionSummary
             aria-controls={packageItem.packageName}
@@ -32,6 +39,6 @@ export default function Packages() {
           </AccordionDetails>
         </Accordion>
       ))}
-    </Box>
+    </Paper>
   );
 }
