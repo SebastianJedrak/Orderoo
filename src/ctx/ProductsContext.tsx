@@ -21,8 +21,6 @@ export default function ProductsProvider(props: {
     getData();
   }, []);
 
-  console.log(data);
-
   return (
     <ProductsContext.Provider value={data}>
       {props.children}

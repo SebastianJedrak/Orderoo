@@ -8,12 +8,17 @@ import {
   MenuItem,
   InputLabel,
   FormControl,
+  FormControlLabel,
+  Checkbox,
 } from "@mui/material";
-import products from "../../data/products.json";
-import ProductItem from "./ProductItem";
+import { useContext } from "react";
+import { ProductsContext } from "../../ctx/ProductsContext";
 
 function Products() {
-  const productsItems = products.productItems;
+  const data = useContext(ProductsContext);
+  const productItems = data?.productItems;
+  console.log(productItems);
+
   return (
     <Paper component="section" elevation={3} sx={{ margin: 5, padding: 5 }}>
       {/* Header */}
@@ -36,19 +41,20 @@ function Products() {
           labelId="select-year-label"
           label="Select year"
           id="select-year"
-          defaultValue = ""
+          defaultValue=""
         >
-          {Object.keys(productsItems[0].productPrice).map((year) => (
-            <MenuItem key={year} value={year}>
-              {year}
-            </MenuItem>
-          ))}
+
         </Select>
 
         {/* Checkbox items*/}
         <FormGroup>
-          {productsItems.map((product) => (
-            <ProductItem key={product.productId} productItem={product} />
+          {productItems?.map((product) => (
+            <FormControlLabel
+              key={product.productId}
+              sx={{ width: "max-content" }}
+              control={<Checkbox />}
+              label={product.productName}
+            />
           ))}
         </FormGroup>
 
