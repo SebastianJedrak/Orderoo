@@ -10,7 +10,7 @@ import {
   FormControl,
   FormControlLabel,
   Checkbox,
-  SelectChangeEvent
+  SelectChangeEvent,
 } from "@mui/material";
 import { useContext, useState } from "react";
 import { ProductsContext } from "../ctx/ProductsContext";
@@ -24,28 +24,35 @@ function Products() {
   const [formValues, setFormValues] = useState<OrderType | null>(null);
   const [isError, setIsError] = useState(false);
   const [selectedYear, setSelectedYear] = useState("2023");
-  const [orderedItems, setOrderedItems] = useState<number[] | null>(null);
+  const [orderedItems, setOrderedItems] = useState<number[] | []>([]);
 
   const handleChangeYear = (e: SelectChangeEvent) => {
     setSelectedYear(e.target.value as string);
   };
 
-  const handleChangeCheckbox = (event: React.SyntheticEvent<Element, Event>) => {
-  const target = event.target as HTMLInputElement
-    console.log(target.value);
+  const handleChangeCheckbox = (
+    event: React.SyntheticEvent<Element, Event>
+  ) => {
+    const target = event.target as HTMLInputElement;
+    const targetId = Number(target.value);
+    if (target.checked) setOrderedItems([...orderedItems, targetId]);
+    if (!target.checked)
+      setOrderedItems([...orderedItems].filter((value) => value !== targetId));
   };
 
   const submitHandler = (e: React.MouseEvent) => {
     e.preventDefault();
+    console.log(selectedYear);
+    console.log(orderedItems);
 
-    if (orderedItems === null) setIsError(true);
-    fetch("/orders.json", {
-      method: "POST",
-      body: JSON.stringify(formValues),
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
+    // if (orderedItems === null) setIsError(true);
+    // fetch("/orders.json", {
+    //   method: "POST",
+    //   body: JSON.stringify(formValues),
+    //   headers: {
+    //     "Content-Type": "application/json",
+    //   },
+    // });
   };
 
   return (
