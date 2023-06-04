@@ -43,7 +43,9 @@ function Products() {
           id="select-year"
           defaultValue=""
         >
-
+          {productItems?.[0].productPrice.map((year) => (
+            <MenuItem value={year.year}>{year.year}</MenuItem>
+          ))}
         </Select>
 
         {/* Checkbox items*/}
