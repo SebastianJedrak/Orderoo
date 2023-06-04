@@ -18,6 +18,8 @@ import { useContext, useEffect, useState } from "react";
 import { ProductsContext } from "../ctx/ProductsContext";
 import { OrderType } from "../types";
 
+const YEARS = [2023, 2024, 2025]
+
 function Products() {
   const data = useContext(ProductsContext);
   const productItems = data?.productItems;
@@ -79,6 +81,7 @@ function Products() {
         Place Your Order
       </Typography>
       <form method="POST">
+
         {/* Select year */}
         <FormControl
           fullWidth
@@ -98,9 +101,7 @@ function Products() {
             value={selectedYear}
             onChange={handleChangeYear}
           >
-            <MenuItem value="2023">2023</MenuItem>
-            <MenuItem value="2024">2024</MenuItem>
-            <MenuItem value="2025">2025</MenuItem>
+            {YEARS.map(year => <MenuItem key={year} value={year}>{year}</MenuItem>)}
           </Select>
           <FormHelperText
             sx={{ visibility: `${isYearError ? "visible" : "hidden"}` }}
@@ -108,6 +109,7 @@ function Products() {
             You need to choose year of order
           </FormHelperText>
         </FormControl>
+
         {/* Checkbox items*/}
         <FormControl fullWidth error={isCheckboxError} variant="standard">
           <FormLabel>Choose your items</FormLabel>
@@ -129,6 +131,7 @@ function Products() {
             You need to choose minimum one item to order
           </FormHelperText>
         </FormControl>
+
         {/* Summary and order*/}
         <Stack spacing={1} display="flex" alignItems="end">
           <Typography variant="h6"> 19$</Typography>
