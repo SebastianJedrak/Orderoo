@@ -51,7 +51,7 @@ function Products() {
     console.log(targetProduct);
     if (target.checked) setOrderedItems([...orderedItems, targetProduct]);
     if (!target.checked)
-      setOrderedItems([...orderedItems].filter((value) => value !== targetProduct));
+      setOrderedItems([...orderedItems].filter((object) => object.productId !== targetProduct.productId));
   };
 
   useEffect(
