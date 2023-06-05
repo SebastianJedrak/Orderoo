@@ -66,13 +66,23 @@ function Products() {
 
   // Set packages
   useEffect(() => {
-    // @ts-ignore
-    const orderItemsId = orderedItems.map((item) => item.productId);
-    const packageId = packageItems?.map((item) => item.productsIncludedId)[0];
-    console.log(orderItemsId);
-    console.log(packageId);
-    // @ts-ignore
- }, [orderedItems, packageItems]);
+    if (orderedItems.length > 0) {
+      // @ts-ignore
+      const orderItemsId = orderedItems.map((item) => item.productId);
+      const packageId = packageItems?.map((item) => item.productsIncludedId);
+      // console.log(orderItemsId);
+      // console.log(packageId);
+      const isSubset = (array1: any, array2: any) =>
+        array2.every((element: any) => array1.includes(element));
+
+      const packets = packageId?.map((packet) =>
+        isSubset(packet, orderItemsId)
+      );
+
+      console.log(packets);
+      // @ts-ignore
+    }
+  }, [orderedItems, packageItems]);
 
   // Set price
   useEffect(() => {
