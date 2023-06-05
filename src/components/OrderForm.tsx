@@ -16,9 +16,9 @@ import {
 } from "@mui/material";
 import { useContext, useEffect, useState } from "react";
 import { ProductsContext } from "../ctx/ProductsContext";
-import { OrderType, ProductsType } from "../types";
+import { OrderType } from "../types";
 
-const YEARS = [2023, 2024, 2025]
+const YEARS = [2023, 2024, 2025];
 
 function Products() {
   const data = useContext(ProductsContext);
@@ -29,7 +29,9 @@ function Products() {
   const [isCheckboxError, setIsCheckboxError] = useState(false);
   const [isYearError, setIsYearError] = useState(false);
   const [selectedYear, setSelectedYear] = useState("");
-  const [orderedItems, setOrderedItems] = useState<any[] | []>([]);
+  const [orderedItems, setOrderedItems] = useState<
+    OrderType["orderedItems"] | []
+  >([]);
 
   const handleChangeYear = (e: SelectChangeEvent) => {
     // Reset error
@@ -51,7 +53,13 @@ function Products() {
     console.log(targetProduct);
     if (target.checked) setOrderedItems([...orderedItems, targetProduct]);
     if (!target.checked)
-      setOrderedItems([...orderedItems].filter((object) => object.productId !== targetProduct.productId));
+      setOrderedItems(
+        [...orderedItems].filter(
+          (
+            object // @ts-ignore
+          ) => object.productId !== targetProduct.productId
+        )
+      );
   };
 
   useEffect(
@@ -82,7 +90,6 @@ function Products() {
         Place Your Order
       </Typography>
       <form method="POST">
-
         {/* Select year */}
         <FormControl
           fullWidth
@@ -102,7 +109,11 @@ function Products() {
             value={selectedYear}
             onChange={handleChangeYear}
           >
-            {YEARS.map(year => <MenuItem key={year} value={year}>{year}</MenuItem>)}
+            {YEARS.map((year) => (
+              <MenuItem key={year} value={year}>
+                {year}
+              </MenuItem>
+            ))}
           </Select>
           <FormHelperText
             sx={{ visibility: `${isYearError ? "visible" : "hidden"}` }}
