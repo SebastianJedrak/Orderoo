@@ -68,15 +68,24 @@ function Products() {
     [selectedYear, orderedItems]
   );
 
-  // Set totalPrice-
+  // Set price
   useEffect(() => {
-    // @ts-ignore
-    const filterItemInYears = orderedItems.map(
+    const filterItemInYears = orderedItems.flatMap((item) =>
       // @ts-ignore
-      (item) => item.productPrice.filter(year => Number(year.year) === selectedYear) 
+      item.productPrice.filter((year) => Number(year.year) === selectedYear)
     );
-    console.log(filterItemInYears);
-    setTotalPrice(0);
+    const filterPriceInYears = filterItemInYears.map((object) =>
+      Number(object.price)
+    );
+    console.log(filterPriceInYears);
+    if (filterPriceInYears.length > 0)
+      setTotalPrice(
+        filterPriceInYears.reduce(
+          (acc: number, price: number) => (acc = price + acc)
+        )
+      );
+    if (filterPriceInYears.length < 1) setTotalPrice(0);
+
   }, [selectedYear, orderedItems]);
 
   // Handle submit
@@ -159,7 +168,7 @@ function Products() {
 
         {/* Summary and order*/}
         <Stack spacing={1} display="flex" alignItems="end">
-          <Typography variant="h6"> 19$</Typography>
+          <Typography variant="h6"> {totalPrice} PLN</Typography>
           <Button onClick={submitHandler} type="submit" variant="contained">
             Order!
           </Button>
