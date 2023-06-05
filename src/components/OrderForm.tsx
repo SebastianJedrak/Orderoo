@@ -62,11 +62,7 @@ function Products() {
       );
   };
 
-  // Set formValues
-  useEffect(
-    () => setFormValues({ selectedYear, orderedItems }),
-    [selectedYear, orderedItems]
-  );
+
 
   // Set price
   useEffect(() => {
@@ -87,6 +83,12 @@ function Products() {
     if (filterPriceInYears.length < 1) setTotalPrice(0);
 
   }, [selectedYear, orderedItems]);
+
+  // Set formValues
+  useEffect(
+    () => setFormValues({ selectedYear, orderedItems, totalPrice }),
+    [selectedYear, orderedItems, totalPrice]
+  );
 
   // Handle submit
   const submitHandler = (e: React.MouseEvent) => {
