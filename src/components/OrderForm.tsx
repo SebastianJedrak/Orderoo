@@ -32,6 +32,7 @@ function Products() {
   const [orderedItems, setOrderedItems] = useState<
     OrderType["orderedItems"] | []
   >([]);
+  const [totalPrice, setTotalPrice] = useState(0);
 
   const handleChangeYear = (e: SelectChangeEvent) => {
     // Reset error
@@ -50,7 +51,6 @@ function Products() {
     // Get data
     const target = event.target as HTMLInputElement;
     const targetProduct = JSON.parse(target.value);
-    console.log(targetProduct);
     if (target.checked) setOrderedItems([...orderedItems, targetProduct]);
     if (!target.checked)
       setOrderedItems(
@@ -62,11 +62,24 @@ function Products() {
       );
   };
 
+  // Set formValues
   useEffect(
     () => setFormValues({ selectedYear, orderedItems }),
     [selectedYear, orderedItems]
   );
 
+  // Set totalPrice-
+  useEffect(() => {
+    // @ts-ignore
+    const filterItemInYears = orderedItems.map(
+      // @ts-ignore
+      (item) => item.productPrice.filter(year => Number(year.year) === selectedYear) 
+    );
+    console.log(filterItemInYears);
+    setTotalPrice(0);
+  }, [selectedYear, orderedItems]);
+
+  // Handle submit
   const submitHandler = (e: React.MouseEvent) => {
     e.preventDefault();
     // Validation
