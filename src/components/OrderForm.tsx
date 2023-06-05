@@ -16,7 +16,7 @@ import {
 } from "@mui/material";
 import { useContext, useEffect, useState } from "react";
 import { ProductsContext } from "../ctx/ProductsContext";
-import { OrderType } from "../types";
+import { OrderType, ProductsType } from "../types";
 
 const YEARS = [2023, 2024, 2025]
 
@@ -29,7 +29,7 @@ function Products() {
   const [isCheckboxError, setIsCheckboxError] = useState(false);
   const [isYearError, setIsYearError] = useState(false);
   const [selectedYear, setSelectedYear] = useState("");
-  const [orderedItems, setOrderedItems] = useState<number[] | []>([]);
+  const [orderedItems, setOrderedItems] = useState<any[] | []>([]);
 
   const handleChangeYear = (e: SelectChangeEvent) => {
     // Reset error
@@ -47,10 +47,11 @@ function Products() {
 
     // Get data
     const target = event.target as HTMLInputElement;
-    const targetId = Number(target.value);
-    if (target.checked) setOrderedItems([...orderedItems, targetId]);
+    const targetProduct = JSON.parse(target.value);
+    console.log(targetProduct);
+    if (target.checked) setOrderedItems([...orderedItems, targetProduct]);
     if (!target.checked)
-      setOrderedItems([...orderedItems].filter((value) => value !== targetId));
+      setOrderedItems([...orderedItems].filter((value) => value !== targetProduct));
   };
 
   useEffect(
@@ -120,7 +121,7 @@ function Products() {
                 sx={{ width: "max-content" }}
                 control={<Checkbox />}
                 label={product.productName}
-                value={product.productId}
+                value={JSON.stringify(product)}
                 onChange={handleChangeCheckbox}
               />
             ))}
