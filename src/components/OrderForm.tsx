@@ -76,7 +76,7 @@ function Products() {
         array2.every((element: any) => array1.includes(element));
 
       const packets = packageId?.map((packet) =>
-        isSubset(packet, orderItemsId)
+        isSubset(orderItemsId, packet)
       );
 
       console.log(packets);
