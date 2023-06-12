@@ -22,8 +22,8 @@ const YEARS = [2023, 2024, 2025];
 
 function Products() {
   const data = useContext(ProductsContext);
-  const productItems = data?.productItems;
-  const packageItems = data?.packages;
+  const productItems = data?.data?.productItems;
+  const packageItems = data?.data?.packages;
 
   // Form control
   const [formValues, setFormValues] = useState<OrderType | null>(null);

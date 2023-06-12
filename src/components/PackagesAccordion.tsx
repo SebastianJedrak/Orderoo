@@ -11,7 +11,7 @@ import { ProductsContext } from "../ctx/ProductsContext";
 export default function Packages() {
   const data = useContext(ProductsContext);
   // const productItems = data?.productItems;
-  const packages = data?.packages;
+  const packages = data?.data?.packages;
 
   return (
     <Paper component="section" elevation={3} sx={{ margin: 5, padding: 5 }}>
