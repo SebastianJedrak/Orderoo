@@ -15,5 +15,5 @@ export type ProductsType = {
 
 export type OrderType = {
   totalPrice: string,
-  orderedItems: ProductsType["productItems"][],
+  orderedItems: ProductsType["productItems"],
 }

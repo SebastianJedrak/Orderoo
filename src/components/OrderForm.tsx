@@ -54,9 +54,7 @@ function Products() {
 
     // Update OrderedItems
     setOrderedItems(
-      // @ts-ignore
       productItems!.filter((item) =>
-        // @ts-ignore
         orderedItems.find((oldItem) => oldItem.productId === item.productId)
       )
     );
@@ -74,9 +72,9 @@ function Products() {
     if (target.checked) setOrderedItems([...orderedItems, targetProduct]);
     if (!target.checked)
       setOrderedItems(
-        [...orderedItems].filter(
+        orderedItems.filter(
           (
-            object // @ts-ignore
+            object 
           ) => object.productId !== targetProduct.productId
         )
       );
@@ -85,7 +83,7 @@ function Products() {
   // Set active packages
   useEffect(() => {
     if (orderedItems.length > 0) {
-      // @ts-ignore
+
       const orderItemsId = orderedItems.map((item) => item.productId);
       setActivePackages(
         packageItems!.filter((packageItem) =>
