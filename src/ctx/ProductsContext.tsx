@@ -1,11 +1,15 @@
-import { createContext, useEffect, useState } from "react";
+import { SetStateAction, createContext, useEffect, useState } from "react";
 import { ProductsType } from "../types";
+import { CardActionAreaClassKey } from "@mui/material";
 
-export const ProductsContext = createContext<(ProductsType | null)>(null);
+export const ProductsContext = createContext<{
+  data: ProductsType | null;
+  setSelectedYear: React.Dispatch<SetStateAction<string>>;
+} | null>(null);
 
-export default function ProductsProvider(props: {
-  children: React.ReactNode}) {
-  const [data, setData] = useState<(ProductsType | null)>(null);
+export default function ProductsProvider(props: { children: React.ReactNode }) {
+  const [data, setData] = useState<ProductsType | null>(null);
+  const [selectedYear, setSelectedYear] = useState("");
 
   useEffect(() => {
     async function getData() {
@@ -22,7 +26,7 @@ export default function ProductsProvider(props: {
   }, []);
 
   return (
-    <ProductsContext.Provider value={data}>
+    <ProductsContext.Provider value={{ data, setSelectedYear }}>
       {props.children}
     </ProductsContext.Provider>
   );
