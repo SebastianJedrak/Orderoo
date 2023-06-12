@@ -16,7 +16,7 @@ import {
 } from "@mui/material";
 import { useContext, useEffect, useState } from "react";
 import { ProductsContext } from "../ctx/ProductsContext";
-import { OrderType } from "../types";
+import { OrderType, ProductsType } from "../types";
 
 const YEARS = [2023, 2024, 2025];
 
@@ -33,7 +33,9 @@ function Products() {
   const [orderedItems, setOrderedItems] = useState<
     OrderType["orderedItems"] | []
   >([]);
-  const [acivePackages, setAcivePackages] = useState([]);
+  const [acivePackages, setAcivePackages] = useState<
+    ProductsType["packages"] | []
+  >([]);
   const [orderWithPackages, setOrderWithPackages] = useState<
     OrderType["orderedItems"] | []
   >([]);
@@ -68,14 +70,15 @@ function Products() {
       );
   };
 
-  // Set packages
+  // Set active packages
   useEffect(() => {
     if (orderedItems.length > 0) {
-      // @ts-ignore
+      setAcivePackages();
+            // @ts-ignore
       const orderItemsId = orderedItems.map((item) => item.productId);
       const packageId = packageItems?.map((item) => item.productsIncludedId);
-      // console.log(orderItemsId);
-      // console.log(packageId);
+      console.log(orderItemsId);
+      console.log(packageId);
       const isSubset = (array1: any, array2: any) =>
         array2.every((element: any) => array1.includes(element));
 
@@ -83,7 +86,7 @@ function Products() {
         isSubset(orderItemsId, packet)
       );
 
-      console.log(packets);
+      // console.log(packets);
       // @ts-ignore
     }
   }, [orderedItems, packageItems]);
