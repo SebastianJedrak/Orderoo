@@ -82,23 +82,9 @@ function Products() {
           )
         )
       );
-
-      // @ts-ignore
-      const packageId = packageItems?.map((item) => item.productsIncludedId);
-      // console.log(orderItemsId);
-      // console.log(packageId);
-      const isSubset = (array1: any, array2: any) =>
-        array2.every((element: any) => array1.includes(element));
-
-      const packets = packageId?.map((packet) =>
-        isSubset(orderItemsId, packet)
-      );
-
-      // console.log(packets);
-      // @ts-ignore
     }
   }, [orderedItems, packageItems]);
-  console.log(activePackages);
+  
   // Set price
   useEffect(() => {
     const filterItemInYears = orderedItems.flatMap((item) =>
