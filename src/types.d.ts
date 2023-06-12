@@ -2,12 +2,12 @@ export type ProductsType = {
   productItems: {
     productId: string;
     productName: string;
-    productPrice: { year: string; price: string }[] | { year: string; price: string };
+    productPrice: { year: string; price: string }[];
   }[];
   packages: {
     packageId: string;
     packageName: string;
-    packagePrice: { year: string; price: string }[] | { year: string; price: string };
+    packagePrice: { year: string; price: string }[];
     productsIncludedId: string[];
     productsFreeId: (string | null)[];
   }[];

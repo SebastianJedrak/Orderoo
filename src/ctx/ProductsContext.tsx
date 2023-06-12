@@ -1,6 +1,5 @@
 import { SetStateAction, createContext, useEffect, useState } from "react";
 import { ProductsType } from "../types";
-import { CardActionAreaClassKey } from "@mui/material";
 
 export const ProductsContext = createContext<{
   data: ProductsType | null;
@@ -10,8 +9,14 @@ export const ProductsContext = createContext<{
 export default function ProductsProvider(props: { children: React.ReactNode }) {
   const [data, setData] = useState<ProductsType | null>(null);
   const [selectedYear, setSelectedYear] = useState("");
-  const [dataInSelectedYear, setDataInSelectedYear] = useState<ProductsType | null>(null);
+  const [productInSelectedYear, setProductInSelectedYear] = useState<
+    ProductsType["productItems"] | null
+  >(null);
+  const [packageInSelectedYear, setPackageInSelectedYear] = useState<
+    ProductsType["packages"] | null
+  >(null);
 
+  // Fetch data
   useEffect(() => {
     async function getData() {
       try {
@@ -25,6 +30,39 @@ export default function ProductsProvider(props: { children: React.ReactNode }) {
     }
     getData();
   }, []);
+
+  // Transform data
+  useEffect(() => {
+    if (data && selectedYear !== "") {
+      setProductInSelectedYear(
+        data.productItems.map((item) => {
+          const product = {
+            productId: item.productId,
+            productName: item.productName,
+            productPrice: item.productPrice.filter(
+              (year) => year.year === selectedYear
+            ),
+          };
+          return product;
+        })
+      );
+
+      setPackageInSelectedYear(
+        data.packages.map((item) => {
+          const packageItem = {
+            packageId: item.packageId,
+            packageName: item.packageName,
+            packagePrice: item.packagePrice.filter(
+              (year) => year.year === selectedYear
+            ),
+            productsIncludedId: item.productsIncludedId,
+            productsFreeId: item.productsFreeId,
+          };
+          return packageItem;
+        })
+      );
+    }
+  }, [data, selectedYear]);
 
   return (
     <ProductsContext.Provider value={{ data, setSelectedYear }}>
