@@ -33,7 +33,10 @@ function Products() {
   const [orderedItems, setOrderedItems] = useState<
     OrderType["orderedItems"] | []
   >([]);
-  const [orderedPackages, setOrderedPackages] = useState([]);
+  const [acivePackages, setAcivePackages] = useState([]);
+  const [orderWithPackages, setOrderWithPackages] = useState<
+    OrderType["orderedItems"] | []
+  >([]);
   const [totalPrice, setTotalPrice] = useState("0");
 
   const handleChangeYear = (e: SelectChangeEvent) => {
@@ -95,10 +98,12 @@ function Products() {
       Number(object.price)
     );
     if (filterPriceInYears.length > 0)
-      setTotalPrice(String(
-        filterPriceInYears.reduce(
-          (acc: number, price: number) => (acc = price + acc)
-        ))
+      setTotalPrice(
+        String(
+          filterPriceInYears.reduce(
+            (acc: number, price: number) => (acc = price + acc)
+          )
+        )
       );
     if (filterPriceInYears.length < 1) setTotalPrice("0");
   }, [selectedYear, orderedItems]);
