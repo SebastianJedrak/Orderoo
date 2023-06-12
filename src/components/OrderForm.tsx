@@ -24,6 +24,7 @@ function Products() {
   const data = useContext(ProductsContext);
   const productItems = data?.productItems;
   const packageItems = data?.packages;
+  console.log(packageItems);
 
   // Form control
   const [formValues, setFormValues] = useState<OrderType | null>(null);
@@ -73,8 +74,8 @@ function Products() {
   // Set active packages
   useEffect(() => {
     if (orderedItems.length > 0) {
-      setAcivePackages();
-            // @ts-ignore
+      setAcivePackages(packageItems!.map((packageItem) => packageItem));
+      // @ts-ignore
       const orderItemsId = orderedItems.map((item) => item.productId);
       const packageId = packageItems?.map((item) => item.productsIncludedId);
       console.log(orderItemsId);
