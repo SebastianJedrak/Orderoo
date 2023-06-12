@@ -30,7 +30,6 @@ function Products() {
   // Form control
   const [formValues, setFormValues] = useState<OrderType | null>(null);
   const [isCheckboxError, setIsCheckboxError] = useState(false);
-  const [isYearError, setIsYearError] = useState(false);
   const [orderedItems, setOrderedItems] = useState<
     OrderType["orderedItems"] | []
   >([]);
@@ -45,9 +44,6 @@ function Products() {
   }, [setSelectedYear]);
 
   const handleChangeYear = (e: SelectChangeEvent) => {
-    // Reset error
-    if (isYearError) setIsYearError(false);
-
     // Set Year
     const selectedValue = String(e.target.value);
     setSelectedYear!(selectedValue);
@@ -126,10 +122,9 @@ function Products() {
     // Validation
     if (formValues?.orderedItems.length === 0) {
       setIsCheckboxError(true);
-      setIsYearError(true);
       return;
     }
-    if (formValues?.orderedItems.length === 0) return setIsCheckboxError(true);
+    console.log(formValues);
   };
 
   return (
@@ -142,7 +137,6 @@ function Products() {
         {/* Select year */}
         <FormControl
           fullWidth
-          error={isYearError}
           sx={{ margin: "20px 0" }}
           variant="standard"
         >
@@ -164,11 +158,6 @@ function Products() {
               </MenuItem>
             ))}
           </Select>
-          <FormHelperText
-            sx={{ visibility: `${isYearError ? "visible" : "hidden"}` }}
-          >
-            You need to choose year of order
-          </FormHelperText>
         </FormControl>
 
         {/* Checkbox items*/}
