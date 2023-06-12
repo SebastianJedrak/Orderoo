@@ -24,7 +24,6 @@ function Products() {
   const data = useContext(ProductsContext);
   const productItems = data?.productItems;
   const packageItems = data?.packages;
-  console.log(packageItems);
 
   // Form control
   const [formValues, setFormValues] = useState<OrderType | null>(null);
@@ -34,7 +33,7 @@ function Products() {
   const [orderedItems, setOrderedItems] = useState<
     OrderType["orderedItems"] | []
   >([]);
-  const [acivePackages, setAcivePackages] = useState<
+  const [activePackages, setActivePackages] = useState<
     ProductsType["packages"] | []
   >([]);
   const [orderWithPackages, setOrderWithPackages] = useState<
@@ -74,12 +73,20 @@ function Products() {
   // Set active packages
   useEffect(() => {
     if (orderedItems.length > 0) {
-      setAcivePackages(packageItems!.map((packageItem) => packageItem));
       // @ts-ignore
       const orderItemsId = orderedItems.map((item) => item.productId);
+      setActivePackages(
+        packageItems!.filter((packageItem) =>
+          packageItem.productsIncludedId.every((id) =>
+            orderItemsId.includes(id)
+          )
+        )
+      );
+
+      // @ts-ignore
       const packageId = packageItems?.map((item) => item.productsIncludedId);
-      console.log(orderItemsId);
-      console.log(packageId);
+      // console.log(orderItemsId);
+      // console.log(packageId);
       const isSubset = (array1: any, array2: any) =>
         array2.every((element: any) => array1.includes(element));
 
@@ -91,7 +98,7 @@ function Products() {
       // @ts-ignore
     }
   }, [orderedItems, packageItems]);
-
+  console.log(activePackages);
   // Set price
   useEffect(() => {
     const filterItemInYears = orderedItems.flatMap((item) =>
@@ -132,7 +139,6 @@ function Products() {
     }
     if (formValues?.orderedItems.length === 0) return setIsCheckboxError(true);
     if (formValues?.selectedYear === "") return setIsYearError(true);
-    console.log(formValues);
   };
 
   return (
