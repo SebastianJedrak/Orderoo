@@ -24,12 +24,13 @@ function Products() {
   const data = useContext(ProductsContext);
   const productItems = data?.data?.productItems;
   const packageItems = data?.data?.packages;
+  const setSelectedYear = data?.setSelectedYear
 
   // Form control
   const [formValues, setFormValues] = useState<OrderType | null>(null);
   const [isCheckboxError, setIsCheckboxError] = useState(false);
   const [isYearError, setIsYearError] = useState(false);
-  const [selectedYear, setSelectedYear] = useState<string>("");
+  const [selectedYear, setSelectedYearHandle] = useState<string>("");
   const [orderedItems, setOrderedItems] = useState<
     OrderType["orderedItems"] | []
   >([]);
@@ -44,7 +45,7 @@ function Products() {
 
     // Set Year
     const selectedValue = String(e.target.value);
-    setSelectedYear(selectedValue);
+    setSelectedYear!(selectedValue);
   };
 
   const handleChangeCheckbox = (
@@ -100,7 +101,7 @@ function Products() {
         )
       );
     if (filterPriceInYears.length < 1) setTotalPrice("0");
-  }, [selectedYear, orderedItems]);
+  }, [orderedItems]);
 
   // Set formValues
   useEffect(

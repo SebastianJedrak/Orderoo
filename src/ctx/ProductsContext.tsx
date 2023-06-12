@@ -10,6 +10,7 @@ export const ProductsContext = createContext<{
 export default function ProductsProvider(props: { children: React.ReactNode }) {
   const [data, setData] = useState<ProductsType | null>(null);
   const [selectedYear, setSelectedYear] = useState("");
+  const [dataInSelectedYear, setDataInSelectedYear] = useState<ProductsType | null>(null);
 
   useEffect(() => {
     async function getData() {
