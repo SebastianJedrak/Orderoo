@@ -115,9 +115,10 @@ function Products() {
       <Typography variant="h5" gutterBottom textAlign="center">
         Place Your Order
       </Typography>
+      
+      {/* Form */}
       <form method="POST">
         <SelectYear />
-        {/* Checkbox items*/}
         <FormControl fullWidth error={isCheckboxError} variant="standard">
           <FormLabel>Choose your items</FormLabel>
           <FormGroup>
