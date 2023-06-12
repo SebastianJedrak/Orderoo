@@ -22,15 +22,17 @@ const YEARS = [2023, 2024, 2025];
 
 function Products() {
   const data = useContext(ProductsContext);
-  const productItems = data?.data?.productItems;
-  const packageItems = data?.data?.packages;
+  const productItems = data?.productInSelectedYear;
+  const packageItems = data?.packageInSelectedYear;
   const setSelectedYear = data?.setSelectedYear;
+  const selectedYear = data?.selectedYear
+
+  console.log(productItems);
 
   // Form control
   const [formValues, setFormValues] = useState<OrderType | null>(null);
   const [isCheckboxError, setIsCheckboxError] = useState(false);
   const [isYearError, setIsYearError] = useState(false);
-  const [selectedYearLabel, setSelectedYearLabel] = useState<string>("");
   const [orderedItems, setOrderedItems] = useState<
     OrderType["orderedItems"] | []
   >([]);
@@ -39,6 +41,11 @@ function Products() {
   >([]);
   const [totalPrice, setTotalPrice] = useState("0");
 
+  // Set initial date
+  useEffect(() => {
+    setSelectedYear!(String(YEARS[0]))
+  }, [setSelectedYear])
+  
   const handleChangeYear = (e: SelectChangeEvent) => {
     // Reset error
     if (isYearError) setIsYearError(false);
@@ -46,7 +53,6 @@ function Products() {
     // Set Year
     const selectedValue = String(e.target.value);
     setSelectedYear!(selectedValue);
-    setSelectedYearLabel(selectedValue);
   };
 
   const handleChangeCheckbox = (
@@ -85,45 +91,43 @@ function Products() {
   }, [orderedItems, packageItems]);
 
   // Set price
-  // useEffect(() => {
-  //   const filterItemInYears = orderedItems.flatMap((item) =>
-  //     // @ts-ignore
-  //     item.productPrice.filter((year) => year.year === selectedYear)
-  //   );
-  //   const filterPriceInYears = filterItemInYears.map((object) =>
-  //     Number(object.price)
-  //   );
-  //   if (filterPriceInYears.length > 0)
-  //     setTotalPrice(
-  //       String(
-  //         filterPriceInYears.reduce(
-  //           (acc: number, price: number) => (acc = price + acc)
-  //         )
-  //       )
-  //     );
-  //   if (filterPriceInYears.length < 1) setTotalPrice("0");
-  // }, [orderedItems]);
+  useEffect(() => {
+    const filterItemInYears = orderedItems.flatMap((item) =>
+      // @ts-ignore
+      item.productPrice.filter((year) => year.year === selectedYear)
+    );
+    const filterPriceInYears = filterItemInYears.map((object) =>
+      Number(object.price)
+    );
+    if (filterPriceInYears.length > 0)
+      setTotalPrice(
+        String(
+          filterPriceInYears.reduce(
+            (acc: number, price: number) => (acc = price + acc)
+          )
+        )
+      );
+    if (filterPriceInYears.length < 1) setTotalPrice("0");
+  }, [orderedItems]);
 
   // Set formValues
-  // useEffect(
-  //   () => setFormValues({ selectedYear, orderedItems, totalPrice }),
-  //   [selectedYear, orderedItems, totalPrice]
-  // );
+  useEffect(
+    () => setFormValues({ orderedItems, totalPrice }),
+    [ orderedItems, totalPrice]
+  );
 
   // Handle submit
   const submitHandler = (e: React.MouseEvent) => {
     e.preventDefault();
     // Validation
     if (
-      formValues?.orderedItems.length === 0 &&
-      formValues?.selectedYear === ""
+      formValues?.orderedItems.length === 0
     ) {
       setIsCheckboxError(true);
       setIsYearError(true);
       return;
     }
     if (formValues?.orderedItems.length === 0) return setIsCheckboxError(true);
-    if (formValues?.selectedYear === "") return setIsYearError(true);
   };
 
   return (
@@ -149,7 +153,7 @@ function Products() {
             labelId="select-year-label"
             label="Select year"
             id="select-year"
-            value={selectedYearLabel}
+            value={selectedYear}
             onChange={handleChangeYear}
           >
             {YEARS.map((year) => (
