@@ -53,10 +53,15 @@ function Products() {
     setSelectedYear!(selectedValue);
 
     // Update OrderedItems
-    // setOrderedItems()
-    
+    setOrderedItems(
+      // @ts-ignore
+      productItems!.filter((item) =>
+        // @ts-ignore
+        orderedItems.find((oldItem) => oldItem.productId === item.productId)
+      )
+    );
   };
-  console.log(orderedItems);
+
   const handleChangeCheckbox = (
     event: React.SyntheticEvent<Element, Event>
   ) => {
@@ -127,8 +132,6 @@ function Products() {
     }
     if (formValues?.orderedItems.length === 0) return setIsCheckboxError(true);
   };
-
-  console.log(orderedItems);
 
   return (
     <Paper component="section" elevation={3} sx={{ margin: 5, padding: 5 }}>
