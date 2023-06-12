@@ -25,9 +25,7 @@ function Products() {
   const productItems = data?.productInSelectedYear;
   const packageItems = data?.packageInSelectedYear;
   const setSelectedYear = data?.setSelectedYear;
-  const selectedYear = data?.selectedYear
-
-  console.log(productItems);
+  const selectedYear = data?.selectedYear;
 
   // Form control
   const [formValues, setFormValues] = useState<OrderType | null>(null);
@@ -43,9 +41,9 @@ function Products() {
 
   // Set initial date
   useEffect(() => {
-    setSelectedYear!(String(YEARS[0]))
-  }, [setSelectedYear])
-  
+    setSelectedYear!(String(YEARS[0]));
+  }, [setSelectedYear]);
+
   const handleChangeYear = (e: SelectChangeEvent) => {
     // Reset error
     if (isYearError) setIsYearError(false);
@@ -53,8 +51,12 @@ function Products() {
     // Set Year
     const selectedValue = String(e.target.value);
     setSelectedYear!(selectedValue);
-  };
 
+    // Update OrderedItems
+    // setOrderedItems()
+    
+  };
+  console.log(orderedItems);
   const handleChangeCheckbox = (
     event: React.SyntheticEvent<Element, Event>
   ) => {
@@ -92,43 +94,41 @@ function Products() {
 
   // Set price
   useEffect(() => {
-    const filterItemInYears = orderedItems.flatMap((item) =>
+    const priceNumberArray = orderedItems.flatMap((item) =>
       // @ts-ignore
-      item.productPrice.filter((year) => year.year === selectedYear)
+      Number(item.productPrice[0].price)
     );
-    const filterPriceInYears = filterItemInYears.map((object) =>
-      Number(object.price)
-    );
-    if (filterPriceInYears.length > 0)
+
+    if (orderedItems.length > 0)
       setTotalPrice(
         String(
-          filterPriceInYears.reduce(
+          priceNumberArray.reduce(
             (acc: number, price: number) => (acc = price + acc)
           )
         )
       );
-    if (filterPriceInYears.length < 1) setTotalPrice("0");
+    if (priceNumberArray.length < 1) setTotalPrice("0");
   }, [orderedItems]);
 
   // Set formValues
   useEffect(
     () => setFormValues({ orderedItems, totalPrice }),
-    [ orderedItems, totalPrice]
+    [orderedItems, totalPrice]
   );
 
   // Handle submit
   const submitHandler = (e: React.MouseEvent) => {
     e.preventDefault();
     // Validation
-    if (
-      formValues?.orderedItems.length === 0
-    ) {
+    if (formValues?.orderedItems.length === 0) {
       setIsCheckboxError(true);
       setIsYearError(true);
       return;
     }
     if (formValues?.orderedItems.length === 0) return setIsCheckboxError(true);
   };
+
+  console.log(orderedItems);
 
   return (
     <Paper component="section" elevation={3} sx={{ margin: 5, padding: 5 }}>

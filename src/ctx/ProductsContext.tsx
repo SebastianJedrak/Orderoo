@@ -66,6 +66,7 @@ export default function ProductsProvider(props: { children: React.ReactNode }) {
     }
   }, [data, selectedYear]);
 
+
   return (
     <ProductsContext.Provider value={{ productInSelectedYear, packageInSelectedYear, setSelectedYear, selectedYear }}>
       {props.children}
