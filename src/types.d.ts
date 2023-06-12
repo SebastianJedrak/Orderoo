@@ -1,20 +1,20 @@
 export type ProductsType = {
   productItems: {
-    productId: number;
+    productId: string;
     productName: string;
     productPrice: { year: string; price: string }[];
   }[];
   packages: {
-    packageId: number;
+    packageId: string;
     packageName: string;
     packagePrice: { year: string; price: string }[];
-    productsIncludedId: number[];
-    productsFreeId: (number | null)[];
+    productsIncludedId: string[];
+    productsFreeId: (string | null)[];
   }[];
 };
 
 export type OrderType = {
   selectedYear: string,
-  totalPrice: number,
+  totalPrice: string,
   orderedItems: ProductsType["productItems"][],
 }

@@ -29,19 +29,20 @@ function Products() {
   const [formValues, setFormValues] = useState<OrderType | null>(null);
   const [isCheckboxError, setIsCheckboxError] = useState(false);
   const [isYearError, setIsYearError] = useState(false);
-  const [selectedYear, setSelectedYear] = useState("");
+  const [selectedYear, setSelectedYear] = useState<string>("");
   const [orderedItems, setOrderedItems] = useState<
     OrderType["orderedItems"] | []
   >([]);
   const [orderedPackages, setOrderedPackages] = useState([]);
-  const [totalPrice, setTotalPrice] = useState(0);
+  const [totalPrice, setTotalPrice] = useState("0");
 
   const handleChangeYear = (e: SelectChangeEvent) => {
     // Reset error
     if (isYearError) setIsYearError(false);
 
     // Set Year
-    setSelectedYear(e.target.value as string);
+    const selectedValue = String(e.target.value);
+    setSelectedYear(selectedValue);
   };
 
   const handleChangeCheckbox = (
@@ -88,18 +89,18 @@ function Products() {
   useEffect(() => {
     const filterItemInYears = orderedItems.flatMap((item) =>
       // @ts-ignore
-      item.productPrice.filter((year) => Number(year.year) === selectedYear)
+      item.productPrice.filter((year) => year.year === selectedYear)
     );
     const filterPriceInYears = filterItemInYears.map((object) =>
       Number(object.price)
     );
     if (filterPriceInYears.length > 0)
-      setTotalPrice(
+      setTotalPrice(String(
         filterPriceInYears.reduce(
           (acc: number, price: number) => (acc = price + acc)
-        )
+        ))
       );
-    if (filterPriceInYears.length < 1) setTotalPrice(0);
+    if (filterPriceInYears.length < 1) setTotalPrice("0");
   }, [selectedYear, orderedItems]);
 
   // Set formValues
