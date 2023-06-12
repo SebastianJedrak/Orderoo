@@ -4,28 +4,21 @@ import {
   Button,
   Typography,
   Stack,
-  Select,
-  MenuItem,
-  InputLabel,
   FormControl,
   FormControlLabel,
   Checkbox,
-  SelectChangeEvent,
   FormLabel,
   FormHelperText,
 } from "@mui/material";
 import { useContext, useEffect, useState } from "react";
 import { ProductsContext } from "../ctx/ProductsContext";
 import { OrderType, ProductsType } from "../types";
-
-const YEARS = [2023, 2024, 2025];
+import SelectYear from "./SelectYear";
 
 function Products() {
   const data = useContext(ProductsContext);
   const productItems = data?.productInSelectedYear;
   const packageItems = data?.packageInSelectedYear;
-  const setSelectedYear = data?.setSelectedYear;
-  const selectedYear = data?.selectedYear;
 
   // Form control
   const [formValues, setFormValues] = useState<OrderType | null>(null);
@@ -37,17 +30,6 @@ function Products() {
     ProductsType["packages"] | []
   >([]);
   const [totalPrice, setTotalPrice] = useState("0");
-
-  // Set initial date
-  useEffect(() => {
-    setSelectedYear!(String(YEARS[0]));
-  }, [setSelectedYear]);
-
-  const handleChangeYear = (e: SelectChangeEvent) => {
-    // Set Year
-    const selectedValue = String(e.target.value);
-    setSelectedYear!(selectedValue);
-  };
 
   // Update OrderedItems
   useEffect(() => {
@@ -134,32 +116,7 @@ function Products() {
         Place Your Order
       </Typography>
       <form method="POST">
-        {/* Select year */}
-        <FormControl
-          fullWidth
-          sx={{ margin: "20px 0" }}
-          variant="standard"
-        >
-          <InputLabel size="small" id="select-year-label">
-            Select year
-          </InputLabel>
-          <Select
-            sx={{ width: "150px" }}
-            size="small"
-            labelId="select-year-label"
-            label="Select year"
-            id="select-year"
-            value={selectedYear}
-            onChange={handleChangeYear}
-          >
-            {YEARS.map((year) => (
-              <MenuItem key={year} value={year}>
-                {year}
-              </MenuItem>
-            ))}
-          </Select>
-        </FormControl>
-
+        <SelectYear />
         {/* Checkbox items*/}
         <FormControl fullWidth error={isCheckboxError} variant="standard">
           <FormLabel>Choose your items</FormLabel>
