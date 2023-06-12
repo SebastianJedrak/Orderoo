@@ -36,9 +36,6 @@ function Products() {
   const [activePackages, setActivePackages] = useState<
     ProductsType["packages"] | []
   >([]);
-  const [orderWithPackages, setOrderWithPackages] = useState<
-    OrderType["orderedItems"] | []
-  >([]);
   const [totalPrice, setTotalPrice] = useState("0");
 
   const handleChangeYear = (e: SelectChangeEvent) => {
