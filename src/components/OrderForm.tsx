@@ -51,14 +51,18 @@ function Products() {
     // Set Year
     const selectedValue = String(e.target.value);
     setSelectedYear!(selectedValue);
-
-    // Update OrderedItems
-    setOrderedItems(
-      productItems!.filter((item) =>
-        orderedItems.find((oldItem) => oldItem.productId === item.productId)
-      )
-    );
   };
+
+  // Update OrderedItems
+  useEffect(() => {
+    if (orderedItems.length > 0) {
+      setOrderedItems((prev) =>
+        productItems!.filter((item) =>
+          prev.find((oldItem) => oldItem.productId === item.productId)
+        )
+      );
+    }
+  }, [productItems, orderedItems]);
 
   const handleChangeCheckbox = (
     event: React.SyntheticEvent<Element, Event>
@@ -73,9 +77,7 @@ function Products() {
     if (!target.checked)
       setOrderedItems(
         orderedItems.filter(
-          (
-            object 
-          ) => object.productId !== targetProduct.productId
+          (object) => object.productId !== targetProduct.productId
         )
       );
   };
@@ -83,7 +85,6 @@ function Products() {
   // Set active packages
   useEffect(() => {
     if (orderedItems.length > 0) {
-
       const orderItemsId = orderedItems.map((item) => item.productId);
       setActivePackages(
         packageItems!.filter((packageItem) =>
