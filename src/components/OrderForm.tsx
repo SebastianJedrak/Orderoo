@@ -35,7 +35,7 @@ function Products() {
   useEffect(() => {
     if (productItems) {
       setOrderedItems((prev) =>
-        productItems!.filter((item) =>
+        productItems.filter((item) =>
           prev.find((oldItem) => oldItem.productId === item.productId)
         )
       );
@@ -63,11 +63,17 @@ function Products() {
   // Set active packages
   useEffect(() => {
     if (orderedItems.length > 0) {
+      // Create array of ordered items id
       const orderItemsId = orderedItems.map((item) => item.productId);
+      // Match packets with ordered items
       const activePackets = packageItems!.filter((packageItem) =>
         packageItem.productsIncludedId.every((id) => orderItemsId.includes(id))
       );
-      console.log(activePackets);
+      // Add property with price + free products to active packages
+      const activePacketsTotalPrice = activePackets.map((packet) => packet);
+      // Compare packages and pick lowest price if overlap
+
+      console.log(activePacketsTotalPrice);
       setActivePackages(activePackets);
     }
   }, [orderedItems, packageItems]);
