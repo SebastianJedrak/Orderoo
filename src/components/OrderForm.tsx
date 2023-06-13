@@ -64,20 +64,18 @@ function Products() {
   useEffect(() => {
     if (orderedItems.length > 0) {
       const orderItemsId = orderedItems.map((item) => item.productId);
-      setActivePackages(
-        packageItems!.filter((packageItem) =>
-          packageItem.productsIncludedId.every((id) =>
-            orderItemsId.includes(id)
-          )
-        )
+      const activePackets = packageItems!.filter((packageItem) =>
+        packageItem.productsIncludedId.every((id) => orderItemsId.includes(id))
       );
+
+      
+      setActivePackages(activePackets);
     }
   }, [orderedItems, packageItems]);
 
   // Set price
   useEffect(() => {
     const priceNumberArray = orderedItems.flatMap((item) =>
-      // @ts-ignore
       Number(item.productPrice[0].price)
     );
 
@@ -115,7 +113,7 @@ function Products() {
       <Typography variant="h5" gutterBottom textAlign="center">
         Place Your Order
       </Typography>
-      
+
       {/* Form */}
       <form method="POST">
         <SelectYear />
