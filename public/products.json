@@ -54,22 +54,11 @@
       "packageId": "2",
       "packageName": "Internet + Abonament telefoniczny",
       "packagePrice": [
-        { "year": "2023", "price": "1" },
-        { "year": "2024", "price": "64" },
-        { "year": "2025", "price": "64" }
-      ],
-      "productsIncludedId": ["1", "3"],
-      "productsFreeId": []
-    },
-    {
-      "packageId": "3",
-      "packageName": "Test",
-      "packagePrice": [
         { "year": "2023", "price": "64" },
         { "year": "2024", "price": "64" },
         { "year": "2025", "price": "64" }
       ],
-      "productsIncludedId": ["4"],
+      "productsIncludedId": ["1", "3"],
       "productsFreeId": []
     }
   ]

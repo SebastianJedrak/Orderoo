@@ -86,10 +86,8 @@ function Products() {
         };
       });
       // Compare packages and pick lowest price if overlap
-      const overlapPackets = activePacketsTotalPrice.filter(
-        (packet, i, arr) => {
-          // find overlap item in activePacketsTotalPrice and false if price is higher
-
+      const nonOverlapItemsPackages = activePacketsTotalPrice.filter(
+        (packet, _i, arr) => {
           const isOverlap = packet.productsIncludedId.find((packetSome) =>
             arr.some(
               (packetArrEl) =>
@@ -108,12 +106,10 @@ function Products() {
           } else return true;
         }
       );
-      console.log(overlapPackets);
-      // setActivePackages(nonOverlapItemsPackages);
+      setActivePackages(nonOverlapItemsPackages);
     }
   }, [orderedItems, packageItems]);
 
-  // console.log(activePackages);
   // Set price
   useEffect(() => {
     const priceNumberArray = orderedItems.flatMap((item) =>
