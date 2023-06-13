@@ -88,24 +88,16 @@ function Products() {
       // Compare packages and pick lowest price if overlap
       const nonOverlapItemsPackages = activePacketsTotalPrice.filter(
         (packet, i, arr) => {
-          if (i > 0) {
-            const isOverlap = arr[i - 1].productsIncludedId.some((packetSome) =>
-              packet.productsIncludedId.includes(packetSome)
-            );
-            if (isOverlap) {
-              return Number(packet.totalPrice) < Number(arr[i - 1].totalPrice)
-                ? packet
-                : null;
-            }
-          }
+        // find overlap item in activePacketsTotalPrice and false if price is higher
+
           return packet;
         }
       );
-      console.log(nonOverlapItemsPackages);
-      setActivePackages(activePacketsTotalPrice);
+      setActivePackages(nonOverlapItemsPackages);
     }
   }, [orderedItems, packageItems]);
 
+  console.log(activePackages);
   // Set price
   useEffect(() => {
     const priceNumberArray = orderedItems.flatMap((item) =>
