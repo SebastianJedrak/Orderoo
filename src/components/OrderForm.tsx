@@ -90,15 +90,22 @@ function Products() {
         (packet, i, arr) => {
           // find overlap item in activePacketsTotalPrice and false if price is higher
 
-          const isOverlap = packet.productsIncludedId.some(
-            (packetSome) =>
-              arr.some(
-                (packetArr) =>
-                  packetArr.productsIncludedId.includes(packetSome) &&
-                  packetArr.packageId !== packet.packageId 
-              )
+          const isOverlap = packet.productsIncludedId.find((packetSome) =>
+            arr.some(
+              (packetArrEl) =>
+                packetArrEl.productsIncludedId.includes(packetSome) &&
+                packetArrEl.packageId !== packet.packageId
+            )
           );
-          if (isOverlap) {return packet}
+
+          if (isOverlap) {
+            return arr.find(
+              (packetArrEl) =>
+                Number(packetArrEl.totalPrice) > Number(packet.totalPrice)
+            )
+              ? true
+              : false;
+          } else return true;
         }
       );
       console.log(overlapPackets);
