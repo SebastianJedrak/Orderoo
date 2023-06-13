@@ -76,14 +76,25 @@ function Products() {
         );
         const discount =
           freeProducts.length > 0
-            ? freeProducts.reduce(
-                (acc, product) => {return acc += Number(product.productPrice[0].price)}, 0
-              )
+            ? freeProducts.reduce((acc, product) => {
+                return (acc += Number(product.productPrice[0].price));
+              }, 0)
             : 0;
-        return { ...packet, totalPrice: String(Number(packet.packagePrice[0].price)- discount)};
+        return {
+          ...packet,
+          totalPrice: String(Number(packet.packagePrice[0].price) - discount),
+        };
       });
       // Compare packages and pick lowest price if overlap
-      
+      const nonOverlapItemsPackages = activePacketsTotalPrice.filter(
+        (packet, i, arr) => {
+          if (i > 0) {
+            console.log(arr[i - 1].productsIncludedId.some(packetSome =>  packet.productsIncludedId.includes(packetSome)));
+          }
+          return packet;
+        }
+      );
+      console.log(nonOverlapItemsPackages);
       setActivePackages(activePacketsTotalPrice);
     }
   }, [orderedItems, packageItems]);
