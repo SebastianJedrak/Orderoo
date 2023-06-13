@@ -70,7 +70,9 @@ function Products() {
         packageItem.productsIncludedId.every((id) => orderItemsId.includes(id))
       );
       // Add property with price + free products to active packages
-      const activePacketsTotalPrice = activePackets.map((packet) => packet);
+      const activePacketsTotalPrice = activePackets.map((packet) => {
+        return { ...packet, totalPrice: packet.packagePrice[0].price };
+      });
       // Compare packages and pick lowest price if overlap
 
       console.log(activePacketsTotalPrice);

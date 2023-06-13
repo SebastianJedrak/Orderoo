@@ -43,8 +43,7 @@ export default function ProductsProvider(props: { children: React.ReactNode }) {
         
         data.productItems.map((item) => {
           const product = {
-            productId: item.productId,
-            productName: item.productName,
+            ...item,
             productPrice: item.productPrice.filter(
               (year) => year.year === selectedYear
             ),
@@ -56,13 +55,10 @@ export default function ProductsProvider(props: { children: React.ReactNode }) {
       setPackageInSelectedYear(
         data.packages.map((item) => {
           const packageItem = {
-            packageId: item.packageId,
-            packageName: item.packageName,
+            ...item,
             packagePrice: item.packagePrice.filter(
               (year) => year.year === selectedYear
-            ),
-            productsIncludedId: item.productsIncludedId,
-            productsFreeId: item.productsFreeId,
+            )
           };
           return packageItem;
         })
