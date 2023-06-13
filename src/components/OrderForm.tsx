@@ -89,7 +89,14 @@ function Products() {
       const nonOverlapItemsPackages = activePacketsTotalPrice.filter(
         (packet, i, arr) => {
           if (i > 0) {
-            console.log(arr[i - 1].productsIncludedId.some(packetSome =>  packet.productsIncludedId.includes(packetSome)));
+            const isOverlap = arr[i - 1].productsIncludedId.some((packetSome) =>
+              packet.productsIncludedId.includes(packetSome)
+            );
+            if (isOverlap) {
+              return Number(packet.totalPrice) < Number(arr[i - 1].totalPrice)
+                ? packet
+                : null;
+            }
           }
           return packet;
         }
