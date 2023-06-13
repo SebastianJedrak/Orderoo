@@ -86,18 +86,27 @@ function Products() {
         };
       });
       // Compare packages and pick lowest price if overlap
-      const nonOverlapItemsPackages = activePacketsTotalPrice.filter(
+      const overlapPackets = activePacketsTotalPrice.filter(
         (packet, i, arr) => {
-        // find overlap item in activePacketsTotalPrice and false if price is higher
+          // find overlap item in activePacketsTotalPrice and false if price is higher
 
-          return packet;
+          const isOverlap = packet.productsIncludedId.some(
+            (packetSome) =>
+              arr.some(
+                (packetArr) =>
+                  packetArr.productsIncludedId.includes(packetSome) &&
+                  packetArr.packageId !== packet.packageId 
+              )
+          );
+          if (isOverlap) {return packet}
         }
       );
-      setActivePackages(nonOverlapItemsPackages);
+      console.log(overlapPackets);
+      // setActivePackages(nonOverlapItemsPackages);
     }
   }, [orderedItems, packageItems]);
 
-  console.log(activePackages);
+  // console.log(activePackages);
   // Set price
   useEffect(() => {
     const priceNumberArray = orderedItems.flatMap((item) =>
