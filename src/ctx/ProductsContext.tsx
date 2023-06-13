@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-expressions */
 import { SetStateAction, createContext, useEffect, useState } from "react";
 import { ProductsType } from "../types";
 
@@ -35,8 +36,11 @@ export default function ProductsProvider(props: { children: React.ReactNode }) {
 
   // Transform data
   useEffect(() => {
+  
     if (data && selectedYear !== "") {
+      
       setProductInSelectedYear(
+        
         data.productItems.map((item) => {
           const product = {
             productId: item.productId,

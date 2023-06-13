@@ -32,7 +32,7 @@ function Products() {
   const [totalPrice, setTotalPrice] = useState("0");
 
   // Update OrderedItems
-  useEffect(() => {
+  const onChangeYearHandler = () => {
     if (orderedItems.length > 0) {
       setOrderedItems((prev) =>
         productItems!.filter((item) =>
@@ -40,7 +40,7 @@ function Products() {
         )
       );
     }
-  }, [productItems, orderedItems]);
+  };
 
   const handleChangeCheckbox = (
     event: React.SyntheticEvent<Element, Event>
@@ -67,8 +67,7 @@ function Products() {
       const activePackets = packageItems!.filter((packageItem) =>
         packageItem.productsIncludedId.every((id) => orderItemsId.includes(id))
       );
-
-      
+      console.log(activePackets);
       setActivePackages(activePackets);
     }
   }, [orderedItems, packageItems]);
@@ -116,7 +115,7 @@ function Products() {
 
       {/* Form */}
       <form method="POST">
-        <SelectYear />
+        <SelectYear onChangeYear={onChangeYearHandler} />
         <FormControl fullWidth error={isCheckboxError} variant="standard">
           <FormLabel>Choose your items</FormLabel>
           <FormGroup>

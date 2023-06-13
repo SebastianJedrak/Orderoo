@@ -4,7 +4,7 @@ import { ProductsContext } from "../ctx/ProductsContext";
 
 const YEARS = [2023, 2024, 2025];
 
-export default function SelectYear() {
+export default function SelectYear(props: {onChangeYear: any}) {
   const data = useContext(ProductsContext);
   const setSelectedYear = data?.setSelectedYear;
   const selectedYear = data?.selectedYear;
@@ -18,6 +18,7 @@ export default function SelectYear() {
     // Set Year
     const selectedValue = String(e.target.value);
     setSelectedYear!(selectedValue);
+    props.onChangeYear()
   };
 
   return (
