@@ -71,12 +71,20 @@ function Products() {
       );
       // Add property with price + free products to active packages
       const activePacketsTotalPrice = activePackets.map((packet) => {
-        return { ...packet, totalPrice: packet.packagePrice[0].price };
+        const freeProducts = orderedItems.filter((product) =>
+          packet.productsFreeId.includes(product.productId)
+        );
+        const discount =
+          freeProducts.length > 0
+            ? freeProducts.reduce(
+                (acc, product) => {return acc += Number(product.productPrice[0].price)}, 0
+              )
+            : 0;
+        return { ...packet, totalPrice: String(Number(packet.packagePrice[0].price)- discount)};
       });
       // Compare packages and pick lowest price if overlap
-
-      console.log(activePacketsTotalPrice);
-      setActivePackages(activePackets);
+      
+      setActivePackages(activePacketsTotalPrice);
     }
   }, [orderedItems, packageItems]);
 
