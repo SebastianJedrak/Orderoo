@@ -97,18 +97,22 @@ function Products() {
           );
 
           if (isOverlap) {
-            return arr.find(
-              (packetArrEl) =>
-                Number(packetArrEl.totalPrice) > Number(packet.totalPrice)
-            )
-              ? true
-              : false;
+            return arr.find((packetArrEl) => {
+              if (packetArrEl.productsIncludedId.includes(isOverlap)) {
+                return Number(packetArrEl.totalPrice) >
+                  Number(packet.totalPrice)
+                  ? true
+                  : false;
+              } else return false;
+            });
           } else return true;
         }
       );
       setActivePackages(nonOverlapItemsPackages);
     }
   }, [orderedItems, packageItems]);
+
+  console.log(activePackages);
 
   // Set price
   useEffect(() => {
