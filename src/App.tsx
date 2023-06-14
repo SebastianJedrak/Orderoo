@@ -4,6 +4,7 @@ import Header from "./components/Header";
 import OrderForm from "./components/Order/OrderForm";
 import PackagesAccordion from "./components/PackagesAccordion";
 import ProductsProvider from "./ctx/ProductsContext";
+import Footer from "./components/Footer";
 
 function App() {
   return (
@@ -12,6 +13,7 @@ function App() {
         <Header />
         <OrderForm />
         <PackagesAccordion />
+        <Footer />
       </Box>
     </ProductsProvider>
   );

@@ -44,7 +44,7 @@ export default function CheckboxProducts(props: Props) {
 
   return (
     <FormControl fullWidth error={props.isCheckboxError} variant="standard">
-      <FormLabel>Choose your items</FormLabel>
+      <FormLabel sx={{color:"primary.main"}}>Choose your items</FormLabel>
       <FormGroup sx={{ mb: "32px" }}>
         {props.productItems?.map((product) => (
           <Fragment key={product.productId}>
