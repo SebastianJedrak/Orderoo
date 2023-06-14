@@ -16,7 +16,7 @@ import { OrderType, ProductsType } from "../types";
 import SelectYear from "./SelectYear";
 import DialogFormSubmit from "./DialogFormSubmit";
 
-function Products() {
+export default function OrderForm() {
   const data = useContext(ProductsContext);
   const productItems = data?.productInSelectedYear;
   const packageItems = data?.packageInSelectedYear;
@@ -280,5 +280,3 @@ function Products() {
     </Paper>
   );
 }
-
-export default Products;
