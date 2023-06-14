@@ -5,6 +5,7 @@ import { OrderType, ProductsType } from "../../types";
 import SelectYear from "./SelectYear";
 import DialogFormSubmit from "./DialogFormSubmit";
 import CheckboxProducts from "./CheckboxProducts";
+import SummaryPrices from "./SummaryPrices";
 
 export default function OrderForm() {
   const data = useContext(ProductsContext);
@@ -188,7 +189,11 @@ export default function OrderForm() {
 
         {/* Summary and order*/}
         <Stack spacing={1} display="flex" alignItems="end">
-          
+          <SummaryPrices
+            discountPriceVisible={discountPriceVisible}
+            discountPrice={discountPrice}
+            totalPrice={totalPrice}
+          />
           <Button onClick={submitHandler} type="submit" variant="contained">
             Order!
           </Button>
