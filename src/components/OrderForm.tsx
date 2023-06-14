@@ -115,6 +115,7 @@ function Products() {
     }
   }, [orderedItems, packageItems]);
 
+  // Set price helper function
   const priceReduce = (array: number[]) => {
     return String(array.reduce((acc, price) => (acc = price + acc)));
   };
@@ -154,8 +155,12 @@ function Products() {
       if (item.packageId) return Number(item.packagePrice[0].price);
       return 0;
     });
-    console.log(priceArray);
+    if (filteredItemsAndPackages.length > 0)
+      setDiscountPrice(priceReduce(priceArray));
+    if (priceArray.length < 1) setDiscountPrice("0");
   }, [orderedItems, activePackages]);
+
+  console.log(discountPrice);
 
   // Handle submit
   const submitHandler = (e: React.MouseEvent) => {
