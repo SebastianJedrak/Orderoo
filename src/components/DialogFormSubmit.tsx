@@ -24,11 +24,11 @@ export default function DialogFormSubmit(props: Props) {
 
   return (
     <Dialog open={props.isOpen} onClose={closeHandler}>
-      <DialogTitle>Successfully Ordered!</DialogTitle>
+      <DialogTitle color="secondary">Successfully Ordered!</DialogTitle>
       <DialogContent>
-        <DialogContentText>Ordered Products</DialogContentText>
+        <DialogContentText sx={{textAlign:"center", color:"black", marginBottom: "8px"}}>Ordered Products</DialogContentText>
         {props.order?.orderedItems.map(item => <DialogContentText key={item.productId}>{item.productName}</DialogContentText>)}
-        <DialogContentText>Order value {props.order?.price}</DialogContentText>
+        <DialogContentText sx={{ color:"black", marginTop: "16px"}}>Payment {props.order?.price} PLN</DialogContentText>
       </DialogContent>
       <DialogActions>
         <Button autoFocus onClick={closeHandler}>
