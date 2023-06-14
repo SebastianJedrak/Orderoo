@@ -185,7 +185,7 @@ function Products() {
         <SelectYear />
         <FormControl fullWidth error={isCheckboxError} variant="standard">
           <FormLabel>Choose your items</FormLabel>
-          <FormGroup>
+          <FormGroup sx={{mb: "32px"}}>
             {productItems?.map((product) => (
               <>
                 <FormControlLabel
@@ -197,17 +197,13 @@ function Products() {
                   onChange={handleChangeCheckbox}
                 />
                 {product.productsRequired.length !== 0 && (
-                  <FormHelperText
-                    sx={{ width: "max-content", display: "inline" }}
-                  >
-                    text
-                  </FormHelperText>
+                  <FormHelperText variant="outlined">You need to order {product.productsRequired.map(req => req.name + " ")}</FormHelperText>
                 )}
               </>
             ))}
           </FormGroup>
-          <FormHelperText
-            sx={{ visibility: `${isCheckboxError ? "visible" : "hidden"}` }}
+          <FormHelperText 
+            sx={{ visibility: `${isCheckboxError ? "visible" : "hidden"}`, fontSize: "1rem" }}
           >
             You need to choose minimum one item to order
           </FormHelperText>
