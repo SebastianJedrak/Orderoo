@@ -140,10 +140,19 @@ function Products() {
 
   // Set discount price
   useEffect(() => {
-    setDiscountPrice()
-    
-  }, [])
-  
+    const filteredItems = orderedItems.filter((item) => {
+      if (
+        activePackages.some((packet) =>
+          packet.productsIncludedId.includes(item.productId)
+        )
+      )
+        return false;
+      else return true;
+    });
+    const filteredItemsAndPackages = [...filteredItems, ...activePackages]
+    console.log(filteredItemsAndPackages);
+    // setDiscountPrice()
+  }, [orderedItems, activePackages]);
 
   // Handle submit
   const submitHandler = (e: React.MouseEvent) => {
