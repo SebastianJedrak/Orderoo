@@ -10,7 +10,7 @@ import {
   FormLabel,
   FormHelperText,
 } from "@mui/material";
-import { useContext, useEffect, useState , Fragment} from "react";
+import { useContext, useEffect, useState, Fragment } from "react";
 import { ProductsContext } from "../ctx/ProductsContext";
 import { OrderType, ProductsType } from "../types";
 import SelectYear from "./SelectYear";
@@ -23,7 +23,8 @@ function Products() {
   // Form control
   const [formValues, setFormValues] = useState<OrderType | null>(null);
   const [isCheckboxError, setIsCheckboxError] = useState(false);
-  const [notOrderedRequiredError, setNotOrderedRequiredError] = useState(false);
+  const [notOrderedRequiredError, setNotOrderedRequiredError] =
+    useState<string[]>();
 
   const [orderedItems, setOrderedItems] = useState<
     OrderType["orderedItems"] | []
@@ -66,19 +67,20 @@ function Products() {
 
   // Set error if not ordered required products
   useEffect(() => {
-    const isAnyRequired = orderedItems.find((item, i, arr) => {
+    const isAnyRequired = orderedItems.map((item, i, arr) => {
       if (item.productsRequired.length > 0) {
-         const itemDemands = item.productsRequired.find((reqItem) =>
+        const itemDemands = item.productsRequired.find((reqItem) =>
           arr.find((arrItem) => arrItem.productId.includes(reqItem.id))
         );
-        
+        if (itemDemands) return "true";
+        if (!itemDemands) return "false";
       }
-
+      return "noDemand"
     });
 
     console.log(isAnyRequired);
 
-    setNotOrderedRequiredError(true);
+    // setNotOrderedRequiredError();
   }, [orderedItems]);
 
   // Set active packages
@@ -214,7 +216,7 @@ function Products() {
                   onChange={handleChangeCheckbox}
                 />
                 {product.productsRequired.length !== 0 && (
-                  <Typography  color="gray" variant="body2">
+                  <Typography color="gray" variant="body2">
                     You need to order{" "}
                     {product.productsRequired.map((req) => req.name + " ")}
                   </Typography>
