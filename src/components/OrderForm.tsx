@@ -37,6 +37,8 @@ function Products() {
   const [totalPrice, setTotalPrice] = useState("0");
   const [discountPrice, setDiscountPrice] = useState("0");
 
+  const [isModalOpen, setIsModalOpen] = useState(false)
+
   // Update OrderedItems
   useEffect(() => {
     if (productItems) {
@@ -191,6 +193,7 @@ function Products() {
     }
     if (notOrderedRequiredError?.some(item => item !== false)) return;
     console.log(formValues);
+    setIsModalOpen(true)
   };
 
   return (
@@ -273,7 +276,7 @@ function Products() {
           </Button>
         </Stack>
       </form>
-      <DialogFormSubmit/>
+      <DialogFormSubmit isOpen={isModalOpen}/>
     </Paper>
   );
 }

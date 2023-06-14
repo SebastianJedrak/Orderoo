@@ -6,12 +6,16 @@ import {
   DialogContentText,
   DialogTitle,
 } from "@mui/material";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
-export default function DialogFormSubmit() {
+export default function DialogFormSubmit(props: {isOpen: boolean}) {
   const [isOpen, setIsOpen] = useState(false);
 
   const closeHandler = () => {setIsOpen(false)};
+  useEffect(() => {
+    props.isOpen && setIsOpen(true) 
+  }, [props.isOpen])
+  
 
   return (
     <Dialog open={isOpen} onClose={closeHandler}>
