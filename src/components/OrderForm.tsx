@@ -276,7 +276,7 @@ function Products() {
           </Button>
         </Stack>
       </form>
-      <DialogFormSubmit isOpen={isModalOpen} order={formValues}/>
+      <DialogFormSubmit isOpen={isModalOpen} onClose={setIsModalOpen} order={formValues}/>
     </Paper>
   );
 }

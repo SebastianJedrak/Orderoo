@@ -6,28 +6,24 @@ import {
   DialogContentText,
   DialogTitle,
 } from "@mui/material";
-import { useEffect, useState } from "react";
+import { SetStateAction} from "react";
 import { OrderType } from "../types";
 
 type Props = {
   isOpen: boolean;
   order: OrderType | null;
+  onClose: React.Dispatch<SetStateAction<boolean>>
 };
 
 export default function DialogFormSubmit(props: Props) {
-  const [isOpen, setIsOpen] = useState(false);
 
   const closeHandler = () => {
-    setIsOpen(false);
+    props.onClose(false);
   };
-  useEffect(() => {
-    props.isOpen && setIsOpen(true);
-  }, [props.isOpen]);
 
-  console.log(props.order?.price);
 
   return (
-    <Dialog open={isOpen} onClose={closeHandler}>
+    <Dialog open={props.isOpen} onClose={closeHandler}>
       <DialogTitle>Successfully Ordered!</DialogTitle>
       <DialogContent>
         <DialogContentText>Ordered Products</DialogContentText>
