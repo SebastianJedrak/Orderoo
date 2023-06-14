@@ -11,7 +11,7 @@ import { OrderType } from "../types";
 
 type Props = {
   isOpen: boolean;
-  order: OrderType["orderedItems"] | [];
+  order: OrderType | null;
 };
 
 export default function DialogFormSubmit(props: Props) {
@@ -23,6 +23,8 @@ export default function DialogFormSubmit(props: Props) {
   useEffect(() => {
     props.isOpen && setIsOpen(true);
   }, [props.isOpen]);
+
+  console.log(props.order?.price);
 
   return (
     <Dialog open={isOpen} onClose={closeHandler}>
