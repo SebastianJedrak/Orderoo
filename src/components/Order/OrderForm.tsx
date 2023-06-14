@@ -171,7 +171,7 @@ export default function OrderForm() {
   return (
     <Paper component="section" elevation={3} sx={{ margin: 5, padding: 5 }}>
       {/* Header */}
-      <Typography variant="h5" gutterBottom textAlign="center">
+      <Typography variant="h5" gutterBottom textAlign="center" color="primary">
         Place Your Order
       </Typography>
 
@@ -194,7 +194,7 @@ export default function OrderForm() {
             discountPrice={discountPrice}
             totalPrice={totalPrice}
           />
-          <Button onClick={submitHandler} type="submit" variant="contained">
+          <Button onClick={submitHandler} color="secondary" type="submit" variant="contained">
             Order!
           </Button>
         </Stack>
