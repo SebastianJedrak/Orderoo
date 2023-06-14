@@ -130,12 +130,6 @@ function Products() {
     if (priceNumberArray.length < 1) setTotalPrice("0");
   }, [orderedItems]);
 
-  // Set formValues
-  useEffect(
-    () => setFormValues({ orderedItems, totalPrice }),
-    [orderedItems, totalPrice]
-  );
-
   // Set discount price
   useEffect(() => {
     const filteredItems = orderedItems.filter((item) => {
@@ -160,6 +154,14 @@ function Products() {
     if (priceArray.length < 1) setDiscountPrice("0");
   }, [orderedItems, activePackages]);
 
+  const discountPriceVisible = Number(discountPrice) < Number(totalPrice);
+
+  // Set formValues
+  useEffect(() => {
+    const price = discountPriceVisible ? discountPrice : totalPrice;
+    setFormValues({ orderedItems, price });
+  }, [orderedItems, totalPrice, discountPrice, discountPriceVisible]);
+
   // Handle submit
   const submitHandler = (e: React.MouseEvent) => {
     e.preventDefault();
@@ -170,8 +172,6 @@ function Products() {
     }
     console.log(formValues);
   };
-
-  const discountPriceVisible = Number(discountPrice) < Number(totalPrice);
 
   return (
     <Paper component="section" elevation={3} sx={{ margin: 5, padding: 5 }}>
