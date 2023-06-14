@@ -209,6 +209,8 @@ function Products() {
           <Typography
             sx={{
               visibility: `${discountPriceVisible ? "visible" : "hidden"}`,
+              opacity: `${discountPriceVisible ? "1" : "0"}`,
+              transition: "opacity linear 0.1s"
             }}
             variant="h6"
           >
@@ -223,6 +225,7 @@ function Products() {
               textDecoration: `${discountPriceVisible && "line-through"}`,
               fontSize: `${discountPriceVisible && "1.1rem"}`,
               paddingTop: `${discountPriceVisible && "0.25rem"}`,
+              transition: "all linear 0.1s"
             }}
           >
             {" "}
