@@ -3,6 +3,7 @@ export type ProductsType = {
     productId: string;
     productName: string;
     productPrice: { year: string; price: string }[];
+    productsRequiredId : string[]
   }[];
   packages: {
     packageId: string;
