@@ -210,7 +210,7 @@ function Products() {
             sx={{
               visibility: `${discountPriceVisible ? "visible" : "hidden"}`,
               opacity: `${discountPriceVisible ? "1" : "0"}`,
-              transition: "opacity linear 0.1s"
+              transition: "opacity linear 0.15s"
             }}
             variant="h6"
           >
