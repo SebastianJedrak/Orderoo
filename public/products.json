@@ -8,7 +8,7 @@
         { "year": "2024", "price": "49" },
         { "year": "2025", "price": "59" }
       ],
-      "productsRequiredId" : []
+      "productsRequired" : []
     },
     {
       "productId": "2",
@@ -18,7 +18,7 @@
         { "year": "2024", "price": "49" },
         { "year": "2025", "price": "59" }
       ],
-      "productsRequiredId" : []
+      "productsRequired" : []
     },
     {
       "productId": "3",
@@ -28,7 +28,7 @@
         { "year": "2024", "price": "29" },
         { "year": "2025", "price": "29" }
       ],
-      "productsRequiredId" : []
+      "productsRequired" : []
     },
     {
       "productId": "4",
@@ -38,7 +38,7 @@
         { "year": "2024", "price": "29" },
         { "year": "2025", "price": "29" }
       ],
-      "productsRequiredId" : ["2"]
+      "productsRequired" : [{"id": "2", "name":"Telewizja"}]
     }
   ],
 

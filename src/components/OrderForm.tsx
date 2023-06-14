@@ -187,14 +187,23 @@ function Products() {
           <FormLabel>Choose your items</FormLabel>
           <FormGroup>
             {productItems?.map((product) => (
-              <FormControlLabel
-                key={product.productId}
-                sx={{ width: "max-content" }}
-                control={<Checkbox />}
-                label={product.productName}
-                value={JSON.stringify(product)}
-                onChange={handleChangeCheckbox}
-              />
+              <>
+                <FormControlLabel
+                  key={product.productId}
+                  sx={{ width: "max-content" }}
+                  control={<Checkbox />}
+                  label={product.productName}
+                  value={JSON.stringify(product)}
+                  onChange={handleChangeCheckbox}
+                />
+                {product.productsRequired.length !== 0 && (
+                  <FormHelperText
+                    sx={{ width: "max-content", display: "inline" }}
+                  >
+                    text
+                  </FormHelperText>
+                )}
+              </>
             ))}
           </FormGroup>
           <FormHelperText
@@ -210,7 +219,7 @@ function Products() {
             sx={{
               visibility: `${discountPriceVisible ? "visible" : "hidden"}`,
               opacity: `${discountPriceVisible ? "1" : "0"}`,
-              transition: "opacity linear 0.15s"
+              transition: "opacity linear 0.15s",
             }}
             variant="h6"
           >
@@ -225,7 +234,7 @@ function Products() {
               textDecoration: `${discountPriceVisible && "line-through"}`,
               fontSize: `${discountPriceVisible && "1.1rem"}`,
               paddingTop: `${discountPriceVisible && "0.25rem"}`,
-              transition: "all linear 0.1s"
+              transition: "all linear 0.1s",
             }}
           >
             {" "}
