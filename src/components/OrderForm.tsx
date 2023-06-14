@@ -1,16 +1,10 @@
 import {
   Paper,
-  FormGroup,
   Button,
   Typography,
-  Stack,
-  FormControl,
-  FormControlLabel,
-  Checkbox,
-  FormLabel,
-  FormHelperText,
+  Stack
 } from "@mui/material";
-import { useContext, useEffect, useState, Fragment } from "react";
+import { useContext, useEffect, useState } from "react";
 import { ProductsContext } from "../ctx/ProductsContext";
 import { OrderType, ProductsType } from "../types";
 import SelectYear from "./SelectYear";
@@ -51,15 +45,7 @@ export default function OrderForm() {
     }
   }, [productItems]);
 
-  const handleChangeCheckbox = (
-    event: React.SyntheticEvent<Element, Event>
-  ) => {
-    // Reset error
-    if (isCheckboxError) setIsCheckboxError(false);
-
-
-
-  // Set error if not ordered required products
+  
   useEffect(() => {
     const isAnyRequired = orderedItems.map((item, i, arr) => {
       if (item.productsRequired.length > 0) {
@@ -197,7 +183,7 @@ export default function OrderForm() {
       {/* Form */}
       <form method="POST">
         <SelectYear />
-        <CheckboxProducts productItems={productItems} isCheckboxError={isCheckboxError} orderedItems={orderedItems}/>
+        <CheckboxProducts  productItems={productItems} isCheckboxError={isCheckboxError} orderedItems={orderedItems} notOrderedRequiredError={notOrderedRequiredError} setOrderedItems={setOrderedItems} setIsCheckboxError={setIsCheckboxError}/>
 
         {/* Summary and order*/}
         <Stack spacing={1} display="flex" alignItems="end">
