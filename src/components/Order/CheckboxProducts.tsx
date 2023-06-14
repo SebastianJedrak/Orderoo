@@ -59,8 +59,8 @@ export default function CheckboxProducts(props: Props) {
               <Typography
                 color={
                   props.notOrderedRequiredError?.includes(product.productId)
-                    ? "red"
-                    : "gray"
+                    ? "error.main"
+                    : "grey.500"
                 }
                 variant="body2"
               >

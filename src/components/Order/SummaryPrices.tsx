@@ -22,7 +22,7 @@ export default function SummaryPrices(props: Props) {
       <Typography
         variant="h6"
         sx={{
-          color: `${props.discountPriceVisible && "gray"}`,
+          color: `${props.discountPriceVisible && "grey.500"}`,
           textDecoration: `${props.discountPriceVisible && "line-through"}`,
           fontSize: `${props.discountPriceVisible && "1.1rem"}`,
           paddingTop: `${props.discountPriceVisible && "0.25rem"}`,
