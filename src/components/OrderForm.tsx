@@ -71,16 +71,14 @@ function Products() {
       if (item.productsRequired.length > 0) {
         const itemDemands = item.productsRequired.find((reqItem) =>
           arr.find((arrItem) => arrItem.productId.includes(reqItem.id))
-        ) ;
+        );
         if (itemDemands) return false;
         if (!itemDemands) return item.productId;
       }
-      return false
+      return false;
     });
 
-    console.log(isAnyRequired);
-
-    // setNotOrderedRequiredError();
+    setNotOrderedRequiredError(isAnyRequired);
   }, [orderedItems]);
 
   // Set active packages
@@ -190,6 +188,7 @@ function Products() {
       setIsCheckboxError(true);
       return;
     }
+    if (notOrderedRequiredError?.some(item => item !== false)) return;
     console.log(formValues);
   };
 
@@ -216,7 +215,14 @@ function Products() {
                   onChange={handleChangeCheckbox}
                 />
                 {product.productsRequired.length !== 0 && (
-                  <Typography color="gray" variant="body2">
+                  <Typography
+                    color={
+                      notOrderedRequiredError?.includes(product.productId)
+                        ? "red"
+                        : "gray"
+                    }
+                    variant="body2"
+                  >
                     You need to order{" "}
                     {product.productsRequired.map((req) => req.name + " ")}
                   </Typography>
