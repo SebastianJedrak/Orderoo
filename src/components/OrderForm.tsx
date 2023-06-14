@@ -66,11 +66,15 @@ function Products() {
 
   // Set error if not ordered required products
   useEffect(() => {
-    
-    
-    setNotOrderedRequiredError(true)
-  }, [orderedItems])
-  
+    const isAnyRequired = orderedItems.find((item, i, arr) =>
+      item.productsRequired.find((reqItem) =>
+        arr.find((arrItem) => arrItem.productsRequired.includes(reqItem))
+      )
+    );
+    console.log(isAnyRequired);
+
+    setNotOrderedRequiredError(true);
+  }, [orderedItems]);
 
   // Set active packages
   useEffect(() => {
@@ -194,7 +198,7 @@ function Products() {
         <SelectYear />
         <FormControl fullWidth error={isCheckboxError} variant="standard">
           <FormLabel>Choose your items</FormLabel>
-          <FormGroup sx={{mb: "32px"}}>
+          <FormGroup sx={{ mb: "32px" }}>
             {productItems?.map((product) => (
               <>
                 <FormControlLabel
@@ -206,13 +210,19 @@ function Products() {
                   onChange={handleChangeCheckbox}
                 />
                 {product.productsRequired.length !== 0 && (
-                  <Typography color="gray" variant="body2">You need to order {product.productsRequired.map(req => req.name + " ")}</Typography>
+                  <Typography color="gray" variant="body2">
+                    You need to order{" "}
+                    {product.productsRequired.map((req) => req.name + " ")}
+                  </Typography>
                 )}
               </>
             ))}
           </FormGroup>
-          <FormHelperText 
-            sx={{ visibility: `${isCheckboxError ? "visible" : "hidden"}`, fontSize: "1rem" }}
+          <FormHelperText
+            sx={{
+              visibility: `${isCheckboxError ? "visible" : "hidden"}`,
+              fontSize: "1rem",
+            }}
           >
             You need to choose minimum one item to order
           </FormHelperText>
