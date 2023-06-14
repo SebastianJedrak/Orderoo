@@ -24,7 +24,7 @@ function Products() {
   const [formValues, setFormValues] = useState<OrderType | null>(null);
   const [isCheckboxError, setIsCheckboxError] = useState(false);
   const [notOrderedRequiredError, setNotOrderedRequiredError] =
-    useState<string[]>();
+    useState<(string | boolean)[]>();
 
   const [orderedItems, setOrderedItems] = useState<
     OrderType["orderedItems"] | []
@@ -71,11 +71,11 @@ function Products() {
       if (item.productsRequired.length > 0) {
         const itemDemands = item.productsRequired.find((reqItem) =>
           arr.find((arrItem) => arrItem.productId.includes(reqItem.id))
-        );
-        if (itemDemands) return "true";
-        if (!itemDemands) return "false";
+        ) ;
+        if (itemDemands) return false;
+        if (!itemDemands) return item.productId;
       }
-      return "noDemand"
+      return false
     });
 
     console.log(isAnyRequired);
