@@ -7,15 +7,22 @@ import {
   DialogTitle,
 } from "@mui/material";
 import { useEffect, useState } from "react";
+import { OrderType } from "../types";
 
-export default function DialogFormSubmit(props: {isOpen: boolean}) {
+type Props = {
+  isOpen: boolean;
+  order: OrderType["orderedItems"] | [];
+};
+
+export default function DialogFormSubmit(props: Props) {
   const [isOpen, setIsOpen] = useState(false);
 
-  const closeHandler = () => {setIsOpen(false)};
+  const closeHandler = () => {
+    setIsOpen(false);
+  };
   useEffect(() => {
-    props.isOpen && setIsOpen(true) 
-  }, [props.isOpen])
-  
+    props.isOpen && setIsOpen(true);
+  }, [props.isOpen]);
 
   return (
     <Dialog open={isOpen} onClose={closeHandler}>
