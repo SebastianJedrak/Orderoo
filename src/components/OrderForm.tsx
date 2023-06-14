@@ -206,6 +206,20 @@ function Products() {
 
         {/* Summary and order*/}
         <Stack spacing={1} display="flex" alignItems="end">
+          <Typography
+            sx={{
+              visibility: `${
+                Number(discountPrice) < Number(totalPrice)
+                  ? "visible"
+                  : "hidden"
+              }`,
+            }}
+            variant="h6"
+          >
+            {" "}
+            {discountPrice} PLN
+          </Typography>
+
           <Typography variant="h6"> {totalPrice} PLN</Typography>
           <Button onClick={submitHandler} type="submit" variant="contained">
             Order!
