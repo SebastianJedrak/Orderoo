@@ -23,6 +23,7 @@ function Products() {
   // Form control
   const [formValues, setFormValues] = useState<OrderType | null>(null);
   const [isCheckboxError, setIsCheckboxError] = useState(false);
+  const [notOrderedRequiredError, setNotOrderedRequiredError] = useState(false);
 
   const [orderedItems, setOrderedItems] = useState<
     OrderType["orderedItems"] | []
@@ -62,6 +63,14 @@ function Products() {
         )
       );
   };
+
+  // Set error if not ordered required products
+  useEffect(() => {
+    
+    
+    setNotOrderedRequiredError(true)
+  }, [orderedItems])
+  
 
   // Set active packages
   useEffect(() => {
