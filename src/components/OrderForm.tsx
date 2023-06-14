@@ -10,7 +10,7 @@ import {
   FormLabel,
   FormHelperText,
 } from "@mui/material";
-import { useContext, useEffect, useState } from "react";
+import { useContext, useEffect, useState , Fragment} from "react";
 import { ProductsContext } from "../ctx/ProductsContext";
 import { OrderType, ProductsType } from "../types";
 import SelectYear from "./SelectYear";
@@ -205,9 +205,8 @@ function Products() {
           <FormLabel>Choose your items</FormLabel>
           <FormGroup sx={{ mb: "32px" }}>
             {productItems?.map((product) => (
-              <>
+              <Fragment key={product.productId}>
                 <FormControlLabel
-                  key={product.productId}
                   sx={{ width: "max-content" }}
                   control={<Checkbox />}
                   label={product.productName}
@@ -215,12 +214,12 @@ function Products() {
                   onChange={handleChangeCheckbox}
                 />
                 {product.productsRequired.length !== 0 && (
-                  <Typography color="gray" variant="body2">
+                  <Typography  color="gray" variant="body2">
                     You need to order{" "}
                     {product.productsRequired.map((req) => req.name + " ")}
                   </Typography>
                 )}
-              </>
+              </Fragment>
             ))}
           </FormGroup>
           <FormHelperText
