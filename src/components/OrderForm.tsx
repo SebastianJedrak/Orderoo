@@ -115,20 +115,17 @@ function Products() {
     }
   }, [orderedItems, packageItems]);
 
+  const priceReduce = (array: number[]) => {
+    return String(array.reduce((acc, price) => (acc = price + acc)));
+  };
+
   // Set price
   useEffect(() => {
     const priceNumberArray = orderedItems.flatMap((item) =>
       Number(item.productPrice[0].price)
     );
 
-    if (orderedItems.length > 0)
-      setTotalPrice(
-        String(
-          priceNumberArray.reduce(
-            (acc: number, price: number) => (acc = price + acc)
-          )
-        )
-      );
+    if (orderedItems.length > 0) setTotalPrice(priceReduce(priceNumberArray));
     if (priceNumberArray.length < 1) setTotalPrice("0");
   }, [orderedItems]);
 
@@ -149,9 +146,15 @@ function Products() {
         return false;
       else return true;
     });
-    const filteredItemsAndPackages = [...filteredItems, ...activePackages]
-    console.log(filteredItemsAndPackages);
-    // setDiscountPrice()
+    const filteredItemsAndPackages = [...filteredItems, ...activePackages];
+    const priceArray = filteredItemsAndPackages.map((item) => {
+      //@ts-ignore
+      if (item.productId) return Number(item.productPrice[0].price);
+      //@ts-ignore
+      if (item.packageId) return Number(item.packagePrice[0].price);
+      return 0;
+    });
+    console.log(priceArray);
   }, [orderedItems, activePackages]);
 
   // Handle submit
