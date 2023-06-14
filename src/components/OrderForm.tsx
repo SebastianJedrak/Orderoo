@@ -197,7 +197,7 @@ function Products() {
                   onChange={handleChangeCheckbox}
                 />
                 {product.productsRequired.length !== 0 && (
-                  <FormHelperText variant="outlined">You need to order {product.productsRequired.map(req => req.name + " ")}</FormHelperText>
+                  <Typography color="gray" variant="body2">You need to order {product.productsRequired.map(req => req.name + " ")}</Typography>
                 )}
               </>
             ))}
