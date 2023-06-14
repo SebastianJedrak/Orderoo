@@ -160,8 +160,6 @@ function Products() {
     if (priceArray.length < 1) setDiscountPrice("0");
   }, [orderedItems, activePackages]);
 
-  console.log(discountPrice);
-
   // Handle submit
   const submitHandler = (e: React.MouseEvent) => {
     e.preventDefault();
@@ -172,6 +170,8 @@ function Products() {
     }
     console.log(formValues);
   };
+
+  const discountPriceVisible = Number(discountPrice) < Number(totalPrice);
 
   return (
     <Paper component="section" elevation={3} sx={{ margin: 5, padding: 5 }}>
@@ -208,11 +208,7 @@ function Products() {
         <Stack spacing={1} display="flex" alignItems="end">
           <Typography
             sx={{
-              visibility: `${
-                Number(discountPrice) < Number(totalPrice)
-                  ? "visible"
-                  : "hidden"
-              }`,
+              visibility: `${discountPriceVisible ? "visible" : "hidden"}`,
             }}
             variant="h6"
           >
@@ -220,7 +216,18 @@ function Products() {
             {discountPrice} PLN
           </Typography>
 
-          <Typography variant="h6"> {totalPrice} PLN</Typography>
+          <Typography
+            variant="h6"
+            sx={{
+              color: `${discountPriceVisible && "gray"}`,
+              textDecoration: `${discountPriceVisible && "line-through"}`,
+              fontSize: `${discountPriceVisible && "1.1rem"}`,
+              paddingTop: `${discountPriceVisible && "0.25rem"}`,
+            }}
+          >
+            {" "}
+            {totalPrice} PLN
+          </Typography>
           <Button onClick={submitHandler} type="submit" variant="contained">
             Order!
           </Button>
