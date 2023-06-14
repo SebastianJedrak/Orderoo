@@ -23,13 +23,16 @@ function Products() {
   // Form control
   const [formValues, setFormValues] = useState<OrderType | null>(null);
   const [isCheckboxError, setIsCheckboxError] = useState(false);
+
   const [orderedItems, setOrderedItems] = useState<
     OrderType["orderedItems"] | []
   >([]);
   const [activePackages, setActivePackages] = useState<
     ProductsType["packages"] | []
   >([]);
+
   const [totalPrice, setTotalPrice] = useState("0");
+  const [discountPrice, setDiscountPrice] = useState("0");
 
   // Update OrderedItems
   useEffect(() => {
@@ -112,8 +115,6 @@ function Products() {
     }
   }, [orderedItems, packageItems]);
 
-  console.log(activePackages);
-
   // Set price
   useEffect(() => {
     const priceNumberArray = orderedItems.flatMap((item) =>
@@ -136,6 +137,13 @@ function Products() {
     () => setFormValues({ orderedItems, totalPrice }),
     [orderedItems, totalPrice]
   );
+
+  // Set discount price
+  useEffect(() => {
+    setDiscountPrice()
+    
+  }, [])
+  
 
   // Handle submit
   const submitHandler = (e: React.MouseEvent) => {
