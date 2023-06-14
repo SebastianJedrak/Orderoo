@@ -15,6 +15,7 @@ import { ProductsContext } from "../ctx/ProductsContext";
 import { OrderType, ProductsType } from "../types";
 import SelectYear from "./SelectYear";
 import DialogFormSubmit from "./DialogFormSubmit";
+import CheckboxProducts from "./CheckboxProducts";
 
 export default function OrderForm() {
   const data = useContext(ProductsContext);
@@ -56,17 +57,7 @@ export default function OrderForm() {
     // Reset error
     if (isCheckboxError) setIsCheckboxError(false);
 
-    // Set orderItems
-    const target = event.target as HTMLInputElement;
-    const targetProduct = JSON.parse(target.value);
-    if (target.checked) setOrderedItems([...orderedItems, targetProduct]);
-    if (!target.checked)
-      setOrderedItems(
-        orderedItems.filter(
-          (object) => object.productId !== targetProduct.productId
-        )
-      );
-  };
+
 
   // Set error if not ordered required products
   useEffect(() => {
@@ -206,43 +197,7 @@ export default function OrderForm() {
       {/* Form */}
       <form method="POST">
         <SelectYear />
-        <FormControl fullWidth error={isCheckboxError} variant="standard">
-          <FormLabel>Choose your items</FormLabel>
-          <FormGroup sx={{ mb: "32px" }}>
-            {productItems?.map((product) => (
-              <Fragment key={product.productId}>
-                <FormControlLabel
-                  sx={{ width: "max-content" }}
-                  control={<Checkbox />}
-                  label={product.productName}
-                  value={JSON.stringify(product)}
-                  onChange={handleChangeCheckbox}
-                />
-                {product.productsRequired.length !== 0 && (
-                  <Typography
-                    color={
-                      notOrderedRequiredError?.includes(product.productId)
-                        ? "red"
-                        : "gray"
-                    }
-                    variant="body2"
-                  >
-                    You need to order{" "}
-                    {product.productsRequired.map((req) => req.name + " ")}
-                  </Typography>
-                )}
-              </Fragment>
-            ))}
-          </FormGroup>
-          <FormHelperText
-            sx={{
-              visibility: `${isCheckboxError ? "visible" : "hidden"}`,
-              fontSize: "1rem",
-            }}
-          >
-            You need to choose minimum one item to order
-          </FormHelperText>
-        </FormControl>
+        <CheckboxProducts productItems={productItems} isCheckboxError={isCheckboxError} orderedItems={orderedItems}/>
 
         {/* Summary and order*/}
         <Stack spacing={1} display="flex" alignItems="end">
