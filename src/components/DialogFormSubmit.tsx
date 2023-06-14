@@ -30,7 +30,9 @@ export default function DialogFormSubmit(props: Props) {
     <Dialog open={isOpen} onClose={closeHandler}>
       <DialogTitle>Successfully Ordered!</DialogTitle>
       <DialogContent>
-        <DialogContentText>Ordered items and price</DialogContentText>
+        <DialogContentText>Ordered Products</DialogContentText>
+        {props.order?.orderedItems.map(item => <DialogContentText key={item.productId}>{item.productName}</DialogContentText>)}
+        <DialogContentText>Order value {props.order?.price}</DialogContentText>
       </DialogContent>
       <DialogActions>
         <Button autoFocus onClick={closeHandler}>
