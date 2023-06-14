@@ -66,11 +66,16 @@ function Products() {
 
   // Set error if not ordered required products
   useEffect(() => {
-    const isAnyRequired = orderedItems.find((item, i, arr) =>
-      item.productsRequired.find((reqItem) =>
-        arr.find((arrItem) => arrItem.productsRequired.includes(reqItem))
-      )
-    );
+    const isAnyRequired = orderedItems.find((item, i, arr) => {
+      if (item.productsRequired.length > 0) {
+         const itemDemands = item.productsRequired.find((reqItem) =>
+          arr.find((arrItem) => arrItem.productId.includes(reqItem.id))
+        );
+        
+      }
+
+    });
+
     console.log(isAnyRequired);
 
     setNotOrderedRequiredError(true);
