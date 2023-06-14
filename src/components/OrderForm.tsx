@@ -167,7 +167,7 @@ function Products() {
       //@ts-ignore
       if (item.productId) return Number(item.productPrice[0].price);
       //@ts-ignore
-      if (item.packageId) return Number(item.packagePrice[0].price);
+      if (item.packageId) return Number(item.totalPrice);
       return 0;
     });
     if (filteredItemsAndPackages.length > 0)
