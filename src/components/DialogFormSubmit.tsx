@@ -11,10 +11,10 @@ import { useState } from "react";
 export default function DialogFormSubmit() {
   const [isOpen, setIsOpen] = useState(false);
 
-  const closeHandler = () => {};
+  const closeHandler = () => {setIsOpen(false)};
 
   return (
-    <Dialog open={true} onClose={closeHandler}>
+    <Dialog open={isOpen} onClose={closeHandler}>
       <DialogTitle>Successfully Ordered!</DialogTitle>
       <DialogContent>
         <DialogContentText>Ordered items and price</DialogContentText>

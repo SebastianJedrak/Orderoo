@@ -14,6 +14,7 @@ import { useContext, useEffect, useState, Fragment } from "react";
 import { ProductsContext } from "../ctx/ProductsContext";
 import { OrderType, ProductsType } from "../types";
 import SelectYear from "./SelectYear";
+import DialogFormSubmit from "./DialogFormSubmit";
 
 function Products() {
   const data = useContext(ProductsContext);
@@ -272,6 +273,7 @@ function Products() {
           </Button>
         </Stack>
       </form>
+      <DialogFormSubmit/>
     </Paper>
   );
 }
