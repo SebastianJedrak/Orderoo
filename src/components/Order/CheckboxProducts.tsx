@@ -8,7 +8,7 @@ import {
   Typography,
 } from "@mui/material";
 import { Fragment, SetStateAction } from "react";
-import { OrderType, ProductsType } from "../types";
+import { OrderType, ProductsType } from "../../types";
 
 type Props = {
   isCheckboxError: boolean;
@@ -19,7 +19,7 @@ type Props = {
   setOrderedItems: React.Dispatch<
     SetStateAction<OrderType["orderedItems"] | []>
   >;
-  setIsCheckboxError: React.Dispatch<SetStateAction<boolean>>
+  setIsCheckboxError: React.Dispatch<SetStateAction<boolean>>;
 };
 
 export default function CheckboxProducts(props: Props) {

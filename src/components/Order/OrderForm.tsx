@@ -1,12 +1,7 @@
-import {
-  Paper,
-  Button,
-  Typography,
-  Stack
-} from "@mui/material";
+import { Paper, Button, Typography, Stack } from "@mui/material";
 import { useContext, useEffect, useState } from "react";
-import { ProductsContext } from "../ctx/ProductsContext";
-import { OrderType, ProductsType } from "../types";
+import { ProductsContext } from "../../ctx/ProductsContext";
+import { OrderType, ProductsType } from "../../types";
 import SelectYear from "./SelectYear";
 import DialogFormSubmit from "./DialogFormSubmit";
 import CheckboxProducts from "./CheckboxProducts";
@@ -32,7 +27,7 @@ export default function OrderForm() {
   const [totalPrice, setTotalPrice] = useState("0");
   const [discountPrice, setDiscountPrice] = useState("0");
 
-  const [isModalOpen, setIsModalOpen] = useState(false)
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   // Update OrderedItems
   useEffect(() => {
@@ -45,7 +40,6 @@ export default function OrderForm() {
     }
   }, [productItems]);
 
-  
   useEffect(() => {
     const isAnyRequired = orderedItems.map((item, i, arr) => {
       if (item.productsRequired.length > 0) {
@@ -168,9 +162,9 @@ export default function OrderForm() {
       setIsCheckboxError(true);
       return;
     }
-    if (notOrderedRequiredError?.some(item => item !== false)) return;
+    if (notOrderedRequiredError?.some((item) => item !== false)) return;
     console.log(formValues);
-    setIsModalOpen(true)
+    setIsModalOpen(true);
   };
 
   return (
@@ -183,7 +177,14 @@ export default function OrderForm() {
       {/* Form */}
       <form method="POST">
         <SelectYear />
-        <CheckboxProducts  productItems={productItems} isCheckboxError={isCheckboxError} orderedItems={orderedItems} notOrderedRequiredError={notOrderedRequiredError} setOrderedItems={setOrderedItems} setIsCheckboxError={setIsCheckboxError}/>
+        <CheckboxProducts
+          productItems={productItems}
+          isCheckboxError={isCheckboxError}
+          orderedItems={orderedItems}
+          notOrderedRequiredError={notOrderedRequiredError}
+          setOrderedItems={setOrderedItems}
+          setIsCheckboxError={setIsCheckboxError}
+        />
 
         {/* Summary and order*/}
         <Stack spacing={1} display="flex" alignItems="end">
@@ -217,7 +218,11 @@ export default function OrderForm() {
           </Button>
         </Stack>
       </form>
-      <DialogFormSubmit isOpen={isModalOpen} onClose={setIsModalOpen} order={formValues}/>
+      <DialogFormSubmit
+        isOpen={isModalOpen}
+        onClose={setIsModalOpen}
+        order={formValues}
+      />
     </Paper>
   );
 }
