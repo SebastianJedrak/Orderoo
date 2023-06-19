@@ -56,9 +56,8 @@ export default function CheckboxProducts(props: Props) {
               alignItems={"center"}
               marginTop={1}
             >
-              <Stack direction={"row"}  alignItems={"center"}>
+              <Stack sx={{flexDirection: {sm: "row"}}}  alignItems={"center"}>
                 <FormControlLabel
-                  sx={{ width: "max-content" }}
                   control={<Checkbox />}
                   label={product.productName}
                   value={JSON.stringify(product)}
@@ -75,13 +74,13 @@ export default function CheckboxProducts(props: Props) {
                     fontSize={"0.8rem"}
                     lineHeight={0}
                   >
-                    {`( You need to order
-                    ${product.productsRequired.map((req) => req.name + " ")})`}
+                    {`You need to order
+                    ${product.productsRequired.map((req) => req.name + " ")}`}
                   </Typography>
                 )}
               </Stack>
 
-              <Typography variant="body1" component="span" fontWeight={600}>
+              <Typography width={"70px"} textAlign={"end"} variant="body1" component="span" fontWeight={600}>
                 {product.productPrice[0].price} PLN
               </Typography>
             </Stack>
