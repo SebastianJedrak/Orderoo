@@ -12,7 +12,7 @@
     },
     {
       "productId": "2",
-      "productName": "Telewizja",
+      "productName": "TV",
       "productPrice": [
         { "year": "2023", "price": "49" },
         { "year": "2024", "price": "49" },
@@ -22,7 +22,7 @@
     },
     {
       "productId": "3",
-      "productName": "Abonament telefoniczny",
+      "productName": "Phone subscription",
       "productPrice": [
         { "year": "2023", "price": "29" },
         { "year": "2024", "price": "29" },
@@ -32,20 +32,20 @@
     },
     {
       "productId": "4",
-      "productName": "Dekoder 4K",
+      "productName": "4k Decoder",
       "productPrice": [
         { "year": "2023", "price": "29" },
         { "year": "2024", "price": "29" },
         { "year": "2025", "price": "29" }
       ],
-      "productsRequired" : [{"id": "2", "name":"Telewizja"}]
+      "productsRequired" : [{"id": "2", "name":"TV"}]
     }
   ],
 
   "packages": [
     {
       "packageId": "1",
-      "packageName": "Internet + telewizja",
+      "packageName": "Internet + TV",
       "packagePrice": [
         { "year": "2023", "price": "79" },
         { "year": "2024", "price": "89" },
@@ -56,7 +56,7 @@
     },
     {
       "packageId": "2",
-      "packageName": "Internet + Abonament telefoniczny",
+      "packageName": "Internet + Phone subscription",
       "packagePrice": [
         { "year": "2023", "price": "64" },
         { "year": "2024", "price": "64" },
