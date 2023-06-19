@@ -1,17 +1,17 @@
-import { Paper, Typography } from '@mui/material'
+import { Box, Paper, Typography } from "@mui/material";
 
 export default function Footer() {
   return (
-    <Paper  component="footer">
+    <Box py={2} component="footer" bgcolor="primary.main" textAlign="center" >
       <Typography
-        py={2}
-        textAlign="center"
-        bgcolor="primary.main"
         color="common.white"
         variant="body1"
+        maxWidth="1000px"
+        mx="auto"
       >
-        Project made by Sebastian Jędrak for portfolio purposes
+        Website made by Sebastian Jędrak for portfolio purposes. Offers aren't real. If you have any
+        problem you can contact me at jedrak.sebastian@gmail.com
       </Typography>
-    </Paper>
-  )
+    </Box>
+  );
 }
