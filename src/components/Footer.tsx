@@ -2,7 +2,7 @@ import { Box, Typography } from "@mui/material";
 
 export default function Footer() {
   return (
-    <Box py={2} component="footer" bgcolor="primary.main" textAlign="center" >
+    <Box py={2} px={6} component="footer" bgcolor="primary.main" textAlign="center" >
       <Typography
         color="common.white"
         variant="body1"

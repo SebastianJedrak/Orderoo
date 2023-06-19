@@ -2,7 +2,7 @@ import { Typography, Paper } from "@mui/material";
 
 function Header() {
   return (
-    <Paper elevation={4} component="header">
+    <Paper elevation={12} component="header">
       <Typography
         py={2}
         textAlign="center"
