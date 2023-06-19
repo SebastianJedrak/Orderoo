@@ -16,7 +16,7 @@ function App() {
         <Box
           sx={{
             py: 5,
-            background: `url(${bgImg}) center no-repeat`,
+            background: `url(${bgImg}) top no-repeat`,
             backgroundSize: "cover",
             backgroundBlendMode: "soft-light",
             backgroundColor:  "rgba(255, 255, 255, 0.6)"
