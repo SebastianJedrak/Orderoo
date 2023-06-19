@@ -1,5 +1,6 @@
 import {
   Checkbox,
+  Divider,
   FormControl,
   FormControlLabel,
   FormGroup,
@@ -50,7 +51,6 @@ export default function CheckboxProducts(props: Props) {
         {props.productItems?.map((product) => (
           <Fragment key={product.productId}>
             <Stack direction={"row"} justifyContent={"space-between"} alignItems={"center"}>
-              {" "}
               <FormControlLabel
                 sx={{ width: "max-content" }}
                 control={<Checkbox />}
@@ -76,6 +76,7 @@ export default function CheckboxProducts(props: Props) {
                 {product.productsRequired.map((req) => req.name + " ")}
               </Typography>
             )}
+            <Divider />
           </Fragment>
         ))}
       </FormGroup>
