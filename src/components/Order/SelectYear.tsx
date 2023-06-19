@@ -27,7 +27,7 @@ export default function SelectYear() {
   };
 
   return (
-    <FormControl fullWidth sx={{ margin: "20px 0" }} variant="standard">
+    <FormControl fullWidth sx={{ my: 5 }} variant="standard">
       <InputLabel size="small" id="select-year-label" sx={{color:"primary.main"}}>
         Select year
       </InputLabel>

@@ -49,11 +49,12 @@ export default function CheckboxProducts(props: Props) {
       <FormLabel sx={{ color: "primary.main" }}>Choose your items</FormLabel>
       <FormGroup sx={{ mb: "32px" }}>
         {props.productItems?.map((product) => (
-          <Fragment key={product.productId}>
+          <Stack spacing={1} key={product.productId}>
             <Stack
               direction={"row"}
               justifyContent={"space-between"}
               alignItems={"center"}
+              marginTop={1}
             >
               <Stack direction={"row"}  alignItems={"center"}>
                 <FormControlLabel
@@ -86,7 +87,7 @@ export default function CheckboxProducts(props: Props) {
             </Stack>
 
             <Divider />
-          </Fragment>
+          </Stack>
         ))}
       </FormGroup>
       <FormHelperText
