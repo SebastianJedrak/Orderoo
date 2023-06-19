@@ -50,32 +50,41 @@ export default function CheckboxProducts(props: Props) {
       <FormGroup sx={{ mb: "32px" }}>
         {props.productItems?.map((product) => (
           <Fragment key={product.productId}>
-            <Stack direction={"row"} justifyContent={"space-between"} alignItems={"center"}>
-              <FormControlLabel
-                sx={{ width: "max-content" }}
-                control={<Checkbox />}
-                label={product.productName}
-                value={JSON.stringify(product)}
-                onChange={handleChangeCheckbox}
-              />
-              <Typography variant="body1" component="span" fontWeight={600} >
-                {" "}
+            <Stack
+              direction={"row"}
+              justifyContent={"space-between"}
+              alignItems={"center"}
+            >
+              <Stack direction={"row"}  alignItems={"center"}>
+                <FormControlLabel
+                  sx={{ width: "max-content" }}
+                  control={<Checkbox />}
+                  label={product.productName}
+                  value={JSON.stringify(product)}
+                  onChange={handleChangeCheckbox}
+                />
+                {product.productsRequired.length !== 0 && (
+                  <Typography
+                    color={
+                      props.notOrderedRequiredError?.includes(product.productId)
+                        ? "error.main"
+                        : "grey.500"
+                    }
+                    variant="body2"
+                    fontSize={"0.8rem"}
+                    lineHeight={0}
+                  >
+                    {`( You need to order
+                    ${product.productsRequired.map((req) => req.name + " ")})`}
+                  </Typography>
+                )}
+              </Stack>
+
+              <Typography variant="body1" component="span" fontWeight={600}>
                 {product.productPrice[0].price} PLN
               </Typography>
             </Stack>
-            {product.productsRequired.length !== 0 && (
-              <Typography
-                color={
-                  props.notOrderedRequiredError?.includes(product.productId)
-                    ? "error.main"
-                    : "grey.500"
-                }
-                variant="body2"
-              >
-                You need to order{" "}
-                {product.productsRequired.map((req) => req.name + " ")}
-              </Typography>
-            )}
+
             <Divider />
           </Fragment>
         ))}
