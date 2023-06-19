@@ -169,7 +169,7 @@ export default function OrderForm() {
   };
 
   return (
-    <Paper component="section" elevation={3} sx={{ mx:  "auto", padding: 5, maxWidth: 700 }}>
+    <Paper component="section" elevation={3} sx={{ mx:  "auto", mb: 5, padding: 5, maxWidth: 700 }}>
       {/* Header */}
       <Typography variant="h5" gutterBottom textAlign="center" color="primary">
         Place Your Order

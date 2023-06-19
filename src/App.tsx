@@ -13,7 +13,7 @@ function App() {
     <ProductsProvider>
       <Box>
         <Header />
-        <Box sx={{ py: 5, backgroundImage: `url(${bgImg})` }}>
+        <Box sx={{ py: 5, background: `url(${bgImg})` }}>
           <OrderForm />
           <PackagesAccordion />
         </Box>
