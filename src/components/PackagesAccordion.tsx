@@ -14,9 +14,9 @@ export default function Packages() {
   const packages = data?.packageInSelectedYear;
 
   return (
-    <Paper component="section" elevation={3} sx={{ margin: 5, padding: 5 }}>
+    <Paper component="section" elevation={3} sx={{ margin:  "2.5rem auto", padding: 5, maxWidth: 700 }}>
       {/* Header */}
-      <Typography variant="h5" gutterBottom textAlign="center">
+      <Typography variant="h5" gutterBottom textAlign="center" color="primary">
         Our Packages
       </Typography>
 
