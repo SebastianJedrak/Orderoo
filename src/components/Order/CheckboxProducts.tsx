@@ -5,6 +5,7 @@ import {
   FormGroup,
   FormHelperText,
   FormLabel,
+  Stack,
   Typography,
 } from "@mui/material";
 import { Fragment, SetStateAction } from "react";
@@ -44,17 +45,24 @@ export default function CheckboxProducts(props: Props) {
 
   return (
     <FormControl fullWidth error={props.isCheckboxError} variant="standard">
-      <FormLabel sx={{color:"primary.main"}}>Choose your items</FormLabel>
+      <FormLabel sx={{ color: "primary.main" }}>Choose your items</FormLabel>
       <FormGroup sx={{ mb: "32px" }}>
         {props.productItems?.map((product) => (
           <Fragment key={product.productId}>
-            <FormControlLabel
-              sx={{ width: "max-content" }}
-              control={<Checkbox />}
-              label={product.productName}
-              value={JSON.stringify(product)}
-              onChange={handleChangeCheckbox}
-            />
+            <Stack direction={"row"} justifyContent={"space-between"} alignItems={"center"}>
+              {" "}
+              <FormControlLabel
+                sx={{ width: "max-content" }}
+                control={<Checkbox />}
+                label={product.productName}
+                value={JSON.stringify(product)}
+                onChange={handleChangeCheckbox}
+              />
+              <Typography variant="body1" component="span" fontWeight={600} >
+                {" "}
+                {product.productPrice[0].price} PLN
+              </Typography>
+            </Stack>
             {product.productsRequired.length !== 0 && (
               <Typography
                 color={
