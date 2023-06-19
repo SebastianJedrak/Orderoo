@@ -9,7 +9,7 @@ import {
   Stack,
   Typography,
 } from "@mui/material";
-import { Fragment, SetStateAction } from "react";
+import { SetStateAction } from "react";
 import { OrderType, ProductsType } from "../../types";
 
 type Props = {
