@@ -10,7 +10,7 @@ function Header() {
         color="common.white"
         variant="h4"
       >
-        Orderoo
+        Media Connect
       </Typography>
     </Paper>
   );
