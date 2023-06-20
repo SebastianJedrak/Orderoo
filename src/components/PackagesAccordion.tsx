@@ -83,15 +83,20 @@ export default function Packages() {
                 discount.
                 {packageItem.productsFreeId.length > 0 && (
                   <>
-                    You might also get {" "}
+                    You might also get{" "}
                     <Box
                       component="span"
                       fontWeight="fontWeightBold"
                       color="secondary.main"
                     >
-                      free
-                    </Box>
-                    {" "} for free.
+                      {packageItem.productsFreeId.reduce((acc, item, i, arr) => {
+                        return (acc +=
+                          productItems!.find(
+                            (productItem) => productItem.productId === item
+                          )!.productName + (i === arr.length ? ", " : ""));
+                      }, "")}
+                    </Box>{" "}
+                    for free.
                   </>
                 )}
               </Typography>
