@@ -32,7 +32,7 @@ function Header(props: Props) {
         variant="contained"
         color="secondary"
       >
-        Change to {props.view}
+        Change to {props.view === "admin" ? "user" : "admin"}
       </Button>
     </Stack>
   );

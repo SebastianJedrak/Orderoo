@@ -35,8 +35,14 @@ export default function AdminView() {
         <Stack spacing={1}>
           {productItems!.map((item) => (
             <>
-              <Stack direction={"row"} justifyContent={"space-between"} alignItems={"center"}>
-                <Typography key={item.productId}>{item.productName}</Typography>
+              <Stack
+                direction={"row"}
+                justifyContent={"space-between"}
+                alignItems={"center"}
+              >
+                <Typography key={item.productId}>
+                  {item.productId} {item.productName}
+                </Typography>
                 <Box>
                   <IconButton aria-label="edit" color="primary">
                     <EditIcon />
