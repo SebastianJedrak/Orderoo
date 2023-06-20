@@ -50,9 +50,8 @@ export default function Packages() {
           </AccordionSummary>
           <AccordionDetails>
             <Typography>
-              If you order{" "}
+              If you order {" "}
               <Box component="span" fontWeight="fontWeightBold">
-                {" "}
                 {packageItem.productsIncludedId.reduce((acc, item) => {
                   return (acc +=
                     productItems!.find(
@@ -60,8 +59,19 @@ export default function Packages() {
                     )!.productName + ", ");
                 }, "")}
               </Box>
-              you will get "discount%" discount. "if free" You might also get
-              "freeItems" for free.{" "}
+              you will get
+              <Box component="span" fontWeight="fontWeightBold">
+                {" "}
+                {packageItem.productsIncludedId.reduce((acc, item) => {
+                  return (acc += Number(
+                    productItems!.find(
+                      (productItem) => productItem.productId === item
+                    )!.productPrice[0].price
+                  ));
+                }, 0) - Number(packageItem.packagePrice[0].price)}
+                {" "} PLN {" "}
+              </Box>
+              discount. "if free" You might also get "freeItems" for free.
             </Typography>
           </AccordionDetails>
         </Accordion>
