@@ -10,7 +10,7 @@ import {
   Typography,
 } from "@mui/material";
 import { SetStateAction } from "react";
-import { OrderType, ProductsType } from "../../types";
+import { OrderType, ProductsType } from "../../../types";
 
 type Props = {
   isCheckboxError: boolean;
@@ -56,7 +56,10 @@ export default function CheckboxProducts(props: Props) {
               alignItems={"center"}
               marginTop={1}
             >
-              <Stack sx={{flexDirection: {sm: "row"}}}  alignItems={"center"}>
+              <Stack
+                sx={{ flexDirection: { sm: "row" } }}
+                alignItems={"center"}
+              >
                 <FormControlLabel
                   control={<Checkbox />}
                   label={product.productName}
@@ -80,7 +83,13 @@ export default function CheckboxProducts(props: Props) {
                 )}
               </Stack>
 
-              <Typography width={"70px"} textAlign={"end"} variant="body1" component="span" fontWeight={600}>
+              <Typography
+                width={"70px"}
+                textAlign={"end"}
+                variant="body1"
+                component="span"
+                fontWeight={600}
+              >
                 {product.productPrice[0].price} PLN
               </Typography>
             </Stack>

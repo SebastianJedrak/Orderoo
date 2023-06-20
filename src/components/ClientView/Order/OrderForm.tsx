@@ -1,7 +1,7 @@
 import { Paper, Button, Typography, Stack } from "@mui/material";
 import { useContext, useEffect, useState } from "react";
-import { ProductsContext } from "../../ctx/ProductsContext";
-import { OrderType, ProductsType } from "../../types";
+import { ProductsContext } from "../../../ctx/ProductsContext";
+import { OrderType, ProductsType } from "../../../types";
 import SelectYear from "./SelectYear";
 import DialogFormSubmit from "./DialogFormSubmit";
 import CheckboxProducts from "./CheckboxProducts";
@@ -169,7 +169,11 @@ export default function OrderForm() {
   };
 
   return (
-    <Paper component="section" elevation={3} sx={{ mx:  "auto", mb: 5, padding: 5, maxWidth: 700 }}>
+    <Paper
+      component="section"
+      elevation={3}
+      sx={{ mx: "auto", mb: 5, padding: 5, maxWidth: 700 }}
+    >
       {/* Header */}
       <Typography variant="h5" gutterBottom textAlign="center" color="primary">
         Place Your Order
@@ -194,7 +198,12 @@ export default function OrderForm() {
             discountPrice={discountPrice}
             totalPrice={totalPrice}
           />
-          <Button onClick={submitHandler} color="secondary" type="submit" variant="contained">
+          <Button
+            onClick={submitHandler}
+            color="secondary"
+            type="submit"
+            variant="contained"
+          >
             Order!
           </Button>
         </Stack>

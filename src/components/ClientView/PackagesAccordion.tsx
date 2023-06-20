@@ -7,7 +7,7 @@ import {
   Box,
 } from "@mui/material";
 import { useContext, useState } from "react";
-import { ProductsContext } from "../ctx/ProductsContext";
+import { ProductsContext } from "../../ctx/ProductsContext";
 import { ExpandMore } from "@mui/icons-material";
 
 export default function Packages() {
@@ -16,13 +16,15 @@ export default function Packages() {
   const packages = data?.packageInSelectedYear;
 
   const matchProductWithPackageId = (packageItem: any) => {
-  return  packageItem.reduce((acc: string, item: any, i: number, arr: any) => {
-      return (acc +=
-        productItems!.find(
+    return packageItem.reduce((acc: string, item: any, i: number, arr: any) => {
+      return (
+        (acc += productItems!.find(
           (productItem) => productItem.productId === item
-        )!.productName ) + (i + 1 === arr.length ? " " : i +2 === arr.length ? " and " : ", ")
-    }, "")
-  }
+        )!.productName) +
+        (i + 1 === arr.length ? " " : i + 2 === arr.length ? " and " : ", ")
+      );
+    }, "");
+  };
 
   // Accordion open control
   const [expanded, setExpanded] = useState<string | false>(false);
@@ -66,7 +68,6 @@ export default function Packages() {
                   fontWeight="fontWeightBold"
                   color="secondary.main"
                 >
-                  
                   {matchProductWithPackageId(packageItem.productsIncludedId)}
                 </Box>
                 you will get

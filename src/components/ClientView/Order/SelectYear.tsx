@@ -6,7 +6,7 @@ import {
   SelectChangeEvent,
 } from "@mui/material";
 import { useContext, useEffect } from "react";
-import { ProductsContext } from "../../ctx/ProductsContext";
+import { ProductsContext } from "../../../ctx/ProductsContext";
 
 const YEARS = [2023, 2024, 2025];
 
@@ -28,7 +28,11 @@ export default function SelectYear() {
 
   return (
     <FormControl fullWidth sx={{ my: 5 }} variant="standard">
-      <InputLabel size="small" id="select-year-label" sx={{color:"primary.main"}}>
+      <InputLabel
+        size="small"
+        id="select-year-label"
+        sx={{ color: "primary.main" }}
+      >
         Select year
       </InputLabel>
       <Select

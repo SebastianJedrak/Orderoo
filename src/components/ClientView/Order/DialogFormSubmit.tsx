@@ -8,7 +8,7 @@ import {
   Box,
 } from "@mui/material";
 import { SetStateAction } from "react";
-import { OrderType } from "../../types";
+import { OrderType } from "../../../types";
 
 type Props = {
   isOpen: boolean;
@@ -32,7 +32,7 @@ export default function DialogFormSubmit(props: Props) {
             textAlign: "center",
             color: "common.black",
             mb: 2,
-            fontWeight:"fontWeightBold"
+            fontWeight: "fontWeightBold",
           }}
         >
           Ordered Products

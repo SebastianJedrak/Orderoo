@@ -1,8 +1,8 @@
 import "./App.css";
 import Box from "@mui/material/Box/Box";
 import Header from "./components/Header";
-import OrderForm from "./components/Order/OrderForm";
-import PackagesAccordion from "./components/PackagesAccordion";
+import OrderForm from "./components/ClientView/Order/OrderForm";
+import PackagesAccordion from "./components/ClientView/PackagesAccordion";
 import ProductsProvider from "./ctx/ProductsContext";
 import Footer from "./components/Footer";
 
@@ -20,7 +20,7 @@ function App() {
             background: `url(${bgImg}) top no-repeat`,
             backgroundSize: "cover",
             backgroundBlendMode: "soft-light",
-            backgroundColor:  "rgba(255, 255, 255, 0.6)"
+            backgroundColor: "rgba(255, 255, 255, 0.6)",
           }}
         >
           <OrderForm />
