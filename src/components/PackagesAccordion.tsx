@@ -47,7 +47,7 @@ export default function Packages() {
             <Typography>{packageItem.packageName}</Typography>
           </AccordionSummary>
           <AccordionDetails>
-            <Typography>{packageItem.packageName}</Typography>
+            <Typography>If you order "itemlist" you will get "discount%" discount. "if free" You might also get "freeItems" for free. </Typography>
           </AccordionDetails>
         </Accordion>
       ))}
