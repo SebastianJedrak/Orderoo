@@ -7,6 +7,7 @@ import {
 } from "@mui/material";
 import { useContext } from "react";
 import { ProductsContext } from "../ctx/ProductsContext";
+import { ExpandMore } from "@mui/icons-material";
 
 export default function Packages() {
   const data = useContext(ProductsContext);
@@ -30,6 +31,7 @@ export default function Packages() {
           <AccordionSummary
             aria-controls={packageItem.packageName}
             id={String(packageItem.packageId)}
+            expandIcon={<ExpandMore/>}
           >
             <Typography>{packageItem.packageName}</Typography>
           </AccordionSummary>
