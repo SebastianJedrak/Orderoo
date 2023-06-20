@@ -4,6 +4,7 @@ import {
   AccordionSummary,
   Paper,
   Typography,
+  Box,
 } from "@mui/material";
 import { useContext, useState } from "react";
 import { ProductsContext } from "../ctx/ProductsContext";
@@ -11,7 +12,7 @@ import { ExpandMore } from "@mui/icons-material";
 
 export default function Packages() {
   const data = useContext(ProductsContext);
-  // const productItems = data?.productItems;
+  const productItems = data?.productInSelectedYear;
   const packages = data?.packageInSelectedYear;
 
   // Accordion open control
@@ -19,7 +20,8 @@ export default function Packages() {
 
   const handleChange =
     (panel: string) => (event: React.SyntheticEvent, isExpanded: boolean) => {
-      setExpanded(isExpanded ? panel : false)}
+      setExpanded(isExpanded ? panel : false);
+    };
 
   return (
     <Paper
@@ -47,7 +49,20 @@ export default function Packages() {
             <Typography>{packageItem.packageName}</Typography>
           </AccordionSummary>
           <AccordionDetails>
-            <Typography>If you order "itemlist" you will get "discount%" discount. "if free" You might also get "freeItems" for free. </Typography>
+            <Typography>
+              If you order{" "}
+              <Box component="span" fontWeight="fontWeightBold">
+                {" "}
+                {packageItem.productsIncludedId.reduce((acc, item) => {
+                  return (acc +=
+                    productItems!.find(
+                      (productItem) => productItem.productId === item
+                    )!.productName + ", ");
+                }, "")}
+              </Box>
+              you will get "discount%" discount. "if free" You might also get
+              "freeItems" for free.{" "}
+            </Typography>
           </AccordionDetails>
         </Accordion>
       ))}
