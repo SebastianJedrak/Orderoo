@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { Fragment, useContext } from "react";
 import { ProductsContext } from "../../ctx/ProductsContext";
 import {
   Box,
@@ -46,13 +46,13 @@ export default function AdminView() {
           </Stack>
           <Divider />
           {productItems!.map((item) => (
-            <>
+            <Fragment key={item.productId}>
               <Stack
                 direction={"row"}
                 justifyContent={"space-between"}
                 alignItems={"center"}
               >
-                <Stack key={item.productId} direction={"row"}>
+                <Stack  direction={"row"}>
                   <Typography width={"32px"}>{item.productId}</Typography>
                   <Typography>{item.productName}</Typography>
                 </Stack>
@@ -68,7 +68,7 @@ export default function AdminView() {
               </Stack>
 
               <Divider />
-            </>
+            </Fragment>
           ))}
         </Stack>
         <Box textAlign={"center"}>
