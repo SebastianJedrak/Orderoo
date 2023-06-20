@@ -45,14 +45,18 @@ export default function Packages() {
             <AccordionSummary
               aria-controls={packageItem.packageName}
               id={String(packageItem.packageId)}
-              expandIcon={<ExpandMore color="secondary" />}
+              expandIcon={<ExpandMore color="primary" />}
             >
               <Typography>{packageItem.packageName}</Typography>
             </AccordionSummary>
             <AccordionDetails>
               <Typography>
                 If you order{" "}
-                <Box component="span" fontWeight="fontWeightBold">
+                <Box
+                  component="span"
+                  fontWeight="fontWeightBold"
+                  color="secondary.main"
+                >
                   {packageItem.productsIncludedId.reduce((acc, item) => {
                     return (acc +=
                       productItems!.find(
@@ -61,7 +65,11 @@ export default function Packages() {
                   }, "")}
                 </Box>
                 you will get
-                <Box component="span" fontWeight="fontWeightBold">
+                <Box
+                  component="span"
+                  fontWeight="fontWeightBold"
+                  color="secondary.main"
+                >
                   {" "}
                   {packageItem.productsIncludedId.reduce((acc, item) => {
                     return (acc += Number(
@@ -70,9 +78,22 @@ export default function Packages() {
                       )!.productPrice[0].price
                     ));
                   }, 0) - Number(packageItem.packagePrice[0].price)}{" "}
-                  PLN{" "}
-                </Box>
-                discount. "if free" You might also get "freeItems" for free.
+                  PLN
+                </Box>{" "}
+                discount.
+                {packageItem.productsFreeId.length > 0 && (
+                  <>
+                    You might also get {" "}
+                    <Box
+                      component="span"
+                      fontWeight="fontWeightBold"
+                      color="secondary.main"
+                    >
+                      free
+                    </Box>
+                    {" "} for free.
+                  </>
+                )}
               </Typography>
             </AccordionDetails>
           </Accordion>
