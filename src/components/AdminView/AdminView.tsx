@@ -2,6 +2,7 @@ import { useContext } from "react";
 import { ProductsContext } from "../../ctx/ProductsContext";
 import {
   Box,
+  Button,
   Divider,
   IconButton,
   Paper,
@@ -11,6 +12,7 @@ import {
 
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
+import ControlPointIcon from "@mui/icons-material/ControlPoint";
 
 export default function AdminView() {
   const data = useContext(ProductsContext);
@@ -32,7 +34,7 @@ export default function AdminView() {
         >
           Products
         </Typography>
-        <Stack spacing={1}>
+        <Stack spacing={1} my={4}>
           <Stack direction={"row"}>
             <Typography width={"32px"} sx={{ fontWeight: "fontWeightBold" }}>
               ID
@@ -68,6 +70,11 @@ export default function AdminView() {
             </>
           ))}
         </Stack>
+        <Box textAlign={"center"}>
+          <Button endIcon={<ControlPointIcon />} variant="contained">
+            Add Product
+          </Button>
+        </Box>
       </Paper>
     </Box>
   );
