@@ -5,7 +5,7 @@ import {
   Paper,
   Typography,
 } from "@mui/material";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { ProductsContext } from "../ctx/ProductsContext";
 import { ExpandMore } from "@mui/icons-material";
 
@@ -14,8 +14,19 @@ export default function Packages() {
   // const productItems = data?.productItems;
   const packages = data?.packageInSelectedYear;
 
+  // Accordion open control
+  const [expanded, setExpanded] = useState<string | false>(false);
+
+  const handleChange =
+    (panel: string) => (event: React.SyntheticEvent, isExpanded: boolean) => {
+      setExpanded(isExpanded ? panel : false)}
+
   return (
-    <Paper component="section" elevation={3} sx={{ mx:  "auto", padding: 5, maxWidth: 700 }}>
+    <Paper
+      component="section"
+      elevation={3}
+      sx={{ mx: "auto", padding: 5, maxWidth: 700 }}
+    >
       {/* Header */}
       <Typography variant="h5" gutterBottom textAlign="center" color="primary">
         Our Packages
@@ -25,13 +36,13 @@ export default function Packages() {
       {packages?.map((packageItem) => (
         <Accordion
           key={packageItem.packageId}
-          // expanded={expanded === "panel1"}
-          // onChange={handleChange("panel1")}
+          expanded={expanded === packageItem.packageName}
+          onChange={handleChange(packageItem.packageName)}
         >
           <AccordionSummary
             aria-controls={packageItem.packageName}
             id={String(packageItem.packageId)}
-            expandIcon={<ExpandMore/>}
+            expandIcon={<ExpandMore />}
           >
             <Typography>{packageItem.packageName}</Typography>
           </AccordionSummary>
