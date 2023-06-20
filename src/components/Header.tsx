@@ -1,4 +1,4 @@
-import { Typography, Paper, Button, Box, Stack } from "@mui/material";
+import { Typography, Button, Box, Stack } from "@mui/material";
 import { SetStateAction } from "react";
 
 type Props = {
@@ -32,7 +32,7 @@ function Header(props: Props) {
         variant="contained"
         color="secondary"
       >
-        Change to Client
+        Change to {props.view}
       </Button>
     </Stack>
   );
