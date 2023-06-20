@@ -44,9 +44,9 @@ export default function Packages() {
           <AccordionSummary
             aria-controls={packageItem.packageName}
             id={String(packageItem.packageId)}
-            expandIcon={<ExpandMore />}
+            expandIcon={<ExpandMore color="secondary"/>}
           >
-            <Typography>{packageItem.packageName}</Typography>
+            <Typography >{packageItem.packageName}</Typography>
           </AccordionSummary>
           <AccordionDetails>
             <Typography>
