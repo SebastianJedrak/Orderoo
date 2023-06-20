@@ -16,7 +16,7 @@ export default function Packages() {
   const packages = data?.packageInSelectedYear;
 
   const matchProductWithPackageId = (packageItem: any) => {
-  return  packageItem.reduce((acc: any, item: any, i: any, arr: any) => {
+  return  packageItem.reduce((acc: string, item: any, i: number, arr: any) => {
       return (acc +=
         productItems!.find(
           (productItem) => productItem.productId === item
@@ -94,12 +94,7 @@ export default function Packages() {
                       fontWeight="fontWeightBold"
                       color="secondary.main"
                     >
-                      {packageItem.productsFreeId.reduce((acc, item, i, arr) => {
-                        return (acc +=
-                          productItems!.find(
-                            (productItem) => productItem.productId === item
-                          )!.productName + (i === arr.length ? ", " : ""));
-                      }, "")}
+                      {matchProductWithPackageId(packageItem.productsFreeId)}
                     </Box>{" "}
                     for free.
                   </>
