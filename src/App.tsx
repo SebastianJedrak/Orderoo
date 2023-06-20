@@ -7,12 +7,16 @@ import ProductsProvider from "./ctx/ProductsContext";
 import Footer from "./components/Footer";
 
 import bgImg from "./img/bg/2000x3000.png";
+import { useState } from "react";
 
 function App() {
+
+  const [view, setView] = useState("user")
+
   return (
     <ProductsProvider>
       <Box>
-        <Header />
+        <Header view={view} changeView={setView}/>
         <Box
           sx={{
             py: 5,
