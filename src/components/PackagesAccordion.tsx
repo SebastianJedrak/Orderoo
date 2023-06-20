@@ -20,7 +20,7 @@ export default function Packages() {
       return (acc +=
         productItems!.find(
           (productItem) => productItem.productId === item
-        )!.productName ) + (i + 1 === arr.length ? " " : ", ")
+        )!.productName ) + (i + 1 === arr.length ? " " : i +2 === arr.length ? " and " : ", ")
     }, "")
   }
 
