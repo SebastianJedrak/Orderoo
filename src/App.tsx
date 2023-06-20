@@ -8,7 +8,7 @@ import Footer from "./components/Footer";
 
 import bgImg from "./img/bg/2000x3000.png";
 import { useState } from "react";
-import AdminView from "./components/AdminView/AdminView";
+import Admin from "./components/AdminView/Admin";
 
 function App() {
   const [view, setView] = useState("user");
@@ -17,10 +17,10 @@ function App() {
 
   return (
     <ProductsProvider>
-      <Box>
+      <Box >
         <Header view={view} changeView={setView} />
         {view === "user" && (
-          <Box
+          <Box minHeight={"80vh"}
             sx={{
               py: 5,
               px: 3,
@@ -34,20 +34,7 @@ function App() {
             <PackagesAccordion />
           </Box>
         )}
-        {view === "admin" && (
-          <Box
-            sx={{
-              py: 5,
-              px: 3,
-              background: `url(${bgImg}) top no-repeat`,
-              backgroundSize: "cover",
-              backgroundBlendMode: "soft-light",
-              backgroundColor: "rgba(255, 255, 255, 0.6)",
-            }}
-          >
-            <AdminView />
-          </Box>
-        )}
+        {view === "admin" && <Admin/>}
 
         <Footer />
       </Box>

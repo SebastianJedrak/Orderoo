@@ -21,6 +21,7 @@ export default function AdminView() {
 
   return (
     <Box>
+      {/* Products */}
       <Paper
         component="section"
         elevation={3}
@@ -76,6 +77,8 @@ export default function AdminView() {
           </Button>
         </Box>
       </Paper>
+
+      {/* Packages */}
     </Box>
   );
 }
