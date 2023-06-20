@@ -5,6 +5,7 @@ import {
   DialogContent,
   DialogContentText,
   DialogTitle,
+  Box,
 } from "@mui/material";
 import { SetStateAction } from "react";
 import { OrderType } from "../../types";
@@ -22,24 +23,38 @@ export default function DialogFormSubmit(props: Props) {
 
   return (
     <Dialog open={props.isOpen} onClose={closeHandler}>
-      <DialogTitle color="secondary">Successfully Ordered!</DialogTitle>
+      <DialogTitle sx={{ px: 15, mb: 2 }} textAlign={"center"} color="primary">
+        Successfully Ordered!
+      </DialogTitle>
       <DialogContent>
         <DialogContentText
           sx={{
             textAlign: "center",
             color: "common.black",
-            marginBottom: "8px",
+            mb: 2,
+            fontWeight:"fontWeightBold"
           }}
         >
           Ordered Products
         </DialogContentText>
         {props.order?.orderedItems.map((item) => (
           <DialogContentText key={item.productId}>
-            {item.productName}
+            - {item.productName}
           </DialogContentText>
         ))}
-        <DialogContentText sx={{ color: "common.black", marginTop: "16px" }}>
-          Payment {props.order?.price} PLN
+        <DialogContentText
+          textAlign={"end"}
+          sx={{ color: "common.black", mt: 3 }}
+        >
+          Payment:{" "}
+          <Box
+            component="span"
+            fontWeight="fontWeightBold"
+            color="secondary.main"
+          >
+            {props.order?.price}{" "}
+          </Box>
+          PLN
         </DialogContentText>
       </DialogContent>
       <DialogActions>
