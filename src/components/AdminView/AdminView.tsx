@@ -33,6 +33,15 @@ export default function AdminView() {
           Products
         </Typography>
         <Stack spacing={1}>
+          <Stack direction={"row"}>
+            <Typography width={"32px"} sx={{ fontWeight: "fontWeightBold" }}>
+              ID
+            </Typography>
+            <Typography sx={{ fontWeight: "fontWeightBold" }}>
+              Product
+            </Typography>
+          </Stack>
+          <Divider />
           {productItems!.map((item) => (
             <>
               <Stack
@@ -40,9 +49,11 @@ export default function AdminView() {
                 justifyContent={"space-between"}
                 alignItems={"center"}
               >
-                <Typography key={item.productId}>
-                  {item.productId} {item.productName}
-                </Typography>
+                <Stack key={item.productId} direction={"row"}>
+                  <Typography width={"32px"}>{item.productId}</Typography>
+                  <Typography>{item.productName}</Typography>
+                </Stack>
+
                 <Box>
                   <IconButton aria-label="edit" color="primary">
                     <EditIcon />
