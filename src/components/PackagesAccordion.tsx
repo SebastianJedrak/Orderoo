@@ -15,6 +15,15 @@ export default function Packages() {
   const productItems = data?.productInSelectedYear;
   const packages = data?.packageInSelectedYear;
 
+  const matchProductWithPackageId = (packageItem: any) => {
+  return  packageItem.reduce((acc: any, item: any, i: any, arr: any) => {
+      return (acc +=
+        productItems!.find(
+          (productItem) => productItem.productId === item
+        )!.productName ) + (i + 1 === arr.length ? " " : ", ")
+    }, "")
+  }
+
   // Accordion open control
   const [expanded, setExpanded] = useState<string | false>(false);
 
@@ -57,12 +66,8 @@ export default function Packages() {
                   fontWeight="fontWeightBold"
                   color="secondary.main"
                 >
-                  {packageItem.productsIncludedId.reduce((acc, item) => {
-                    return (acc +=
-                      productItems!.find(
-                        (productItem) => productItem.productId === item
-                      )!.productName + ", ");
-                  }, "")}
+                  
+                  {matchProductWithPackageId(packageItem.productsIncludedId)}
                 </Box>
                 you will get
                 <Box
