@@ -35,47 +35,56 @@ export default function Packages() {
       </Typography>
 
       {/* Accordion */}
-      {packages?.map((packageItem) => (
-        <Accordion
-          key={packageItem.packageId}
-          expanded={expanded === packageItem.packageName}
-          onChange={handleChange(packageItem.packageName)}
-        >
-          <AccordionSummary
-            aria-controls={packageItem.packageName}
-            id={String(packageItem.packageId)}
-            expandIcon={<ExpandMore color="secondary"/>}
+      <Box my={4}>
+        {packages?.map((packageItem) => (
+          <Accordion
+            key={packageItem.packageId}
+            expanded={expanded === packageItem.packageName}
+            onChange={handleChange(packageItem.packageName)}
           >
-            <Typography >{packageItem.packageName}</Typography>
-          </AccordionSummary>
-          <AccordionDetails>
-            <Typography>
-              If you order {" "}
-              <Box component="span" fontWeight="fontWeightBold">
-                {packageItem.productsIncludedId.reduce((acc, item) => {
-                  return (acc +=
-                    productItems!.find(
-                      (productItem) => productItem.productId === item
-                    )!.productName + ", ");
-                }, "")}
-              </Box>
-              you will get
-              <Box component="span" fontWeight="fontWeightBold">
-                {" "}
-                {packageItem.productsIncludedId.reduce((acc, item) => {
-                  return (acc += Number(
-                    productItems!.find(
-                      (productItem) => productItem.productId === item
-                    )!.productPrice[0].price
-                  ));
-                }, 0) - Number(packageItem.packagePrice[0].price)}
-                {" "} PLN {" "}
-              </Box>
-              discount. "if free" You might also get "freeItems" for free.
-            </Typography>
-          </AccordionDetails>
-        </Accordion>
-      ))}
+            <AccordionSummary
+              aria-controls={packageItem.packageName}
+              id={String(packageItem.packageId)}
+              expandIcon={<ExpandMore color="secondary" />}
+            >
+              <Typography>{packageItem.packageName}</Typography>
+            </AccordionSummary>
+            <AccordionDetails>
+              <Typography>
+                If you order{" "}
+                <Box component="span" fontWeight="fontWeightBold">
+                  {packageItem.productsIncludedId.reduce((acc, item) => {
+                    return (acc +=
+                      productItems!.find(
+                        (productItem) => productItem.productId === item
+                      )!.productName + ", ");
+                  }, "")}
+                </Box>
+                you will get
+                <Box component="span" fontWeight="fontWeightBold">
+                  {" "}
+                  {packageItem.productsIncludedId.reduce((acc, item) => {
+                    return (acc += Number(
+                      productItems!.find(
+                        (productItem) => productItem.productId === item
+                      )!.productPrice[0].price
+                    ));
+                  }, 0) - Number(packageItem.packagePrice[0].price)}{" "}
+                  PLN{" "}
+                </Box>
+                discount. "if free" You might also get "freeItems" for free.
+              </Typography>
+            </AccordionDetails>
+          </Accordion>
+        ))}
+      </Box>
+
+      {/* Rules */}
+      <Typography variant="body2" textAlign="center" color="grey.500">
+        Selected promotions cannot be combined. If you choose multiple products
+        from the same package, the most advantageous one will be selected for
+        you.
+      </Typography>
     </Paper>
   );
 }
