@@ -7,6 +7,11 @@ type Props = {
 };
 
 function Header(props: Props) {
+  const changeViewHandler = () => {
+    if (props.view === "user") props.changeView("admin");
+    if (props.view === "admin") props.changeView("user");
+  };
+
   return (
     <Stack
       component="header"
@@ -16,11 +21,19 @@ function Header(props: Props) {
       bgcolor="primary.main"
       px={3}
     >
-      <Box sx={{width: "11%"}}/>
+      <Box sx={{ width: "11%" }} />
       <Typography py={2} textAlign="center" color="common.white" variant="h4">
         Media Connect
       </Typography>
-      <Button sx={{width: "11%"}} size="small" variant="contained" color="secondary">Change to Client</Button>
+      <Button
+        onClick={changeViewHandler}
+        sx={{ width: "11%" }}
+        size="small"
+        variant="contained"
+        color="secondary"
+      >
+        Change to Client
+      </Button>
     </Stack>
   );
 }
