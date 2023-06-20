@@ -8,6 +8,7 @@ import Footer from "./components/Footer";
 
 import bgImg from "./img/bg/2000x3000.png";
 import { useState } from "react";
+import AdminView from "./components/AdminView/AdminView";
 
 function App() {
   const [view, setView] = useState("user");
@@ -43,7 +44,9 @@ function App() {
               backgroundBlendMode: "soft-light",
               backgroundColor: "rgba(255, 255, 255, 0.6)",
             }}
-          ></Box>
+          >
+            <AdminView />
+          </Box>
         )}
 
         <Footer />
