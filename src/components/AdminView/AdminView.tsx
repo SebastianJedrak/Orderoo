@@ -24,11 +24,11 @@ export default function AdminView() {
 
   const [isDeleteModalOpen, setDeleteIsModalOpen] = useState(false);
   const [dialogProduct, setDialogProduct] = useState<
-    ProductsType["productItems"] | []
-  >([]);
+    ProductsType["productItems"] | null
+  >(null);
   const [dialogPackage, setDialogPackage] = useState<
-    ProductsType["packages"] | []
-  >([]);
+    ProductsType["packages"] | null
+  >(null);
 
   const productClickHandler = (e: React.SyntheticEvent) => {
     const btn = (e.target as HTMLElement).closest("button");

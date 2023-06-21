@@ -12,8 +12,8 @@ import { ProductsType } from "../../types";
 type Props = {
   isOpen: boolean;
   onClose: React.Dispatch<SetStateAction<boolean>>;
-  product: ProductsType["productItems"] | [];
-  package: ProductsType["packages"] | [];
+  product: ProductsType["productItems"] | null;
+  package: ProductsType["packages"] | null;
 };
 
 export default function DialogFormSubmit(props: Props) {
@@ -21,7 +21,7 @@ export default function DialogFormSubmit(props: Props) {
     props.onClose(false);
   };
 
-  console.log(props.product[0]);
+  console.log(props.product?.[0]);
 
   return (
     <Dialog open={props.isOpen} onClose={closeHandler}>
@@ -38,9 +38,8 @@ export default function DialogFormSubmit(props: Props) {
           }}
         >
           Do you want to delete this{" "}
-          {/* {props.package.length > 0
-            ? props.product[0].productName
-            : props.package[0].packageName} */}
+          {props.product && props.product?.[0].productName}
+          {props.package && props.package?.[0].packageName}
           ? This action is irreversible.
         </DialogContentText>
       </DialogContent>
