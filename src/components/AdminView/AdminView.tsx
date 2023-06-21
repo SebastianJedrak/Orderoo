@@ -36,9 +36,9 @@ export default function AdminView() {
     if (btn.dataset.action === "delete") {
       setDeleteIsModalOpen(true);
       if (btn.dataset.type === "product")
-        setDialogProduct(JSON.parse(btn.dataset.product!));
+        setDialogProduct([JSON.parse(btn.dataset.product!)]);
       if (btn.dataset.type === "package")
-        setDialogPackage(JSON.parse(btn.dataset.product!));
+        setDialogPackage([JSON.parse(btn.dataset.product!)]);
     }
   };
 
