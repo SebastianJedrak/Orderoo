@@ -7,6 +7,7 @@ export const ProductsContext = createContext<{
   packageInSelectedYear: ProductsType["packages"] | null;
   selectedYear: string;
   setSelectedYear: React.Dispatch<SetStateAction<string>>;
+  setData: React.Dispatch<SetStateAction<ProductsType | null>> 
 } | null>(null);
 
 export default function ProductsProvider(props: { children: React.ReactNode }) {
@@ -32,9 +33,9 @@ export default function ProductsProvider(props: { children: React.ReactNode }) {
   }
 
   useEffect(() => {
-    if (localStorage.getItem("data")) {
-      const data = localStorage.getItem("data");
-      const dataParse = JSON.parse(data!)
+    if (!data) {
+      const dataStorage = localStorage.getItem("data");
+      const dataParse = JSON.parse(dataStorage!)
       setData(dataParse);
     } else {
       getData();
@@ -81,6 +82,7 @@ export default function ProductsProvider(props: { children: React.ReactNode }) {
         packageInSelectedYear,
         setSelectedYear,
         selectedYear,
+        setData
       }}
     >
       {props.children}

@@ -24,7 +24,7 @@ export default function DialogFormSubmit(props: Props) {
   };
 
   const  deleteHandler =  () => {
-
+    localStorage.removeItem(`data`) 
     props.onClose(false);
   };
 
