@@ -23,7 +23,7 @@ export default function DialogFormSubmit(props: Props) {
   return (
     <Dialog open={props.isOpen} onClose={closeHandler}>
       <DialogTitle sx={{ px: 15, mb: 2 }} textAlign={"center"} color="primary">
-        Do you want to delete this "item"?
+        DELETE
       </DialogTitle>
       <DialogContent>
         <DialogContentText
@@ -34,7 +34,7 @@ export default function DialogFormSubmit(props: Props) {
             fontWeight: "fontWeightBold",
           }}
         >
-          This action is irreversible.
+          Do you want to delete this "item"? This action is irreversible.
         </DialogContentText>
       </DialogContent>
       <DialogActions>
