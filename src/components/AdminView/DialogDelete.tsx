@@ -1,10 +1,12 @@
 import {
+  Box,
   Button,
   Dialog,
   DialogActions,
   DialogContent,
   DialogContentText,
   DialogTitle,
+  Stack,
 } from "@mui/material";
 import { SetStateAction } from "react";
 import { ProductsType } from "../../types";
@@ -34,25 +36,42 @@ export default function DialogFormSubmit(props: Props) {
             textAlign: "center",
             color: "common.black",
             mb: 2,
-            fontWeight: "fontWeightBold",
           }}
         >
-          Do you want to delete this{" "}
-          {props.product && props.product?.[0].productName}
-          {props.package && props.package?.[0].packageName}
+          Do you want to delete{" "}
+          <Box
+            component={"span"}
+            color="secondary.light"
+            fontWeight="fontWeightBold"
+          >
+            {props.product && props.product?.[0].productName}
+            {props.package && props.package?.[0].packageName}
+          </Box>
           ? This action is irreversible.
         </DialogContentText>
       </DialogContent>
-      <DialogActions>
-        <Button autoFocus onClick={closeHandler}>
-          No
-        </Button>
-      </DialogActions>
-      <DialogActions>
-        <Button autoFocus onClick={closeHandler}>
-          Yes
-        </Button>
-      </DialogActions>
+      <Stack direction={"row"} justifyContent={"center"}>
+        {" "}
+        <DialogActions>
+          <Button
+            sx={{ width: "100px" }}
+            variant="contained"
+            autoFocus
+            onClick={closeHandler}
+          >
+            No
+          </Button>
+        </DialogActions>
+        <DialogActions>
+          <Button
+            sx={{ width: "100px" }}
+            variant="outlined"
+            onClick={closeHandler}
+          >
+            Yes
+          </Button>
+        </DialogActions>
+      </Stack>
     </Dialog>
   );
 }
