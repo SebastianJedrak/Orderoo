@@ -66,7 +66,7 @@ export default function Packages() {
                 <Box
                   component="span"
                   fontWeight="fontWeightBold"
-                  color="secondary.main"
+                  color="secondary.dark"
                 >
                   {matchProductWithPackageId(packageItem.productsIncludedId)}
                 </Box>
@@ -74,7 +74,7 @@ export default function Packages() {
                 <Box
                   component="span"
                   fontWeight="fontWeightBold"
-                  color="secondary.main"
+                  color="secondary.dark"
                 >
                   {" "}
                   {packageItem.productsIncludedId.reduce((acc, item) => {
@@ -93,7 +93,7 @@ export default function Packages() {
                     <Box
                       component="span"
                       fontWeight="fontWeightBold"
-                      color="secondary.main"
+                      color="secondary.dark"
                     >
                       {matchProductWithPackageId(packageItem.productsFreeId)}
                     </Box>{" "}

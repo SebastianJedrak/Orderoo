@@ -41,7 +41,7 @@ export default function DialogFormSubmit(props: Props) {
           Do you want to delete{" "}
           <Box
             component={"span"}
-            color="secondary.light"
+            color="secondary.dark"
             fontWeight="fontWeightBold"
           >
             {props.product && props.product?.[0].productName}
