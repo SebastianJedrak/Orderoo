@@ -1,4 +1,4 @@
-import { Fragment, useContext } from "react";
+import { Fragment, useContext, useState } from "react";
 import { ProductsContext } from "../../ctx/ProductsContext";
 import {
   Box,
@@ -14,10 +14,14 @@ import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
 import ControlPointIcon from "@mui/icons-material/ControlPoint";
 
+import DialogDelete from "./DialogDelete";
+
 export default function AdminView() {
   const data = useContext(ProductsContext);
   const productItems = data?.productInSelectedYear;
   const packageItems = data?.packageInSelectedYear;
+
+  const [isDeleteModalOpen, setDeleteIsModalOpen] = useState(false);
 
   return (
     <Box>
@@ -52,7 +56,7 @@ export default function AdminView() {
                 justifyContent={"space-between"}
                 alignItems={"center"}
               >
-                <Stack  direction={"row"}>
+                <Stack direction={"row"}>
                   <Typography width={"32px"}>{item.productId}</Typography>
                   <Typography>{item.productName}</Typography>
                 </Stack>
@@ -79,6 +83,13 @@ export default function AdminView() {
       </Paper>
 
       {/* Packages */}
+
+      {/* Dialogs */}
+      <DialogDelete
+        isOpen={isDeleteModalOpen}
+        onClose={setDeleteIsModalOpen}
+        item={null}
+      />
     </Box>
   );
 }
