@@ -23,9 +23,12 @@ export default function DialogFormSubmit(props: Props) {
     props.onClose(false);
   };
 
-  const deleteHandler = () => {
+  const  deleteHandler =  () => {
+
     props.onClose(false);
   };
+
+
 
   return (
     <Dialog open={props.isOpen} onClose={closeHandler}>

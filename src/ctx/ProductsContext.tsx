@@ -5,7 +5,7 @@ import { ProductsType } from "../types";
 export const ProductsContext = createContext<{
   productInSelectedYear: ProductsType["productItems"] | null;
   packageInSelectedYear: ProductsType["packages"] | null;
-  selectedYear: string
+  selectedYear: string;
   setSelectedYear: React.Dispatch<SetStateAction<string>>;
 } | null>(null);
 
@@ -20,27 +20,35 @@ export default function ProductsProvider(props: { children: React.ReactNode }) {
   >(null);
 
   // Fetch data
-  useEffect(() => {
-    async function getData() {
-      try {
-        const response = await window.fetch("/products.json");
-        if (!response.ok) throw new Error("Failed to fetch data");
-        const data = await response.json();
-        setData(data);
-      } catch (error: any) {
-        console.error(`Something goes wrong ${error.message}`);
-      }
+  async function getData() {
+    try {
+      const response = await window.fetch("/products.json");
+      if (!response.ok) throw new Error("Failed to fetch data");
+      const data = await response.json();
+      setData(data);
+    } catch (error: any) {
+      console.error(`Something goes wrong ${error.message}`);
     }
-    getData();
-  }, []);
+  }
+
+  useEffect(() => {
+    if (localStorage.getItem("data")) {
+      const data = localStorage.getItem("data");
+      const dataParse = JSON.parse(data!)
+      setData(dataParse);
+    } else {
+      getData();
+      localStorage.setItem("data", JSON.stringify(data));
+    }
+  }, [data])
+  
+
+
 
   // Transform data
   useEffect(() => {
-  
     if (data && selectedYear !== "") {
-      
       setProductInSelectedYear(
-        
         data.productItems.map((item) => {
           const product = {
             ...item,
@@ -58,7 +66,7 @@ export default function ProductsProvider(props: { children: React.ReactNode }) {
             ...item,
             packagePrice: item.packagePrice.filter(
               (year) => year.year === selectedYear
-            )
+            ),
           };
           return packageItem;
         })
@@ -66,9 +74,15 @@ export default function ProductsProvider(props: { children: React.ReactNode }) {
     }
   }, [data, selectedYear]);
 
-
   return (
-    <ProductsContext.Provider value={{ productInSelectedYear, packageInSelectedYear, setSelectedYear, selectedYear }}>
+    <ProductsContext.Provider
+      value={{
+        productInSelectedYear,
+        packageInSelectedYear,
+        setSelectedYear,
+        selectedYear,
+      }}
+    >
       {props.children}
     </ProductsContext.Provider>
   );
