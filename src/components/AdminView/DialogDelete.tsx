@@ -23,7 +23,9 @@ export default function DialogFormSubmit(props: Props) {
     props.onClose(false);
   };
 
-  console.log(props.product?.[0]);
+  const deleteHandler = () => {
+    props.onClose(false);
+  };
 
   return (
     <Dialog open={props.isOpen} onClose={closeHandler}>
@@ -66,7 +68,7 @@ export default function DialogFormSubmit(props: Props) {
           <Button
             sx={{ width: "100px" }}
             variant="outlined"
-            onClick={closeHandler}
+            onClick={deleteHandler}
           >
             Yes
           </Button>
