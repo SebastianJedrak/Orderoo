@@ -12,6 +12,11 @@ import { ProductsType } from "../../types";
 type Props = {
   isOpen: boolean;
   onClose: React.Dispatch<SetStateAction<boolean>>;
+  setDialogItem: React.Dispatch<
+    SetStateAction<
+      ProductsType["productItems"] | ProductsType["packages"] | null
+    >
+  >;
   item: ProductsType["productItems"] | ProductsType["packages"] | null;
 };
 

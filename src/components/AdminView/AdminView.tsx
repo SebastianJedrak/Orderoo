@@ -33,7 +33,6 @@ export default function AdminView() {
     setDialogItem(JSON.parse(btn.dataset.product!))
 };
 
-console.log(dialogItem);
   return (
     <Box>
       <Paper
@@ -107,7 +106,8 @@ console.log(dialogItem);
       <DialogDelete
         isOpen={isDeleteModalOpen}
         onClose={setDeleteIsModalOpen}
-        item={null}
+        item={dialogItem}
+        setDialogItem={setDialogItem}
       />
     </Box>
   );
