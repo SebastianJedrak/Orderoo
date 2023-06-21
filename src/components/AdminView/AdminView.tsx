@@ -30,6 +30,7 @@ export default function AdminView() {
   const productClickHandler = (e: React.SyntheticEvent) => {
     const btn = (e.target as HTMLElement).closest("button");
     if (!btn) return;
+    if (btn.dataset.action === "delete") setDeleteIsModalOpen(true)
     setDialogItem(JSON.parse(btn.dataset.product!))
 };
 
@@ -76,6 +77,7 @@ export default function AdminView() {
                     aria-label="edit"
                     color="primary"
                     data-product={JSON.stringify(item)}
+                    data-action={"edit"}
                   >
                     <EditIcon />
                   </IconButton>
@@ -83,6 +85,7 @@ export default function AdminView() {
                     aria-label="delete"
                     color="primary"
                     data-product={JSON.stringify(item)}
+                    data-action={"delete"}
                   >
                     <DeleteIcon />
                   </IconButton>
