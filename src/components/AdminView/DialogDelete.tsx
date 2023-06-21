@@ -12,18 +12,17 @@ import { ProductsType } from "../../types";
 type Props = {
   isOpen: boolean;
   onClose: React.Dispatch<SetStateAction<boolean>>;
-  setDialogItem: React.Dispatch<
-    SetStateAction<
-      ProductsType["productItems"] | ProductsType["packages"] | null
-    >
-  >;
-  item: ProductsType["productItems"] | ProductsType["packages"] | null;
+  product: ProductsType["productItems"] | null ;
+  package: ProductsType["packages"] | null ;
 };
 
 export default function DialogFormSubmit(props: Props) {
   const closeHandler = () => {
     props.onClose(false);
   };
+
+  console.log(props.product!);
+
 
   return (
     <Dialog open={props.isOpen} onClose={closeHandler}>
@@ -39,7 +38,7 @@ export default function DialogFormSubmit(props: Props) {
             fontWeight: "fontWeightBold",
           }}
         >
-          Do you want to delete this "item"? This action is irreversible.
+          Do you want to delete this {}? This action is irreversible.
         </DialogContentText>
       </DialogContent>
       <DialogActions>

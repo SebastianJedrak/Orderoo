@@ -23,16 +23,24 @@ export default function AdminView() {
   const packageItems = data?.packageInSelectedYear;
 
   const [isDeleteModalOpen, setDeleteIsModalOpen] = useState(false);
-  const [dialogItem, setDialogItem] = useState<
-    ProductsType["productItems"] | ProductsType["packages"] | null
-  >(null);
+  const [dialogProduct, setDialogProduct] = useState<
+    ProductsType["productItems"] | []
+  >([]);
+  const [dialogPackage, setDialogPackage] = useState<
+    ProductsType["packages"] | []
+  >([]);
 
   const productClickHandler = (e: React.SyntheticEvent) => {
     const btn = (e.target as HTMLElement).closest("button");
     if (!btn) return;
-    if (btn.dataset.action === "delete") setDeleteIsModalOpen(true)
-    setDialogItem(JSON.parse(btn.dataset.product!))
-};
+    if (btn.dataset.action === "delete") {
+      setDeleteIsModalOpen(true);
+      if (btn.dataset.type === "product")
+        setDialogProduct(JSON.parse(btn.dataset.product!));
+      if (btn.dataset.type === "package")
+        setDialogPackage(JSON.parse(btn.dataset.product!));
+    }
+  };
 
   return (
     <Box>
@@ -78,6 +86,7 @@ export default function AdminView() {
                     color="primary"
                     data-product={JSON.stringify(item)}
                     data-action={"edit"}
+                    data-type="product"
                   >
                     <EditIcon />
                   </IconButton>
@@ -86,6 +95,7 @@ export default function AdminView() {
                     color="primary"
                     data-product={JSON.stringify(item)}
                     data-action={"delete"}
+                    data-type="product"
                   >
                     <DeleteIcon />
                   </IconButton>
@@ -109,8 +119,8 @@ export default function AdminView() {
       <DialogDelete
         isOpen={isDeleteModalOpen}
         onClose={setDeleteIsModalOpen}
-        item={dialogItem}
-        setDialogItem={setDialogItem}
+        product={dialogProduct}
+        package={dialogPackage}
       />
     </Box>
   );
