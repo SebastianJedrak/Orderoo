@@ -42,10 +42,17 @@ export default function DialogFormSubmit(props: Props) {
     //   return prev;
     // });
 
-    const dataStorage = JSON.parse(localStorage.getItem("data")!);
-    if (props.package !== null) {
-      const newData = dataStorage;
-      console.log(newData);
+    const dataStorage: ProductsType = JSON.parse(localStorage.getItem("data")!);
+    if (props.product !== null) {
+      const updatedProducts = dataStorage.productItems.filter(
+        (item) => item.productId !== props.product?.[0].productId
+      );
+      const newData = {productItems: updatedProducts, packages: dataStorage.packages}
+      // console.log(dataStorage.packages.concat(newData));
+      // console.log(dataStorage);
+      // console.log({productItems: newData, packages: dataStorage.packages});
+      setData!(newData)
+      localStorage.setItem("data", JSON.stringify(newData))
     }
     if (props.package !== null) {
     }

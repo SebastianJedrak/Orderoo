@@ -45,6 +45,8 @@ export default function ProductsProvider(props: { children: React.ReactNode }) {
     }
   }, [data])
 
+  console.log(data);
+
   // Transform data
   useEffect(() => {
     if (dataStorage) {
