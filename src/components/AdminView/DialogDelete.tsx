@@ -63,7 +63,7 @@ export default function DialogFormSubmit(props: Props) {
     )
   );
 
-  const packageToDeleteNames = packageToDelete.map(item => item.packageName)
+  const packageToDeleteNames = packageToDelete.map((item) => item.packageName);
 
   return (
     <Dialog open={props.isOpen} onClose={closeHandler}>
@@ -88,8 +88,18 @@ export default function DialogFormSubmit(props: Props) {
             {props.package && props.package?.[0].packageName}
           </Box>
           ? This action is irreversible.{" "}
-          {packageToDelete.length > 0 &&
-            `Packages containing this product will also be deleted: ${packageToDeleteNames.join(", ")}.`}
+          {packageToDelete.length > 0 && (
+            <>
+              Packages containing this product will also be deleted:{" "}
+              <Box
+                component={"span"}
+                color="secondary.dark"
+                fontWeight="fontWeightBold"
+              >
+                {packageToDeleteNames.join(", ")}
+              </Box>.
+            </>
+          )}
         </DialogContentText>
       </DialogContent>
       <Stack direction={"row"} justifyContent={"center"}>
