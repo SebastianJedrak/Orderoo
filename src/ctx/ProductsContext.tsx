@@ -7,7 +7,7 @@ export const ProductsContext = createContext<{
   packageInSelectedYear: ProductsType["packages"] | null;
   selectedYear: string;
   setSelectedYear: React.Dispatch<SetStateAction<string>>;
-  setData: React.Dispatch<SetStateAction<ProductsType | null>> 
+  setData: React.Dispatch<SetStateAction<ProductsType | null>>;
 } | null>(null);
 
 export default function ProductsProvider(props: { children: React.ReactNode }) {
@@ -33,19 +33,15 @@ export default function ProductsProvider(props: { children: React.ReactNode }) {
       console.error(`Something goes wrong ${error.message}`);
     }
   }
-
+  // localStorage.removeItem("data");
   useEffect(() => {
+    if (localStorage.data === "" || !localStorage.data) getData();
     if (localStorage.data !== "" || localStorage.data !== "null") {
       const dataStorage = localStorage.getItem("data");
-      const dataParse = JSON.parse(dataStorage!)
+      const dataParse = JSON.parse(dataStorage!);
       setDataStorage(dataParse);
-    } else {
-      getData();
-      
     }
-  }, [data])
-
-  console.log(data);
+  }, [data]);
 
   // Transform data
   useEffect(() => {
@@ -83,7 +79,7 @@ export default function ProductsProvider(props: { children: React.ReactNode }) {
         packageInSelectedYear,
         setSelectedYear,
         selectedYear,
-        setData
+        setData,
       }}
     >
       {props.children}
