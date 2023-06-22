@@ -42,9 +42,13 @@ export default function DialogFormSubmit(props: Props) {
     //   return prev;
     // });
 
-    // const dataStorage = localStorage.getItem("data");
-
-// console.log(dataStorage);
+    const dataStorage = JSON.parse(localStorage.getItem("data")!);
+    if (props.package !== null) {
+      const newData = dataStorage;
+      console.log(newData);
+    }
+    if (props.package !== null) {
+    }
     props.onClose(false);
   };
 

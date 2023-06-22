@@ -37,7 +37,6 @@ export default function ProductsProvider(props: { children: React.ReactNode }) {
   useEffect(() => {
     if (localStorage.data !== "" || localStorage.data !== "null") {
       const dataStorage = localStorage.getItem("data");
-      console.log(dataStorage);
       const dataParse = JSON.parse(dataStorage!)
       setDataStorage(dataParse);
     } else {
