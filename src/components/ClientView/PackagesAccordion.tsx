@@ -15,6 +15,7 @@ export default function Packages() {
   const productItems = data?.productInSelectedYear;
   const packages = data?.packageInSelectedYear;
 
+
   const matchProductWithPackageId = (packageItem: any) => {
     return packageItem.reduce((acc: string, item: any, i: number, arr: any) => {
       return (
@@ -30,9 +31,11 @@ export default function Packages() {
   const [expanded, setExpanded] = useState<string | false>(false);
 
   const handleChange =
-    (panel: string) => (event: React.SyntheticEvent, isExpanded: boolean) => {
+    (panel: string) => (_event: React.SyntheticEvent, isExpanded: boolean) => {
       setExpanded(isExpanded ? panel : false);
     };
+    
+    
 
   return (
     <Paper

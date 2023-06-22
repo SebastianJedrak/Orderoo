@@ -34,6 +34,7 @@ export default function ProductsProvider(props: { children: React.ReactNode }) {
     }
   }
   // localStorage.removeItem("data");
+
   useEffect(() => {
     if (localStorage.data === "" || !localStorage.data) getData();
     if (localStorage.data !== "" || localStorage.data !== "null") {

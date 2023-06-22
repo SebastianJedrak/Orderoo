@@ -28,31 +28,14 @@ export default function DialogFormSubmit(props: Props) {
   };
 
   const deleteHandler = () => {
-    // setData!((prev) => {
-    //   if (props.product !== null) {
-    //     return {
-    //       ...prev!.productItems.filter(
-    //         (item) => item.productId !== props.product?.[0].productId
-    //       ),
-    //       ...prev!,
-    //     };
-    //   }
-    //   if (props.package !== null) {
-    //   }
-    //   return prev;
-    // });
-
     const dataStorage: ProductsType = JSON.parse(localStorage.getItem("data")!);
     if (props.product !== null) {
       const updatedProducts = dataStorage.productItems.filter(
         (item) => item.productId !== props.product?.[0].productId
       );
       const newData = {productItems: updatedProducts, packages: dataStorage.packages}
-      // console.log(dataStorage.packages.concat(newData));
-      // console.log(dataStorage);
-      // console.log({productItems: newData, packages: dataStorage.packages});
-      setData!(newData)
       localStorage.setItem("data", JSON.stringify(newData))
+      setData!(newData)
     }
     if (props.package !== null) {
     }
