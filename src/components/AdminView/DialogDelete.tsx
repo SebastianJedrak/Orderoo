@@ -33,9 +33,9 @@ export default function DialogFormSubmit(props: Props) {
       const updatedProducts = dataStorage.productItems
         .filter((item) => item.productId !== props.product?.[0].productId)
         .filter((item) =>
-          item.productsRequired.find(
+          !item.productsRequired.some(
             (itemReq) => itemReq.id === props.product?.[0].productId
-          ) ? false : true
+          ) 
         );
 
       console.log(updatedProducts);
