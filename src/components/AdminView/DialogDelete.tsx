@@ -30,15 +30,21 @@ export default function DialogFormSubmit(props: Props) {
   const deleteHandler = () => {
     const dataStorage: ProductsType = JSON.parse(localStorage.getItem("data")!);
     if (props.product !== null) {
-      const updatedProducts = dataStorage.productItems.filter(
-        (item) => item.productId !== props.product?.[0].productId
+      const updatedProducts = dataStorage.productItems
+        .filter((item) => item.productId !== props.product?.[0].productId)
+        .filter((item) =>
+          item.productsRequired.find(
+            (itemReq) => itemReq.id === props.product?.[0].productId
+          ) ? false : true
+        );
+
+      console.log(updatedProducts);
+      const updatedPackages = dataStorage.packages.filter(
+        (item) =>
+          !item.productsIncludedId.some(
+            (productId) => productId === props.product?.[0].productId
+          )
       );
-      const updatedPackages = dataStorage.packages.filter((item) =>
-        !item.productsIncludedId.some(
-          (productId) => productId === props.product?.[0].productId
-        )
-      );
-      console.log(updatedPackages);
       const newData = {
         productItems: updatedProducts,
         packages: updatedPackages,
