@@ -22,23 +22,23 @@ type Props = {
 export default function DialogFormSubmit(props: Props) {
   const data = useContext(ProductsContext);
   const setData = data?.setData;
+  const dataStorage: ProductsType = JSON.parse(localStorage.getItem("data")!);
 
   const closeHandler = () => {
     props.onClose(false);
   };
 
   const deleteHandler = () => {
-    const dataStorage: ProductsType = JSON.parse(localStorage.getItem("data")!);
     if (props.product !== null) {
       const updatedProducts = dataStorage.productItems
         .filter((item) => item.productId !== props.product?.[0].productId)
-        .filter((item) =>
-          !item.productsRequired.some(
-            (itemReq) => itemReq.id === props.product?.[0].productId
-          ) 
+        .filter(
+          (item) =>
+            !item.productsRequired.some(
+              (itemReq) => itemReq.id === props.product?.[0].productId
+            )
         );
 
-      console.log(updatedProducts);
       const updatedPackages = dataStorage.packages.filter(
         (item) =>
           !item.productsIncludedId.some(
@@ -56,6 +56,14 @@ export default function DialogFormSubmit(props: Props) {
     }
     props.onClose(false);
   };
+
+  const packageToDelete = dataStorage.packages.filter((item) =>
+    item.productsIncludedId.some(
+      (productId) => productId === props.product?.[0].productId
+    )
+  );
+
+  const packageToDeleteNames = packageToDelete.map(item => item.packageName)
 
   return (
     <Dialog open={props.isOpen} onClose={closeHandler}>
@@ -79,7 +87,9 @@ export default function DialogFormSubmit(props: Props) {
             {props.product && props.product?.[0].productName}
             {props.package && props.package?.[0].packageName}
           </Box>
-          ? This action is irreversible.
+          ? This action is irreversible.{" "}
+          {packageToDelete.length > 0 &&
+            `Packages containing this product will also be deleted: ${packageToDeleteNames.join(", ")}.`}
         </DialogContentText>
       </DialogContent>
       <Stack direction={"row"} justifyContent={"center"}>
