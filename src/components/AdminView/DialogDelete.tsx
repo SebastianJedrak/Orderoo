@@ -8,8 +8,9 @@ import {
   DialogTitle,
   Stack,
 } from "@mui/material";
-import { SetStateAction } from "react";
+import { SetStateAction, useContext } from "react";
 import { ProductsType } from "../../types";
+import { ProductsContext } from "../../ctx/ProductsContext";
 
 type Props = {
   isOpen: boolean;
@@ -19,16 +20,30 @@ type Props = {
 };
 
 export default function DialogFormSubmit(props: Props) {
+  const data = useContext(ProductsContext);
+  const setData = data?.setData;
+
   const closeHandler = () => {
     props.onClose(false);
   };
 
-  const  deleteHandler =  () => {
-    localStorage.removeItem(`data`) 
+  const deleteHandler = () => {
+    // setData!((prev) => {
+    //   if (props.product !== null) {
+    //     return {
+    //       ...prev!.productItems.filter(
+    //         (item) => item.productId !== props.product?.[0].productId
+    //       ),
+    //       ...prev!,
+    //     };
+    //   }
+    //   if (props.package !== null) {
+    //   }
+    //   return prev;
+    // });
+
     props.onClose(false);
   };
-
-
 
   return (
     <Dialog open={props.isOpen} onClose={closeHandler}>

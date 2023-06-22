@@ -12,6 +12,7 @@ export const ProductsContext = createContext<{
 
 export default function ProductsProvider(props: { children: React.ReactNode }) {
   const [data, setData] = useState<ProductsType | null>(null);
+  const [dataStorage, setDataStorage] = useState<ProductsType | null>(null);
   const [selectedYear, setSelectedYear] = useState("");
   const [productInSelectedYear, setProductInSelectedYear] = useState<
     ProductsType["productItems"] | null
@@ -27,30 +28,28 @@ export default function ProductsProvider(props: { children: React.ReactNode }) {
       if (!response.ok) throw new Error("Failed to fetch data");
       const data = await response.json();
       setData(data);
+      localStorage.setItem("data", JSON.stringify(data));
     } catch (error: any) {
       console.error(`Something goes wrong ${error.message}`);
     }
   }
 
   useEffect(() => {
-    if (!data) {
+    if (localStorage.data !== "null") {
       const dataStorage = localStorage.getItem("data");
       const dataParse = JSON.parse(dataStorage!)
-      setData(dataParse);
+      setDataStorage(dataParse);
     } else {
       getData();
-      localStorage.setItem("data", JSON.stringify(data));
+      
     }
   }, [data])
-  
-
-
 
   // Transform data
   useEffect(() => {
-    if (data && selectedYear !== "") {
+    if (dataStorage) {
       setProductInSelectedYear(
-        data.productItems.map((item) => {
+        dataStorage.productItems.map((item) => {
           const product = {
             ...item,
             productPrice: item.productPrice.filter(
@@ -62,7 +61,7 @@ export default function ProductsProvider(props: { children: React.ReactNode }) {
       );
 
       setPackageInSelectedYear(
-        data.packages.map((item) => {
+        dataStorage.packages.map((item) => {
           const packageItem = {
             ...item,
             packagePrice: item.packagePrice.filter(
@@ -73,7 +72,7 @@ export default function ProductsProvider(props: { children: React.ReactNode }) {
         })
       );
     }
-  }, [data, selectedYear]);
+  }, [dataStorage, selectedYear]);
 
   return (
     <ProductsContext.Provider
