@@ -16,6 +16,7 @@ import ControlPointIcon from "@mui/icons-material/ControlPoint";
 
 import DialogDelete from "./DialogDelete";
 import { ProductsType } from "../../types";
+import DialogAdd from "./DialogAdd";
 
 export default function AdminView() {
   const data = useContext(ProductsContext);
@@ -23,6 +24,7 @@ export default function AdminView() {
   const packageItems = data?.packageInSelectedYear;
 
   const [isDeleteModalOpen, setDeleteIsModalOpen] = useState(false);
+  const [isAddModalOpen, setAddIsModalOpen] = useState(false);
   const [dialogProduct, setDialogProduct] = useState<
     ProductsType["productItems"] | null
   >(null);
@@ -42,6 +44,9 @@ export default function AdminView() {
     }
   };
 
+  const addProductHandler = () => {
+    setAddIsModalOpen(true);
+  };
 
   return (
     <Box>
@@ -108,7 +113,11 @@ export default function AdminView() {
           ))}
         </Stack>
         <Box textAlign={"center"}>
-          <Button endIcon={<ControlPointIcon />} variant="contained">
+          <Button
+            endIcon={<ControlPointIcon />}
+            variant="contained"
+            onClick={addProductHandler}
+          >
             Add Product
           </Button>
         </Box>
@@ -123,6 +132,7 @@ export default function AdminView() {
         product={dialogProduct}
         package={dialogPackage}
       />
+      <DialogAdd isOpen={isAddModalOpen} onClose={setAddIsModalOpen} />
     </Box>
   );
 }

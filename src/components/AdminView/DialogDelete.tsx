@@ -75,8 +75,6 @@ export default function DialogFormSubmit(props: Props) {
     (item) => item.productName
   );
 
-  console.log(productRequiredToDelete);
-
   return (
     <Dialog open={props.isOpen} onClose={closeHandler}>
       <DialogTitle sx={{ px: 15, mb: 2 }} textAlign={"center"} color="primary">
