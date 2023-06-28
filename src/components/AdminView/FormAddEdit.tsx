@@ -1,7 +1,7 @@
 import { Box, IconButton, Stack, TextField, Typography } from "@mui/material";
 import { YEARS } from "../ClientView/Order/SelectYear";
 import ControlPointIcon from "@mui/icons-material/ControlPoint";
-import RemoveCircleOutlineIcon from '@mui/icons-material/RemoveCircleOutline';
+import RemoveCircleOutlineIcon from "@mui/icons-material/RemoveCircleOutline";
 import { useState } from "react";
 
 export default function FormAddEdit() {
@@ -12,9 +12,9 @@ export default function FormAddEdit() {
   };
 
   const removeYearHandler = () => {
-    setYearsArr((prev) => prev.slice(0 , -1));
-  }
-console.log(yearsArr);
+    setYearsArr((prev) => prev.slice(0, -1));
+  };
+  console.log(yearsArr);
   return (
     <form method="POST">
       <Typography>Product Name</Typography>
@@ -34,10 +34,15 @@ console.log(yearsArr);
             type="number"
             InputProps={{ endAdornment: "PLN" }}
           />
-          {i === 0 && <Box width={"40px"}/>}
-          {i === arr.length -1 && i > 0 && <IconButton aria-label="add-year" onClick={removeYearHandler}>
-        <RemoveCircleOutlineIcon />
-      </IconButton>}
+          {i === arr.length - 1 && i > 0 ? (
+            <IconButton
+              sx={{ width: "40px", aspectRatio: 1 / 1 }}
+              aria-label="add-year"
+              onClick={removeYearHandler}
+            >
+              <RemoveCircleOutlineIcon />
+            </IconButton>
+          ) : <Box sx={{ width: "40px", aspectRatio: 1 / 1 }}/>}
         </Stack>
       ))}
       <IconButton aria-label="add-year" onClick={addYearHandler}>
