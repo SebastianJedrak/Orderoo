@@ -1,15 +1,33 @@
-import { Stack, TextField } from "@mui/material";
+import {
+  FormControl,
+  InputLabel,
+  Stack,
+  TextField,
+  Typography,
+} from "@mui/material";
 import { YEARS } from "../ClientView/Order/SelectYear";
+import { Label } from "@mui/icons-material";
 
 export default function FormAddEdit() {
   return (
     <form method="POST">
-      <TextField label="Product name" type="text" autoFocus/>
-      <Stack direction={"row"}>
-      <TextField label="Year" type="number" defaultValue={YEARS[0]}/>
-      <TextField label="Price" type="number" InputProps={{endAdornment: "PLN"}} />
+        <Typography>Product Name</Typography>
+        <TextField type="text" autoFocus />
 
-      </Stack>
+        <Typography>Prices</Typography>
+        <Stack direction={"row"}>
+          <TextField
+            label="Year"
+            type="number"
+            defaultValue={YEARS[0]}
+            placeholder=""
+          />
+          <TextField
+            label="Price"
+            type="number"
+            InputProps={{ endAdornment: "PLN" }}
+          />
+        </Stack>
     </form>
-  )
+  );
 }
