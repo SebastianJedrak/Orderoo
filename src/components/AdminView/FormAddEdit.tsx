@@ -1,12 +1,12 @@
 import {
-  FormControl,
-  InputLabel,
+  IconButton,
   Stack,
   TextField,
   Typography,
 } from "@mui/material";
 import { YEARS } from "../ClientView/Order/SelectYear";
-import { Label } from "@mui/icons-material";
+import ControlPointIcon from "@mui/icons-material/ControlPoint";
+
 
 export default function FormAddEdit() {
   return (
@@ -28,6 +28,7 @@ export default function FormAddEdit() {
             InputProps={{ endAdornment: "PLN" }}
           />
         </Stack>
+        <IconButton  aria-label="add-year"> <ControlPointIcon /></IconButton>
     </form>
   );
 }
