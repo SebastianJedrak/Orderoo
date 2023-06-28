@@ -9,6 +9,9 @@ import ControlPointIcon from "@mui/icons-material/ControlPoint";
 
 
 export default function FormAddEdit() {
+
+  const addYearHandler = () => {}
+
   return (
     <form method="POST">
         <Typography>Product Name</Typography>
@@ -28,7 +31,7 @@ export default function FormAddEdit() {
             InputProps={{ endAdornment: "PLN" }}
           />
         </Stack>
-        <IconButton  aria-label="add-year"> <ControlPointIcon /></IconButton>
+        <IconButton  aria-label="add-year" onClick={addYearHandler}> <ControlPointIcon /></IconButton>
     </form>
   );
 }
