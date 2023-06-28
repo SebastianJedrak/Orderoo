@@ -1,11 +1,7 @@
 import {
   Autocomplete,
   Box,
-  FormControl,
   IconButton,
-  InputLabel,
-  MenuItem,
-  Select,
   Stack,
   TextField,
   Typography,
