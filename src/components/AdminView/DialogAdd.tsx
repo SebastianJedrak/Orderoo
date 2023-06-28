@@ -8,6 +8,7 @@ import {
   Stack,
 } from "@mui/material";
 import { SetStateAction } from "react";
+import FormAddEdit from "./FormAddEdit";
 
 type Props = {
   isOpen: boolean;
@@ -31,6 +32,7 @@ export default function DialogAdd(props: Props) {
             mb: 2,
           }}
         ></DialogContentText>
+        <FormAddEdit />
       </DialogContent>
       <Stack direction={"row"} justifyContent={"center"}>
         {" "}
