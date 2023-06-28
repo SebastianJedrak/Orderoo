@@ -30,7 +30,7 @@ export default function FormAddEdit() {
     <form method="POST">
       <Stack spacing={2}>
         {/* NAME */}
-        <Stack spacing={1}>
+        <Stack spacing={1} width={"calc(100% - 40px)"}>
           <Typography variant="body1">Product Name</Typography>
           <TextField type="text" autoFocus required />
         </Stack>
@@ -78,7 +78,7 @@ export default function FormAddEdit() {
         </Stack>
 
         {/* REQ */}
-        <Stack spacing={1}>
+        <Stack spacing={1} width={"calc(100% - 40px)"}>
           <Typography variant="body1" gutterBottom>
             Required Products
           </Typography>
