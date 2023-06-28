@@ -8,7 +8,7 @@ import {
 import { useContext, useEffect } from "react";
 import { ProductsContext } from "../../../ctx/ProductsContext";
 
-const YEARS = [2023, 2024, 2025];
+export const YEARS = [2023, 2024, 2025];
 
 export default function SelectYear() {
   const data = useContext(ProductsContext);
