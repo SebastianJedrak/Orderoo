@@ -14,7 +14,7 @@ export default function FormAddEdit() {
   const removeYearHandler = () => {
     setYearsArr((prev) => prev.slice(0, -1));
   };
-  console.log(yearsArr);
+  
   return (
     <form method="POST">
       <Typography>Product Name</Typography>
