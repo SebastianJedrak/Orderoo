@@ -1,4 +1,4 @@
-import { IconButton, Stack, TextField, Typography } from "@mui/material";
+import { Box, IconButton, Stack, TextField, Typography } from "@mui/material";
 import { YEARS } from "../ClientView/Order/SelectYear";
 import ControlPointIcon from "@mui/icons-material/ControlPoint";
 import RemoveCircleOutlineIcon from '@mui/icons-material/RemoveCircleOutline';
@@ -11,8 +11,10 @@ export default function FormAddEdit() {
     setYearsArr((prev) => [...prev, prev.at(-1)! + 1]);
   };
 
-  const removeYearHandler = () => {}
-
+  const removeYearHandler = () => {
+    setYearsArr((prev) => prev.slice(0 , -1));
+  }
+console.log(yearsArr);
   return (
     <form method="POST">
       <Typography>Product Name</Typography>
@@ -32,7 +34,8 @@ export default function FormAddEdit() {
             type="number"
             InputProps={{ endAdornment: "PLN" }}
           />
-          {i === arr.length -1 && <IconButton aria-label="add-year" onClick={removeYearHandler}>
+          {i === 0 && <Box width={"40px"}/>}
+          {i === arr.length -1 && i > 0 && <IconButton aria-label="add-year" onClick={removeYearHandler}>
         <RemoveCircleOutlineIcon />
       </IconButton>}
         </Stack>
