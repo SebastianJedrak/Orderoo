@@ -9,8 +9,9 @@ import {
 import { YEARS } from "../ClientView/Order/SelectYear";
 import ControlPointIcon from "@mui/icons-material/ControlPoint";
 import RemoveCircleOutlineIcon from "@mui/icons-material/RemoveCircleOutline";
-import { useContext, useState, useRef } from "react";
+import { useContext, useState, useRef, useEffect } from "react";
 import { ProductsContext } from "../../ctx/ProductsContext";
+import { ProductsType } from "../../types";
 
 export default function FormAddEdit() {
   const data = useContext(ProductsContext);
@@ -26,9 +27,36 @@ export default function FormAddEdit() {
     setYearsArr((prev) => prev.slice(0, -1));
   };
 
-  const productName = useRef<HTMLInputElement>(null)
+  const productName = useRef<HTMLInputElement>(null);
 
-  console.log(productName.current?.value);
+  const [productPrices, setProductPrices] = useState<{year: string, price: string}[]>([]);
+  const productPriceYear = useRef<HTMLInputElement>(null);
+  const productPricePrice = useRef<HTMLInputElement>(null);
+  useEffect(() => {
+    setProductPrices((prev) => [
+      ...prev,
+      {
+        year: productPriceYear.current!.value,
+        price: productPricePrice.current!.value,
+      },
+    ]);
+  }, [productPriceYear, productPricePrice]);
+
+  console.log(productPrices);
+
+  const newProduct = {
+    productId: productItems!.length + 1,
+    productName: productName.current?.value,
+    productPrice: [
+      {
+        year: productPriceYear.current?.value,
+        price: productPricePrice.current?.value,
+      },
+    ],
+    productsRequired: [],
+  };
+
+ 
 
   return (
     <form method="POST">
@@ -51,12 +79,14 @@ export default function FormAddEdit() {
                   defaultValue={String(el)}
                   placeholder=""
                   required
+                  inputRef={productPriceYear}
                 />
                 <TextField
                   label="Price"
                   type="number"
                   InputProps={{ endAdornment: "PLN" }}
                   required
+                  inputRef={productPricePrice}
                 />
                 {i === arr.length - 1 && i > 0 ? (
                   <IconButton
