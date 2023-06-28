@@ -9,7 +9,7 @@ import {
 import { YEARS } from "../ClientView/Order/SelectYear";
 import ControlPointIcon from "@mui/icons-material/ControlPoint";
 import RemoveCircleOutlineIcon from "@mui/icons-material/RemoveCircleOutline";
-import { useContext, useState } from "react";
+import { useContext, useState, useRef } from "react";
 import { ProductsContext } from "../../ctx/ProductsContext";
 
 export default function FormAddEdit() {
@@ -26,13 +26,17 @@ export default function FormAddEdit() {
     setYearsArr((prev) => prev.slice(0, -1));
   };
 
+  const productName = useRef<HTMLInputElement>(null)
+
+  console.log(productName.current?.value);
+
   return (
     <form method="POST">
       <Stack spacing={2}>
         {/* NAME */}
         <Stack spacing={1} width={"calc(100% - 40px)"}>
           <Typography variant="body1">Product Name</Typography>
-          <TextField type="text" autoFocus required />
+          <TextField type="text" required inputRef={productName} />
         </Stack>
 
         {/* Prices */}
