@@ -33,7 +33,7 @@ export default function FormAddEdit() {
   return (
     <form method="POST">
       <Typography>Product Name</Typography>
-      <TextField type="text" autoFocus />
+      <TextField type="text" autoFocus required/>
 
       <Typography>Prices</Typography>
       {yearsArr.map((el, i, arr) => (
@@ -43,11 +43,13 @@ export default function FormAddEdit() {
             type="number"
             defaultValue={String(el)}
             placeholder=""
+            required
           />
           <TextField
             label="Price"
             type="number"
             InputProps={{ endAdornment: "PLN" }}
+            required
           />
           {i === arr.length - 1 && i > 0 ? (
             <IconButton
