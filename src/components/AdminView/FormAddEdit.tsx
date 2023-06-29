@@ -28,31 +28,24 @@ export default function FormAddEdit() {
     setYearsArr((prev) => prev.slice(0, -1));
   };
 
-  const [productName, setProductName] = useState("");
-  const productNameHandler = (e: ChangeEvent) => {
-    const target = e.target as HTMLInputElement;
-    setProductName(target.value);
-  };
 
-  const [productPriceYear, setProductYear] = useState<string[]>([]);
-  const productYearHandler = (e: ChangeEvent) => {
-    const target = e.target as HTMLInputElement;
 
-    setProductYear((prev) =>
-      [...prev, target.value].filter(
-        (value, i, arr) => arr.indexOf(value) === i
-      )
-    );
-  };
-  console.log(productPriceYear);
+
+
+const submitHandler = (e: React.FormEvent<HTMLFormElement>) => {
+  e.preventDefault()
+  console.log(e.currentTarget.productName.value);
+  console.log(e.currentTarget.productYear1.value);
+
+}
 
   return (
-    <form method="POST">
+    <form method="POST" onSubmit={submitHandler}>
       <Stack spacing={2}>
         {/* NAME */}
         <Stack spacing={1} width={"calc(100% - 40px)"}>
           <Typography variant="body1">Product Name</Typography>
-          <TextField type="text" required onBlur={productNameHandler} />
+          <TextField type="text" required  name="productName"/>
         </Stack>
 
         {/* Prices */}
@@ -67,13 +60,14 @@ export default function FormAddEdit() {
                   defaultValue={String(el)}
                   placeholder=""
                   required
-                  onBlur={productYearHandler}
+                  name={`productYear${i}`}
                 />
                 <TextField
                   label="Price"
                   type="number"
                   InputProps={{ endAdornment: "PLN" }}
                   required
+                  name={`productPrice${i}`}
                 />
                 {i === arr.length - 1 && i > 0 ? (
                   <IconButton
@@ -110,6 +104,7 @@ export default function FormAddEdit() {
             renderInput={(params) => <TextField {...params} />}
           />
         </Stack>
+        <button type="submit">submit</button>
       </Stack>
     </form>
   );
