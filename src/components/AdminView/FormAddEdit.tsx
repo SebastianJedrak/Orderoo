@@ -29,7 +29,7 @@ export default function FormAddEdit() {
   };
 
   const [productPriceInYear, setProductPriceInYear] = useState<
-    { name: string; year?: string; price?: string }[]
+    { name?: string; year?: string; price?: string }[]
   >([]);
 
   const changeYearHandler = (event: ChangeEvent) => {
@@ -40,7 +40,6 @@ export default function FormAddEdit() {
 
   const changePriceHandler = (event: ChangeEvent) => {
     const { name, value } = event.target as HTMLInputElement;
-//@ts-ignore
     setProductPriceInYear((prev) => {
       const addedPrice = {...prev.find((obj) => obj.name === name), price:value}
       return [...prev, addedPrice];
