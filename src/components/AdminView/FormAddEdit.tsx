@@ -2,6 +2,7 @@ import {
   Autocomplete,
   Box,
   IconButton,
+  SelectChangeEvent,
   Stack,
   TextField,
   Typography,
@@ -9,7 +10,7 @@ import {
 import { YEARS } from "../ClientView/Order/SelectYear";
 import ControlPointIcon from "@mui/icons-material/ControlPoint";
 import RemoveCircleOutlineIcon from "@mui/icons-material/RemoveCircleOutline";
-import { useContext, useState, useRef, useEffect } from "react";
+import { useContext, useState, useRef, useEffect, ChangeEvent } from "react";
 import { ProductsContext } from "../../ctx/ProductsContext";
 import { ProductsType } from "../../types";
 
@@ -27,36 +28,11 @@ export default function FormAddEdit() {
     setYearsArr((prev) => prev.slice(0, -1));
   };
 
-  const productName = useRef<HTMLInputElement>(null);
-
-  const [productPrices, setProductPrices] = useState<{year: string, price: string}[]>([]);
-  const productPriceYear = useRef<HTMLInputElement>(null);
-  const productPricePrice = useRef<HTMLInputElement>(null);
-  useEffect(() => {
-    setProductPrices((prev) => [
-      ...prev,
-      {
-        year: productPriceYear.current!.value,
-        price: productPricePrice.current!.value,
-      },
-    ]);
-  }, [productPriceYear, productPricePrice]);
-
-  console.log(productPrices);
-
-  const newProduct = {
-    productId: productItems!.length + 1,
-    productName: productName.current?.value,
-    productPrice: [
-      {
-        year: productPriceYear.current?.value,
-        price: productPricePrice.current?.value,
-      },
-    ],
-    productsRequired: [],
+  const [productName, setProductName] = useState("");
+  const productNameHandler = (e: ChangeEvent) => {
+    const target = e.target as HTMLInputElement
+    setProductName(target.value)
   };
-
- 
 
   return (
     <form method="POST">
@@ -64,7 +40,7 @@ export default function FormAddEdit() {
         {/* NAME */}
         <Stack spacing={1} width={"calc(100% - 40px)"}>
           <Typography variant="body1">Product Name</Typography>
-          <TextField type="text" required inputRef={productName} />
+          <TextField type="text" required onChange={productNameHandler} />
         </Stack>
 
         {/* Prices */}
@@ -79,14 +55,12 @@ export default function FormAddEdit() {
                   defaultValue={String(el)}
                   placeholder=""
                   required
-                  inputRef={productPriceYear}
                 />
                 <TextField
                   label="Price"
                   type="number"
                   InputProps={{ endAdornment: "PLN" }}
                   required
-                  inputRef={productPricePrice}
                 />
                 {i === arr.length - 1 && i > 0 ? (
                   <IconButton
