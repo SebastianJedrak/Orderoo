@@ -30,18 +30,21 @@ export default function FormAddEdit() {
 
   const [productName, setProductName] = useState("");
   const productNameHandler = (e: ChangeEvent) => {
-    const target = e.target as HTMLInputElement
-    setProductName(target.value)
+    const target = e.target as HTMLInputElement;
+    setProductName(target.value);
   };
 
   const [productPriceYear, setProductYear] = useState<string[]>([]);
   const productYearHandler = (e: ChangeEvent) => {
-    const target = e.target as HTMLInputElement
-    console.log(target.value);
-    setProductYear((prev) => [...prev, target.value])
+    const target = e.target as HTMLInputElement;
+
+    setProductYear((prev) =>
+      [...prev, target.value].filter(
+        (value, i, arr) => arr.indexOf(value) === i
+      )
+    );
   };
   console.log(productPriceYear);
-
 
   return (
     <form method="POST">
@@ -49,7 +52,7 @@ export default function FormAddEdit() {
         {/* NAME */}
         <Stack spacing={1} width={"calc(100% - 40px)"}>
           <Typography variant="body1">Product Name</Typography>
-          <TextField type="text" required onChange={productNameHandler} />
+          <TextField type="text" required onBlur={productNameHandler} />
         </Stack>
 
         {/* Prices */}
@@ -64,7 +67,7 @@ export default function FormAddEdit() {
                   defaultValue={String(el)}
                   placeholder=""
                   required
-                  onChange={productYearHandler}
+                  onBlur={productYearHandler}
                 />
                 <TextField
                   label="Price"
