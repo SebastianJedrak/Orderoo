@@ -28,16 +28,31 @@ export default function FormAddEdit() {
     setYearsArr((prev) => prev.slice(0, -1));
   };
 
+  const [productPriceInYear, setProductPriceInYear] = useState<
+    { name: string; year?: string; price?: string }[]
+  >([]);
 
+  const changeYearHandler = (event: ChangeEvent) => {
+    const { name, value } = event.target as HTMLInputElement;
 
+    setProductPriceInYear((prev) => [...prev, { name: name, year: value }]);
+  };
 
+  const changePriceHandler = (event: ChangeEvent) => {
+    const { name, value } = event.target as HTMLInputElement;
+//@ts-ignore
+    setProductPriceInYear((prev) => {
+      const addedPrice = {...prev.find((obj) => obj.name === name), price:value}
+      return [...prev, addedPrice];
+    });
+  };
 
-const submitHandler = (e: React.FormEvent<HTMLFormElement>) => {
-  e.preventDefault()
-  console.log(e.currentTarget.productName.value);
-  console.log(e.currentTarget.productYear1.value);
+  console.log(productPriceInYear);
 
-}
+  const submitHandler = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    console.log(e.currentTarget.productName.value);
+  };
 
   return (
     <form method="POST" onSubmit={submitHandler}>
@@ -45,7 +60,7 @@ const submitHandler = (e: React.FormEvent<HTMLFormElement>) => {
         {/* NAME */}
         <Stack spacing={1} width={"calc(100% - 40px)"}>
           <Typography variant="body1">Product Name</Typography>
-          <TextField type="text" required  name="productName"/>
+          <TextField type="text" required name="productName" />
         </Stack>
 
         {/* Prices */}
@@ -60,14 +75,16 @@ const submitHandler = (e: React.FormEvent<HTMLFormElement>) => {
                   defaultValue={String(el)}
                   placeholder=""
                   required
-                  name={`productYear${i}`}
+                  name={`year-${i}`}
+                  onBlur={changeYearHandler}
                 />
                 <TextField
                   label="Price"
                   type="number"
                   InputProps={{ endAdornment: "PLN" }}
                   required
-                  name={`productPrice${i}`}
+                  name={`year-${i}`}
+                  onBlur={changePriceHandler}
                 />
                 {i === arr.length - 1 && i > 0 ? (
                   <IconButton
