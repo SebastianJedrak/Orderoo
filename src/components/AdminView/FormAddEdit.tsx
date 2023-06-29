@@ -34,6 +34,15 @@ export default function FormAddEdit() {
     setProductName(target.value)
   };
 
+  const [productPriceYear, setProductYear] = useState<string[]>([]);
+  const productYearHandler = (e: ChangeEvent) => {
+    const target = e.target as HTMLInputElement
+    console.log(target.value);
+    setProductYear((prev) => [...prev, target.value])
+  };
+  console.log(productPriceYear);
+
+
   return (
     <form method="POST">
       <Stack spacing={2}>
@@ -55,6 +64,7 @@ export default function FormAddEdit() {
                   defaultValue={String(el)}
                   placeholder=""
                   required
+                  onChange={productYearHandler}
                 />
                 <TextField
                   label="Price"
