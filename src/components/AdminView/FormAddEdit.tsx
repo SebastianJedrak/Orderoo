@@ -30,18 +30,28 @@ export default function FormAddEdit() {
 
   const [productPriceInYear, setProductPriceInYear] = useState<
     { name?: string; year?: string; price?: string }[]
-  >([]);
+  >([{ name: "year-0" }]);
 
   const changeYearHandler = (event: ChangeEvent) => {
     const { name, value } = event.target as HTMLInputElement;
 
-    setProductPriceInYear((prev) => [...prev, { name: name, year: value }]);
+    setProductPriceInYear((prev) => {
+      const addedYear = {
+        ...prev.find((obj) => obj.name === name),
+        year: value,
+      };
+
+      return [...prev, addedYear];
+    });
   };
 
   const changePriceHandler = (event: ChangeEvent) => {
     const { name, value } = event.target as HTMLInputElement;
     setProductPriceInYear((prev) => {
-      const addedPrice = {...prev.find((obj) => obj.name === name), price:value}
+      const addedPrice = {
+        ...prev.find((obj) => obj.name === name),
+        price: value,
+      };
       return [...prev, addedPrice];
     });
   };
@@ -75,7 +85,7 @@ export default function FormAddEdit() {
                   placeholder=""
                   required
                   name={`year-${i}`}
-                  onBlur={changeYearHandler}
+                  onChange={changeYearHandler}
                 />
                 <TextField
                   label="Price"
@@ -83,7 +93,7 @@ export default function FormAddEdit() {
                   InputProps={{ endAdornment: "PLN" }}
                   required
                   name={`year-${i}`}
-                  onBlur={changePriceHandler}
+                  onChange={changePriceHandler}
                 />
                 {i === arr.length - 1 && i > 0 ? (
                   <IconButton
