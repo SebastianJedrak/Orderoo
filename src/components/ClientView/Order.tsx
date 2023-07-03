@@ -17,7 +17,7 @@ export default function Order() {
       }}
     >
       <OrderForm />
-      {/* <PackagesAccordion /> */}
+      <PackagesAccordion />
     </Box>
   );
 }

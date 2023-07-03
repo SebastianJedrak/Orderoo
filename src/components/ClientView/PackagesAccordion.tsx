@@ -15,7 +15,6 @@ export default function Packages() {
   const productItems = data?.productInSelectedYear;
   const packages = data?.packageInSelectedYear;
 
-
   const matchProductWithPackageId = (packageItem: any) => {
     return packageItem.reduce((acc: string, item: any, i: number, arr: any) => {
       return (
@@ -34,8 +33,6 @@ export default function Packages() {
     (panel: string) => (_event: React.SyntheticEvent, isExpanded: boolean) => {
       setExpanded(isExpanded ? panel : false);
     };
-    
-    
 
   return (
     <Paper
@@ -50,63 +47,66 @@ export default function Packages() {
 
       {/* Accordion */}
       <Box my={4}>
-        {packages?.map((packageItem) => (
-          <Accordion
-            key={packageItem.packageId}
-            expanded={expanded === packageItem.packageName}
-            onChange={handleChange(packageItem.packageName)}
-          >
-            <AccordionSummary
-              aria-controls={packageItem.packageName}
-              id={String(packageItem.packageId)}
-              expandIcon={<ExpandMore color="primary" />}
+        {packages?.map((packageItem) => {
+          if (!packageItem.packagePrice[0]) return "";
+          return (
+            <Accordion
+              key={packageItem.packageId}
+              expanded={expanded === packageItem.packageName}
+              onChange={handleChange(packageItem.packageName)}
             >
-              <Typography>{packageItem.packageName}</Typography>
-            </AccordionSummary>
-            <AccordionDetails>
-              <Typography>
-                If you order{" "}
-                <Box
-                  component="span"
-                  fontWeight="fontWeightBold"
-                  color="secondary.dark"
-                >
-                  {matchProductWithPackageId(packageItem.productsIncludedId)}
-                </Box>
-                you will get
-                <Box
-                  component="span"
-                  fontWeight="fontWeightBold"
-                  color="secondary.dark"
-                >
-                  {" "}
-                  {packageItem.productsIncludedId.reduce((acc, item) => {
-                    return (acc += Number(
-                      productItems!.find(
-                        (productItem) => productItem.productId === item
-                      )!.productPrice[0].price
-                    ));
-                  }, 0) - Number(packageItem.packagePrice[0].price)}{" "}
-                  PLN
-                </Box>{" "}
-                discount.
-                {packageItem.productsFreeId.length > 0 && (
-                  <>
-                    You might also get{" "}
-                    <Box
-                      component="span"
-                      fontWeight="fontWeightBold"
-                      color="secondary.dark"
-                    >
-                      {matchProductWithPackageId(packageItem.productsFreeId)}
-                    </Box>{" "}
-                    for free.
-                  </>
-                )}
-              </Typography>
-            </AccordionDetails>
-          </Accordion>
-        ))}
+              <AccordionSummary
+                aria-controls={packageItem.packageName}
+                id={String(packageItem.packageId)}
+                expandIcon={<ExpandMore color="primary" />}
+              >
+                <Typography>{packageItem.packageName}</Typography>
+              </AccordionSummary>
+              <AccordionDetails>
+                <Typography>
+                  If you order{" "}
+                  <Box
+                    component="span"
+                    fontWeight="fontWeightBold"
+                    color="secondary.dark"
+                  >
+                    {matchProductWithPackageId(packageItem.productsIncludedId)}
+                  </Box>
+                  you will get
+                  <Box
+                    component="span"
+                    fontWeight="fontWeightBold"
+                    color="secondary.dark"
+                  >
+                    {" "}
+                    {packageItem.productsIncludedId.reduce((acc, item) => {
+                      return (acc += Number(
+                        productItems!.find(
+                          (productItem) => productItem.productId === item
+                        )!.productPrice[0].price
+                      ));
+                    }, 0) - Number(packageItem.packagePrice[0].price)}{" "}
+                    PLN
+                  </Box>{" "}
+                  discount.
+                  {packageItem.productsFreeId.length > 0 && (
+                    <>
+                      You might also get{" "}
+                      <Box
+                        component="span"
+                        fontWeight="fontWeightBold"
+                        color="secondary.dark"
+                      >
+                        {matchProductWithPackageId(packageItem.productsFreeId)}
+                      </Box>{" "}
+                      for free.
+                    </>
+                  )}
+                </Typography>
+              </AccordionDetails>
+            </Accordion>
+          );
+        })}
       </Box>
 
       {/* Rules */}
