@@ -26,9 +26,6 @@ type Props = {
 };
 
 export default function CheckboxProducts(props: Props) {
-  const data = useContext(ProductsContext);
-  const selectedYear = data?.selectedYear;
-
   const handleChangeCheckbox = (
     event: React.SyntheticEvent<Element, Event>
   ) => {
