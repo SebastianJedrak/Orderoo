@@ -9,8 +9,9 @@ import {
   Stack,
   Typography,
 } from "@mui/material";
-import { SetStateAction } from "react";
+import { SetStateAction, useContext } from "react";
 import { OrderType, ProductsType } from "../../../types";
+import { ProductsContext } from "../../../ctx/ProductsContext";
 
 type Props = {
   isCheckboxError: boolean;
@@ -25,6 +26,9 @@ type Props = {
 };
 
 export default function CheckboxProducts(props: Props) {
+  const data = useContext(ProductsContext);
+  const selectedYear = data?.selectedYear;
+
   const handleChangeCheckbox = (
     event: React.SyntheticEvent<Element, Event>
   ) => {
@@ -48,55 +52,60 @@ export default function CheckboxProducts(props: Props) {
     <FormControl fullWidth error={props.isCheckboxError} variant="standard">
       <FormLabel sx={{ color: "primary.main" }}>Choose your items</FormLabel>
       <FormGroup sx={{ mb: "32px" }}>
-        {props.productItems?.map((product) => (
-          <Stack spacing={1} key={product.productId}>
-            <Stack
-              direction={"row"}
-              justifyContent={"space-between"}
-              alignItems={"center"}
-              marginTop={1}
-            >
+        {props.productItems?.map((product) => {
+          if (!product.productPrice[0]) return "";
+          return (
+            <Stack spacing={1} key={product.productId}>
               <Stack
-                sx={{ flexDirection: { sm: "row" } }}
+                direction={"row"}
+                justifyContent={"space-between"}
                 alignItems={"center"}
+                marginTop={1}
               >
-                <FormControlLabel
-                  control={<Checkbox />}
-                  label={product.productName}
-                  value={JSON.stringify(product)}
-                  onChange={handleChangeCheckbox}
-                />
-                {product.productsRequired.length !== 0 && (
-                  <Typography
-                    color={
-                      props.notOrderedRequiredError?.includes(product.productId)
-                        ? "error.main"
-                        : "grey.500"
-                    }
-                    variant="body2"
-                    fontSize={"0.8rem"}
-                    lineHeight={0}
-                  >
-                    {`You need to order
+                <Stack
+                  sx={{ flexDirection: { sm: "row" } }}
+                  alignItems={"center"}
+                >
+                  <FormControlLabel
+                    control={<Checkbox />}
+                    label={product.productName}
+                    value={JSON.stringify(product)}
+                    onChange={handleChangeCheckbox}
+                  />
+                  {product.productsRequired.length !== 0 && (
+                    <Typography
+                      color={
+                        props.notOrderedRequiredError?.includes(
+                          product.productId
+                        )
+                          ? "error.main"
+                          : "grey.500"
+                      }
+                      variant="body2"
+                      fontSize={"0.8rem"}
+                      lineHeight={0}
+                    >
+                      {`You need to order
                     ${product.productsRequired.map((req) => req.name + " ")}`}
-                  </Typography>
-                )}
+                    </Typography>
+                  )}
+                </Stack>
+
+                <Typography
+                  width={"70px"}
+                  textAlign={"end"}
+                  variant="body1"
+                  component="span"
+                  fontWeight={600}
+                >
+                  {product.productPrice[0].price} PLN
+                </Typography>
               </Stack>
 
-              <Typography
-                width={"70px"}
-                textAlign={"end"}
-                variant="body1"
-                component="span"
-                fontWeight={600}
-              >
-                {product.productPrice[0].price} PLN
-              </Typography>
+              <Divider />
             </Stack>
-
-            <Divider />
-          </Stack>
-        ))}
+          );
+        })}
       </FormGroup>
       <FormHelperText
         sx={{
