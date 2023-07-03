@@ -9,10 +9,15 @@ import {
 import { YEARS } from "../ClientView/Order/SelectYear";
 import ControlPointIcon from "@mui/icons-material/ControlPoint";
 import RemoveCircleOutlineIcon from "@mui/icons-material/RemoveCircleOutline";
-import { useContext, useState, ChangeEvent } from "react";
+import { useContext, useState, ChangeEvent, useEffect } from "react";
 import { ProductsContext } from "../../ctx/ProductsContext";
+import { ProductsType } from "../../types";
 
-export default function FormAddEdit() {
+type Props = {
+  onGetData: (data: ProductsType["productItems"] | null) => void;
+};
+
+export default function FormAddEdit(props: Props) {
   const data = useContext(ProductsContext);
   const productItems = data!.productInSelectedYear;
 
@@ -73,31 +78,29 @@ export default function FormAddEdit() {
   };
 
   // Create new Product object
-  const [newProduct, setNewProduct] = useState({});
+  const productId = String(productItems!.length + 1);
 
-  const submitHandler = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    console.log(productItems!.length + 1);
-    console.log(productName);
-    console.log(
-      productPriceInYear.map((obj) => {
-        return { year: obj.year, price: obj.price };
-      })
-    );
+  const [newProduct, setNewProduct] = useState<
+    ProductsType["productItems"] | null
+  >(null);
+
+  useEffect(() => {
     setNewProduct({
-      productId: productItems!.length + 1,
+      productId: productId,
       productName: productName,
       productPrice: productPriceInYear.map((obj) => {
         return { year: obj.year, price: obj.price };
       }),
       productsRequired: reqProducts,
     });
-  };
+
+  }, [productId, productName, productPriceInYear, reqProducts]);
   
-  console.log(console.log(newProduct));
+  props.onGetData(newProduct);
   
+
   return (
-    <form method="POST" onSubmit={submitHandler}>
+    <form method="POST">
       <Stack spacing={2}>
         {/* NAME */}
         <Stack spacing={1} width={"calc(100% - 40px)"}>

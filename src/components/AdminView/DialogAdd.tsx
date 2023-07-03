@@ -9,6 +9,7 @@ import {
 } from "@mui/material";
 import { SetStateAction } from "react";
 import FormAddEdit from "./FormAddEdit";
+import { ProductsType } from "../../types";
 
 type Props = {
   isOpen: boolean;
@@ -19,6 +20,12 @@ export default function DialogAdd(props: Props) {
   const closeHandler = () => {
     props.onClose(false);
   };
+
+const getDataHandler = (data: (ProductsType["productItems"] | null)) => {
+const dataForm = data
+console.log(dataForm);
+} 
+
   return (
     <Dialog open={props.isOpen} onClose={closeHandler}>
       <DialogTitle sx={{ px: 15, mb: 2 }} textAlign={"center"} color="primary">
@@ -32,7 +39,7 @@ export default function DialogAdd(props: Props) {
             mb: 2,
           }}
         ></DialogContentText>
-        <FormAddEdit />
+        <FormAddEdit onGetData={getDataHandler}/>
       </DialogContent>
       <Stack direction={"row"} justifyContent={"center"}>
         {" "}
