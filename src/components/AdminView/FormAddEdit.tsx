@@ -2,7 +2,6 @@ import {
   Autocomplete,
   Box,
   IconButton,
-  SelectChangeEvent,
   Stack,
   TextField,
   Typography,
@@ -10,9 +9,8 @@ import {
 import { YEARS } from "../ClientView/Order/SelectYear";
 import ControlPointIcon from "@mui/icons-material/ControlPoint";
 import RemoveCircleOutlineIcon from "@mui/icons-material/RemoveCircleOutline";
-import { useContext, useState, useRef, useEffect, ChangeEvent } from "react";
+import { useContext, useState,  ChangeEvent } from "react";
 import { ProductsContext } from "../../ctx/ProductsContext";
-import { ProductsType } from "../../types";
 
 export default function FormAddEdit() {
   const data = useContext(ProductsContext);
@@ -29,16 +27,10 @@ export default function FormAddEdit() {
     setProductPriceInYear((prev) => prev.slice(0, -1));
   };
 
-
-  
-
   const [productPriceInYear, setProductPriceInYear] = useState<
     { name?: string; year?: string; price?: string }[]
   >([{ name: "year-0" }]);
 
-  // useEffect(() => {
-  //   setProductPriceInYear(prev => [...prev, {name: `year-${yearsArr.length}`}])
-  // }, [yearsArr])
 
   const changeYearPriceHandler = (type: string, event: ChangeEvent) => {
     const { name, value } = event.target as HTMLInputElement;
@@ -58,7 +50,6 @@ export default function FormAddEdit() {
       ];
     });
   };
-
 
   console.log(productPriceInYear);
 
@@ -85,7 +76,6 @@ export default function FormAddEdit() {
                 <TextField
                   label="Year"
                   type="number"
-                  defaultValue={String(el)}
                   placeholder=""
                   required
                   name={`year-${i}`}
