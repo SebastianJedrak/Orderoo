@@ -51,11 +51,17 @@ export default function FormAddEdit() {
     });
   };
 
+  const [reqProducts, setReqProducts] = useState([])
+
+  const reqHandler = (_event: React.SyntheticEvent<Element, Event>, value: any) => {
+    setReqProducts(value);
+  }
   
   const submitHandler = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     console.log(e.currentTarget.productName.value);
     console.log(productPriceInYear.map(obj => {return {year: obj.year, price: obj.price}}));
+    console.log(reqProducts);
   };
 
   return (
@@ -122,6 +128,7 @@ export default function FormAddEdit() {
             id="reqProducts"
             options={productItems!.map((product) => product.productName)}
             renderInput={(params) => <TextField {...params} />}
+            onChange={(event, value) => reqHandler(event, value)}
           />
         </Stack>
         <button type="submit">submit</button>
