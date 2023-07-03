@@ -51,11 +51,11 @@ export default function FormAddEdit() {
     });
   };
 
-  console.log(productPriceInYear);
-
+  
   const submitHandler = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     console.log(e.currentTarget.productName.value);
+    console.log(productPriceInYear.map(obj => {return {year: obj.year, price: obj.price}}));
   };
 
   return (
