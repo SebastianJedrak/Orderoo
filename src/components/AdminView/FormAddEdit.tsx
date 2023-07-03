@@ -9,19 +9,21 @@ import {
 import { YEARS } from "../ClientView/Order/SelectYear";
 import ControlPointIcon from "@mui/icons-material/ControlPoint";
 import RemoveCircleOutlineIcon from "@mui/icons-material/RemoveCircleOutline";
-import { useContext, useState,  ChangeEvent } from "react";
+import { useContext, useState, ChangeEvent } from "react";
 import { ProductsContext } from "../../ctx/ProductsContext";
 
 export default function FormAddEdit() {
   const data = useContext(ProductsContext);
   const productItems = data!.productInSelectedYear;
 
-  const [productName, setProductName] = useState("")
-  const productNameHandler = (e: ChangeEvent )=> {
-    const target = e.target as HTMLInputElement
-    setProductName(target.value)
-  }
+  // Handle Name
+  const [productName, setProductName] = useState("");
+  const productNameHandler = (e: ChangeEvent) => {
+    const target = e.target as HTMLInputElement;
+    setProductName(target.value);
+  };
 
+  // Handle Year and price
   const [yearsArr, setYearsArr] = useState<number[]>([YEARS[0]]);
 
   const addYearHandler = () => {
@@ -37,10 +39,12 @@ export default function FormAddEdit() {
     { name?: string; year?: string; price?: string }[]
   >([{ name: "year-0" }]);
 
-
   const changeYearPriceHandler = (type: string, event: ChangeEvent) => {
     const { name, value } = event.target as HTMLInputElement;
-    const valueType = type === "year" ? {name:name, year: value } : {name:name, price: value };
+    const valueType =
+      type === "year"
+        ? { name: name, year: value }
+        : { name: name, price: value };
     setProductPriceInYear((prev) => {
       const addedValue = {
         ...prev.find((obj) => obj.name === name),
@@ -57,16 +61,26 @@ export default function FormAddEdit() {
     });
   };
 
-  const [reqProducts, setReqProducts] = useState([])
+  // Handle req Products
 
-  const reqHandler = (_event: React.SyntheticEvent<Element, Event>, value: any) => {
+  const [reqProducts, setReqProducts] = useState([]);
+
+  const reqHandler = (
+    _event: React.SyntheticEvent<Element, Event>,
+    value: any
+  ) => {
     setReqProducts(value);
-  }
-  
+  };
+
   const submitHandler = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    console.log(productItems!.length +1);
     console.log(productName);
-    console.log(productPriceInYear.map(obj => {return {year: obj.year, price: obj.price}}));
+    console.log(
+      productPriceInYear.map((obj) => {
+        return { year: obj.year, price: obj.price };
+      })
+    );
     console.log(reqProducts);
   };
 
@@ -76,7 +90,12 @@ export default function FormAddEdit() {
         {/* NAME */}
         <Stack spacing={1} width={"calc(100% - 40px)"}>
           <Typography variant="body1">Product Name</Typography>
-          <TextField type="text" required name="productName" onChange={productNameHandler} />
+          <TextField
+            type="text"
+            required
+            name="productName"
+            onChange={productNameHandler}
+          />
         </Stack>
 
         {/* Prices */}
