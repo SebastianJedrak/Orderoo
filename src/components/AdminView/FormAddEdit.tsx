@@ -72,18 +72,30 @@ export default function FormAddEdit() {
     setReqProducts(value);
   };
 
+  // Create new Product object
+  const [newProduct, setNewProduct] = useState({});
+
   const submitHandler = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log(productItems!.length +1);
+    console.log(productItems!.length + 1);
     console.log(productName);
     console.log(
       productPriceInYear.map((obj) => {
         return { year: obj.year, price: obj.price };
       })
     );
-    console.log(reqProducts);
+    setNewProduct({
+      productId: productItems!.length + 1,
+      productName: productName,
+      productPrice: productPriceInYear.map((obj) => {
+        return { year: obj.year, price: obj.price };
+      }),
+      productsRequired: reqProducts,
+    });
   };
-
+  
+  console.log(console.log(newProduct));
+  
   return (
     <form method="POST" onSubmit={submitHandler}>
       <Stack spacing={2}>
