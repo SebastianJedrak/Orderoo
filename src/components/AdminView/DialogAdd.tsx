@@ -30,7 +30,7 @@ export default function DialogAdd(props: Props) {
   };
 
   const getDataHandler = (data: ProductsType["productItems"] | null) => {
-    setDataForm(data)
+   if (data !== null) setDataForm(data)
   };
 
   const submitHandler = () => {
@@ -75,6 +75,7 @@ export default function DialogAdd(props: Props) {
           <Button
             sx={{ width: "100px" }}
             variant="outlined"
+            type="submit"
             onClick={submitHandler}
           >
             Add

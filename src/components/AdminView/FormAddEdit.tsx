@@ -104,9 +104,9 @@ export default function FormAddEdit(props: Props) {
       }),
       productsRequired: reqProducts,
     }]);
-  }, [productId, productName, productPriceInYear, reqProducts]);
+    props.onGetData(newProduct);
+  }, [productId, productName, productPriceInYear, reqProducts, newProduct, props]);
 
-  props.onGetData(newProduct);
 
   return (
     <form method="POST">
