@@ -68,13 +68,23 @@ export default function FormAddEdit(props: Props) {
 
   // Handle req Products
 
-  const [reqProducts, setReqProducts] = useState([]);
+  const [reqProducts, setReqProducts] = useState<
+    { id: string; name: string }[] | []
+  >([]);
 
   const reqHandler = (
     _event: React.SyntheticEvent<Element, Event>,
     value: any
   ) => {
-    setReqProducts(value);
+
+    setReqProducts(
+      value.map((item: string) => {
+        return {
+          id: productItems!.find((products) => products.productName === item)!.productId ,
+          name: item,
+        };
+      })
+    );
   };
 
   // Create new Product object
@@ -86,18 +96,18 @@ export default function FormAddEdit(props: Props) {
 
   useEffect(() => {
     setNewProduct({
+      //@ts-ignore
       productId: productId,
       productName: productName,
       productPrice: productPriceInYear.map((obj) => {
-        return { year: obj.year, price: obj.price };
+        return { year: obj.year!, price: obj.price! };
       }),
       productsRequired: reqProducts,
     });
-
   }, [productId, productName, productPriceInYear, reqProducts]);
-  
-  props.onGetData(newProduct);
-  
+
+  // props.onGetData(newProduct);
+  console.log(newProduct);
 
   return (
     <form method="POST">
@@ -166,7 +176,9 @@ export default function FormAddEdit(props: Props) {
           <Autocomplete
             multiple
             id="reqProducts"
-            options={productItems!.map((product) => product.productName)}
+            options={productItems!.map(
+              (product) => product.productName
+            )}
             renderInput={(params) => <TextField {...params} />}
             onChange={(event, value) => reqHandler(event, value)}
           />

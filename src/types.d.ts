@@ -3,7 +3,7 @@ export type ProductsType = {
     productId: string;
     productName: string;
     productPrice: { year: string; price: string }[];
-    productsRequired: { id: string; name: string }[];
+    productsRequired: { id: string; name: string }[] | [];
   }[];
   packages: {
     packageId: string;
