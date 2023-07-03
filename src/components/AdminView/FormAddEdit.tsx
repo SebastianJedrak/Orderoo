@@ -16,6 +16,12 @@ export default function FormAddEdit() {
   const data = useContext(ProductsContext);
   const productItems = data!.productInSelectedYear;
 
+  const [productName, setProductName] = useState("")
+  const productNameHandler = (e: ChangeEvent )=> {
+    const target = e.target as HTMLInputElement
+    setProductName(target.value)
+  }
+
   const [yearsArr, setYearsArr] = useState<number[]>([YEARS[0]]);
 
   const addYearHandler = () => {
@@ -59,7 +65,7 @@ export default function FormAddEdit() {
   
   const submitHandler = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log(e.currentTarget.productName.value);
+    console.log(productName);
     console.log(productPriceInYear.map(obj => {return {year: obj.year, price: obj.price}}));
     console.log(reqProducts);
   };
@@ -70,7 +76,7 @@ export default function FormAddEdit() {
         {/* NAME */}
         <Stack spacing={1} width={"calc(100% - 40px)"}>
           <Typography variant="body1">Product Name</Typography>
-          <TextField type="text" required name="productName" />
+          <TextField type="text" required name="productName" onChange={productNameHandler} />
         </Stack>
 
         {/* Prices */}
