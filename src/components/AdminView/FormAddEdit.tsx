@@ -28,13 +28,20 @@ export default function FormAddEdit() {
     setYearsArr((prev) => prev.slice(0, -1));
   };
 
+
+  
+
   const [productPriceInYear, setProductPriceInYear] = useState<
     { name?: string; year?: string; price?: string }[]
   >([{ name: "year-0" }]);
 
+  // useEffect(() => {
+  //   setProductPriceInYear(prev => [...prev, {name: `year-${yearsArr.length}`}])
+  // }, [yearsArr])
+
   const changeYearPriceHandler = (type: string, event: ChangeEvent) => {
     const { name, value } = event.target as HTMLInputElement;
-    const valueType = type === "year" ? { year: value } : { price: value };
+    const valueType = type === "year" ? {name:name, year: value } : {name:name, price: value };
     setProductPriceInYear((prev) => {
       const addedValue = {
         ...prev.find((obj) => obj.name === name),
