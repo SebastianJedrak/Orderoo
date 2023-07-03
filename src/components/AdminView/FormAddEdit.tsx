@@ -36,7 +36,7 @@ export default function FormAddEdit() {
     const { name, value } = event.target as HTMLInputElement;
     const valueType = type === "year" ? { year: value } : { price: value };
     setProductPriceInYear((prev) => {
-      const addedYear = {
+      const addedValue = {
         ...prev.find((obj) => obj.name === name),
         ...valueType,
       };
@@ -46,7 +46,7 @@ export default function FormAddEdit() {
           if (i === arr.length - 1) return true;
           return obj.name !== name;
         }),
-        addedYear,
+        addedValue,
       ];
     });
   };
