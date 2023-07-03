@@ -9,9 +9,8 @@ import {
   Stack,
   Typography,
 } from "@mui/material";
-import { SetStateAction, useContext } from "react";
+import { SetStateAction } from "react";
 import { OrderType, ProductsType } from "../../../types";
-import { ProductsContext } from "../../../ctx/ProductsContext";
 
 type Props = {
   isCheckboxError: boolean;
