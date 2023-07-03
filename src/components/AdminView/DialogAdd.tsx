@@ -7,9 +7,10 @@ import {
   DialogTitle,
   Stack,
 } from "@mui/material";
-import { SetStateAction } from "react";
+import { SetStateAction, useContext, useState } from "react";
 import FormAddEdit from "./FormAddEdit";
 import { ProductsType } from "../../types";
+import { ProductsContext } from "../../ctx/ProductsContext";
 
 type Props = {
   isOpen: boolean;
@@ -17,13 +18,30 @@ type Props = {
 };
 
 export default function DialogAdd(props: Props) {
+  const dataStorage: ProductsType = JSON.parse(localStorage.getItem("data")!);
+  const data = useContext(ProductsContext);
+  const setData = data?.setData;
+  const [dataForm, setDataForm] = useState<ProductsType["productItems"] | null>(
+    null
+  );
+
   const closeHandler = () => {
     props.onClose(false);
   };
 
   const getDataHandler = (data: ProductsType["productItems"] | null) => {
-    const dataForm = data;
-    console.log(dataForm);
+    setDataForm(data)
+  };
+
+  const submitHandler = () => {
+    props.onClose(false);
+    const newData = {
+      productItems: [...dataStorage.productItems, ...dataForm!],
+      packages: dataStorage.packages,
+    };
+
+    localStorage.setItem("data", JSON.stringify(newData));
+    setData!(newData);
   };
 
   return (
@@ -57,7 +75,7 @@ export default function DialogAdd(props: Props) {
           <Button
             sx={{ width: "100px" }}
             variant="outlined"
-            onClick={closeHandler}
+            onClick={submitHandler}
           >
             Add
           </Button>
