@@ -21,10 +21,10 @@ export default function DialogAdd(props: Props) {
     props.onClose(false);
   };
 
-const getDataHandler = (data: (ProductsType["productItems"] | null)) => {
-const dataForm = data
-console.log(dataForm);
-} 
+  const getDataHandler = (data: ProductsType["productItems"] | null) => {
+    const dataForm = data;
+    console.log(dataForm);
+  };
 
   return (
     <Dialog open={props.isOpen} onClose={closeHandler}>
@@ -39,7 +39,7 @@ console.log(dataForm);
             mb: 2,
           }}
         ></DialogContentText>
-        <FormAddEdit onGetData={getDataHandler}/>
+        <FormAddEdit onGetData={getDataHandler} />
       </DialogContent>
       <Stack direction={"row"} justifyContent={"center"}>
         {" "}

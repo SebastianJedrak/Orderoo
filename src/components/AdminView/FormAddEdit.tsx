@@ -95,19 +95,17 @@ export default function FormAddEdit(props: Props) {
   >(null);
 
   useEffect(() => {
-    setNewProduct({
-      //@ts-ignore
+    setNewProduct([{
       productId: productId,
       productName: productName,
       productPrice: productPriceInYear.map((obj) => {
         return { year: obj.year!, price: obj.price! };
       }),
       productsRequired: reqProducts,
-    });
+    }]);
   }, [productId, productName, productPriceInYear, reqProducts]);
 
-  // props.onGetData(newProduct);
-  console.log(newProduct);
+  props.onGetData(newProduct);
 
   return (
     <form method="POST">
