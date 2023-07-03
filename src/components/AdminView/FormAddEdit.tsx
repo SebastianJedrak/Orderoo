@@ -26,6 +26,7 @@ export default function FormAddEdit() {
 
   const removeYearHandler = () => {
     setYearsArr((prev) => prev.slice(0, -1));
+    setProductPriceInYear((prev) => prev.slice(0, -1));
   };
 
 
@@ -50,7 +51,7 @@ export default function FormAddEdit() {
 
       return [
         ...prev.filter((obj, i, arr) => {
-          if (i === arr.length - 1) return true;
+          if (i === arr.length) return true;
           return obj.name !== name;
         }),
         addedValue,
