@@ -8,6 +8,7 @@ export const ProductsContext = createContext<{
   selectedYear: string;
   setSelectedYear: React.Dispatch<SetStateAction<string>>;
   setData: React.Dispatch<SetStateAction<ProductsType | null>>;
+  years: number[]
 } | null>(null);
 
 export default function ProductsProvider(props: { children: React.ReactNode }) {
@@ -44,6 +45,23 @@ export default function ProductsProvider(props: { children: React.ReactNode }) {
     }
   }, [data]);
 
+    // Declare years
+    const [years, setYears] = useState<number[] | []>([]);
+
+    useEffect(() => {
+      if (dataStorage) {
+        const getYearsFromItems = dataStorage!.productItems.flatMap((item) =>
+          item.productPrice.map((year) => year.year)
+        );
+        const uniqueYears = getYearsFromItems!.filter(
+          (year, i, arr) => arr.indexOf(year) === i
+        );
+    
+        setYears(uniqueYears.map(item => Number(item)));}
+      
+    }, [dataStorage]);
+  
+
   // Transform data
   useEffect(() => {
     if (dataStorage) {
@@ -73,6 +91,7 @@ export default function ProductsProvider(props: { children: React.ReactNode }) {
     }
   }, [dataStorage, selectedYear]);
 
+
   return (
     <ProductsContext.Provider
       value={{
@@ -81,6 +100,7 @@ export default function ProductsProvider(props: { children: React.ReactNode }) {
         setSelectedYear,
         selectedYear,
         setData,
+        years
       }}
     >
       {props.children}

@@ -6,7 +6,6 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
-import { YEARS } from "../ClientView/Order/SelectYear";
 import ControlPointIcon from "@mui/icons-material/ControlPoint";
 import RemoveCircleOutlineIcon from "@mui/icons-material/RemoveCircleOutline";
 import { useContext, useState, ChangeEvent, useEffect } from "react";
@@ -20,6 +19,8 @@ type Props = {
 export default function FormAddEdit(props: Props) {
   const data = useContext(ProductsContext);
   const productItems = data!.productInSelectedYear;
+  const years = data!.years
+
 
   // Handle Name
   const [productName, setProductName] = useState("");
@@ -29,7 +30,7 @@ export default function FormAddEdit(props: Props) {
   };
 
   // Handle Year and price
-  const [yearsArr, setYearsArr] = useState<number[]>([YEARS[0]]);
+  const [yearsArr, setYearsArr] = useState<number[]>([years[0]]);
 
   const addYearHandler = () => {
     setYearsArr((prev) => [...prev, prev.at(-1)! + 1]);

@@ -8,17 +8,16 @@ import {
 import { useContext, useEffect } from "react";
 import { ProductsContext } from "../../../ctx/ProductsContext";
 
-export const YEARS = [2023, 2024, 2025];
-
 export default function SelectYear() {
   const data = useContext(ProductsContext);
   const setSelectedYear = data?.setSelectedYear;
   const selectedYear = data?.selectedYear;
+  const years = data!.years
 
   // Set initial date
   useEffect(() => {
-    setSelectedYear!(String(YEARS[0]));
-  }, [setSelectedYear]);
+    setSelectedYear!(String(years[0]));
+  }, [setSelectedYear, years]);
 
   const handleChangeYear = (e: SelectChangeEvent) => {
     // Set Year
@@ -44,7 +43,7 @@ export default function SelectYear() {
         value={selectedYear}
         onChange={handleChangeYear}
       >
-        {YEARS.map((year) => (
+        {years.map((year) => (
           <MenuItem key={year} value={year}>
             {year}
           </MenuItem>
