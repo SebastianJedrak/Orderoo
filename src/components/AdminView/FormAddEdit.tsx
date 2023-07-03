@@ -41,7 +41,13 @@ export default function FormAddEdit() {
         year: value,
       };
 
-      return [...prev, addedYear];
+      return [
+        ...prev.filter((obj, i, arr) => {
+          if (i === arr.length - 1) return true;
+          return obj.name !== name;
+        }),
+        addedYear,
+      ];
     });
   };
 
