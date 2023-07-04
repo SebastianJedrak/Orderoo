@@ -113,18 +113,18 @@ export default function FormAddEdit(props: Props) {
       <Stack spacing={2}>
         {/* NAME */}
         <Stack spacing={1} width={"calc(100% - 40px)"}>
-          <Typography variant="body1">Product Name</Typography>
+          <Typography variant="body1">Product Name*</Typography>
           <TextField
             type="text"
-            required
             name="productName"
             onChange={productNameHandler}
+            placeholder="Name"
           />
         </Stack>
 
         {/* Prices */}
         <Stack spacing={1}>
-          <Typography variant="body1">Prices</Typography>
+          <Typography variant="body1">Prices*</Typography>
           <Stack spacing={1} alignItems={"center"}>
             {yearsArr.map((el, i, arr) => (
               <Stack key={i} direction={"row"} alignItems={"center"}>
@@ -132,7 +132,6 @@ export default function FormAddEdit(props: Props) {
                   label="Year"
                   type="number"
                   placeholder=""
-                  required
                   name={`year-${i}`}
                   onChange={(e) => changeYearPriceHandler("year", e)}
                 />
@@ -140,7 +139,6 @@ export default function FormAddEdit(props: Props) {
                   label="Price"
                   type="number"
                   InputProps={{ endAdornment: "PLN" }}
-                  required
                   name={`year-${i}`}
                   onChange={(e) => changeYearPriceHandler("price", e)}
                 />
