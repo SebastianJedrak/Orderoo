@@ -24,10 +24,18 @@ export default function FormAddEdit(props: Props) {
 
   // Handle Name
   const [productName, setProductName] = useState("");
+  const [productNameError, setProductNameError] = useState(true);
+  const [productNameTouched, setProductNameTouched] = useState(false);
+
   const productNameHandler = (e: ChangeEvent) => {
+    setProductNameTouched(true)
     const target = e.target as HTMLInputElement;
+    if (target.value === "") setProductNameError(true)
+    if (target.value !== "") setProductNameError(false)
     setProductName(target.value);
   };
+
+  console.log(productNameError);
 
   // Handle Year and price
   const [yearsArr, setYearsArr] = useState<number[]>([years[0]]);
