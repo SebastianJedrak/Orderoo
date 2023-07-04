@@ -15,7 +15,7 @@ import { ProductsType } from "../../types";
 
 type Props = {
   onGetData: (data: ProductsType["productItems"] | null) => void;
-  onError: ((error: boolean) => void)
+  onError: (error: boolean) => void;
 };
 
 export default function FormAddEdit(props: Props) {
@@ -123,6 +123,7 @@ export default function FormAddEdit(props: Props) {
   const [newProductError, setNewProductError] = useState(true);
 
   useEffect(() => {
+    setNewProductError(false);
     if (productName === "") setProductNameError(true);
     if (productPriceInYear.find((obj) => obj.price === "" || obj.year === ""))
       setProductPriceInYearError(true);
@@ -137,12 +138,12 @@ export default function FormAddEdit(props: Props) {
 
   useEffect(() => {
     props.onGetData(newProduct);
-    props.onError(newProductError)
+    props.onError(newProductError);
   }, [newProduct, newProductError, props]);
 
   return (
     <form method="POST">
-      <Stack spacing={2}>
+      <Stack spacing={1}>
         {/* NAME */}
         <Stack spacing={1} width={"calc(100% - 40px)"}>
           <Typography variant="body1">Product Name*</Typography>
@@ -152,9 +153,17 @@ export default function FormAddEdit(props: Props) {
             onChange={productNameHandler}
             placeholder="Name"
           />
-          {productNameTouched && productNameError && (
-            <FormHelperText error>Enter a valid product name</FormHelperText>
-          )}
+
+          <FormHelperText
+            error
+            sx={{
+              visibility: `${
+                productNameTouched && productNameError ? "visible" : "hidden"
+              }`,
+            }}
+          >
+            Enter a valid product name
+          </FormHelperText>
         </Stack>
 
         {/* Prices */}
@@ -190,9 +199,20 @@ export default function FormAddEdit(props: Props) {
                 )}
               </Stack>
             ))}
-            {productPriceInYearTouched && productPriceInYearError && (
-              <FormHelperText error>Enter a valid pricing</FormHelperText>
-            )}
+
+            <FormHelperText
+              error
+              sx={{
+                visibility: `${
+                  productPriceInYearTouched && productPriceInYearError
+                    ? "visible"
+                    : "hidden"
+                }`,
+              }}
+            >
+              Enter a valid pricing
+            </FormHelperText>
+
             <IconButton
               sx={{ width: "40px" }}
               aria-label="add-year"
