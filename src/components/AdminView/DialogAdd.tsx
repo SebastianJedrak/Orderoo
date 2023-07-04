@@ -54,13 +54,18 @@ export default function DialogAdd(props: Props) {
 
   return (
     <Dialog open={props.isOpen} onClose={closeHandler}>
-      <DialogTitle sx={{ px: 15, mb: 2 }} textAlign={"center"} color="primary">
+      <DialogTitle sx={{ px: 15 }} textAlign={"center"} color="primary">
         Add New Product
-        {submitTouched && isError && (
-          <FormHelperText error sx={{ fontSize: "1rem", textAlign: "center" }}>
-            Input correct data
-          </FormHelperText>
-        )}
+        <FormHelperText
+          error
+          sx={{
+            fontSize: "1rem",
+            textAlign: "center",
+            visibility: `${submitTouched && isError ? "visible" : "hidden"}`,
+          }}
+        >
+          Input correct data
+        </FormHelperText>
       </DialogTitle>
       <DialogContent>
         <DialogContentText
