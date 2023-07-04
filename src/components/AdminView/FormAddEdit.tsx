@@ -49,11 +49,13 @@ export default function FormAddEdit(props: Props) {
   const [productPriceInYear, setProductPriceInYear] = useState<
     { name?: string; year?: string; price?: string }[]
   >([{ name: "year-0" }]);
-  const [productPriceInYearTouched, setProductPriceInYearTouched] = useState(false)
-  const [productPriceInYearError, setProductPriceInYearError] = useState(true)
-
+  const [productPriceInYearTouched, setProductPriceInYearTouched] =
+    useState(false);
+  const [productPriceInYearError, setProductPriceInYearError] = useState(true);
 
   const changeYearPriceHandler = (type: string, event: ChangeEvent) => {
+    setProductPriceInYearTouched(true);
+    setProductPriceInYearError(false);
     const { name, value } = event.target as HTMLInputElement;
     const valueType =
       type === "year"
@@ -107,7 +109,7 @@ export default function FormAddEdit(props: Props) {
     // Validation
     if (productName === "") setProductNameError(true);
     if (productPriceInYear.find((obj) => obj.price === "" || obj.year === ""))
-      console.log("object");
+      setProductPriceInYearError(true);
     //New Product
     setNewProduct([
       {
@@ -175,6 +177,9 @@ export default function FormAddEdit(props: Props) {
                 )}
               </Stack>
             ))}
+            {productPriceInYearTouched && productPriceInYearError && (
+              <FormHelperText error>Enter a valid pricing</FormHelperText>
+            )}
             <IconButton
               sx={{ width: "40px" }}
               aria-label="add-year"
