@@ -104,10 +104,13 @@ export default function FormAddEdit(props: Props) {
       }),
       productsRequired: reqProducts,
     }]);
+  }, [productId, productName, productPriceInYear, reqProducts]);
+
+  useEffect(() => {
     props.onGetData(newProduct);
-  }, [productId, productName, productPriceInYear, reqProducts, newProduct, props]);
 
-
+  }, [newProduct, props])
+  
   return (
     <form method="POST">
       <Stack spacing={2}>
