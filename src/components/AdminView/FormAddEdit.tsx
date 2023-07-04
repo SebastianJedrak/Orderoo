@@ -20,8 +20,7 @@ type Props = {
 export default function FormAddEdit(props: Props) {
   const data = useContext(ProductsContext);
   const productItems = data!.productInSelectedYear;
-  const years = data!.years
-
+  const years = data!.years;
 
   // Handle Name
   const [productName, setProductName] = useState("");
@@ -29,8 +28,8 @@ export default function FormAddEdit(props: Props) {
   const [productNameTouched, setProductNameTouched] = useState(false);
 
   const productNameHandler = (e: ChangeEvent) => {
-    setProductNameTouched(true)
-    setProductNameError(false)
+    setProductNameTouched(true);
+    setProductNameError(false);
     const target = e.target as HTMLInputElement;
     setProductName(target.value);
   };
@@ -50,6 +49,9 @@ export default function FormAddEdit(props: Props) {
   const [productPriceInYear, setProductPriceInYear] = useState<
     { name?: string; year?: string; price?: string }[]
   >([{ name: "year-0" }]);
+  const [productPriceInYearTouched, setProductPriceInYearTouched] = useState(false)
+  const [productPriceInYearError, setProductPriceInYearError] = useState(true)
+
 
   const changeYearPriceHandler = (type: string, event: ChangeEvent) => {
     const { name, value } = event.target as HTMLInputElement;
@@ -83,11 +85,11 @@ export default function FormAddEdit(props: Props) {
     _event: React.SyntheticEvent<Element, Event>,
     value: any
   ) => {
-
     setReqProducts(
       value.map((item: string) => {
         return {
-          id: productItems!.find((products) => products.productName === item)!.productId ,
+          id: productItems!.find((products) => products.productName === item)!
+            .productId,
           name: item,
         };
       })
@@ -102,24 +104,27 @@ export default function FormAddEdit(props: Props) {
   >(null);
 
   useEffect(() => {
-// Validation
-if (productName === "") setProductNameError(true)
-//New Product
-    setNewProduct([{
-      productId: productId,
-      productName: productName,
-      productPrice: productPriceInYear.map((obj) => {
-        return { year: obj.year!, price: obj.price! };
-      }),
-      productsRequired: reqProducts,
-    }]);
+    // Validation
+    if (productName === "") setProductNameError(true);
+    if (productPriceInYear.find((obj) => obj.price === "" || obj.year === ""))
+      console.log("object");
+    //New Product
+    setNewProduct([
+      {
+        productId: productId,
+        productName: productName,
+        productPrice: productPriceInYear.map((obj) => {
+          return { year: obj.year!, price: obj.price! };
+        }),
+        productsRequired: reqProducts,
+      },
+    ]);
   }, [productId, productName, productPriceInYear, reqProducts]);
 
   useEffect(() => {
     props.onGetData(newProduct);
+  }, [newProduct, props]);
 
-  }, [newProduct, props])
-  
   return (
     <form method="POST">
       <Stack spacing={2}>
@@ -132,7 +137,9 @@ if (productName === "") setProductNameError(true)
             onChange={productNameHandler}
             placeholder="Name"
           />
-          {productNameTouched && productNameError && <FormHelperText error>Enter a valid product name</FormHelperText>}
+          {productNameTouched && productNameError && (
+            <FormHelperText error>Enter a valid product name</FormHelperText>
+          )}
         </Stack>
 
         {/* Prices */}
@@ -186,9 +193,7 @@ if (productName === "") setProductNameError(true)
           <Autocomplete
             multiple
             id="reqProducts"
-            options={productItems!.map(
-              (product) => product.productName
-            )}
+            options={productItems!.map((product) => product.productName)}
             renderInput={(params) => <TextField {...params} />}
             onChange={(event, value) => reqHandler(event, value)}
           />
