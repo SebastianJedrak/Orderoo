@@ -38,13 +38,23 @@ export default function DialogFormSubmit(props: Props) {
               (itemReq) => itemReq.id === props.product?.[0].productId
             )
         );
-
-      const updatedPackages = dataStorage.packages.filter(
-        (item) =>
-          !item.productsIncludedId.some(
+      const updatedPackages = dataStorage.packages.filter((item) => {
+        if (
+          item.productsIncludedId.some(
             (productId) => productId === props.product?.[0].productId
           )
-      );
+        ) {
+          return false;
+        }
+        if (
+          item.productsFreeId.some(
+            (productId) => productId === props.product?.[0].productId
+          )
+        ) {
+          return false;
+        }
+        return true;
+      });
       const newData = {
         productItems: updatedProducts,
         packages: updatedPackages,
