@@ -24,6 +24,7 @@ export default function DialogAdd(props: Props) {
   const [dataForm, setDataForm] = useState<ProductsType["productItems"] | null>(
     null
   );
+  const [isError, setIsError] = useState(true)
 
   const closeHandler = () => {
     props.onClose(false);
@@ -32,6 +33,11 @@ export default function DialogAdd(props: Props) {
   const getDataHandler = (data: ProductsType["productItems"] | null) => {
    if (data !== null) setDataForm(data)
   };
+
+  const errorHandler = (error: boolean) => {
+    setIsError(error)
+  }
+  console.log(isError);
 
   const submitHandler = () => {
     props.onClose(false);
@@ -57,7 +63,7 @@ export default function DialogAdd(props: Props) {
             mb: 2,
           }}
         ></DialogContentText>
-        <FormAddEdit onGetData={getDataHandler} />
+        <FormAddEdit onGetData={getDataHandler} onError={errorHandler}/>
       </DialogContent>
       <Stack direction={"row"} justifyContent={"center"}>
         {" "}

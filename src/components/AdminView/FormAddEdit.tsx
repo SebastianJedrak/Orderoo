@@ -15,6 +15,7 @@ import { ProductsType } from "../../types";
 
 type Props = {
   onGetData: (data: ProductsType["productItems"] | null) => void;
+  onError: ((error: boolean) => void)
 };
 
 export default function FormAddEdit(props: Props) {
@@ -127,11 +128,17 @@ export default function FormAddEdit(props: Props) {
       setProductPriceInYearError(true);
     if (productNameError || productPriceInYearError) setNewProductError(true);
     else setNewProductError(false);
-  }, [productName, productPriceInYear, productNameError, productPriceInYearError])
-  
+  }, [
+    productName,
+    productPriceInYear,
+    productNameError,
+    productPriceInYearError,
+  ]);
+
   useEffect(() => {
     props.onGetData(newProduct);
-  }, [newProduct, props]);
+    props.onError(newProductError)
+  }, [newProduct, newProductError, props]);
 
   return (
     <form method="POST">
