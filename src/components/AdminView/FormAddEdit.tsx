@@ -30,9 +30,8 @@ export default function FormAddEdit(props: Props) {
 
   const productNameHandler = (e: ChangeEvent) => {
     setProductNameTouched(true)
+    setProductNameError(false)
     const target = e.target as HTMLInputElement;
-    if (target.value === "") setProductNameError(true)
-    if (target.value !== "") setProductNameError(false)
     setProductName(target.value);
   };
 
@@ -103,6 +102,9 @@ export default function FormAddEdit(props: Props) {
   >(null);
 
   useEffect(() => {
+// Validation
+if (productName === "") setProductNameError(true)
+//New Product
     setNewProduct([{
       productId: productId,
       productName: productName,
