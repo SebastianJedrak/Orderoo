@@ -182,7 +182,6 @@ export default function FormAddEdit(props: Props) {
             onChange={(event, value) => reqHandler(event, value)}
           />
         </Stack>
-        <button type="submit">submit</button>
       </Stack>
     </form>
   );
