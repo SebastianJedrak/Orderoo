@@ -132,6 +132,8 @@ export default function FormAddEdit(props: Props) {
     if (
       productPriceInYear.find(
         (obj) =>
+          !obj.year ||
+          !obj.price ||
           obj.price === "" ||
           obj.year === "" ||
           Number(obj.price) <= 0 ||
@@ -199,6 +201,7 @@ export default function FormAddEdit(props: Props) {
                   InputProps={{ endAdornment: "PLN" }}
                   name={`year-${i}`}
                   onChange={(e) => changeYearPriceHandler("price", e)}
+                  onClick={(e) => productPriceInYearTouched("price", e)}
                 />
                 {i === arr.length - 1 && i > 0 ? (
                   <IconButton
@@ -218,7 +221,9 @@ export default function FormAddEdit(props: Props) {
               error
               sx={{
                 visibility: `${
-                  productPriceIsTouched && productYearIsTouched && productPriceInYearError
+                  productPriceIsTouched &&
+                  productYearIsTouched &&
+                  productPriceInYearError
                     ? "visible"
                     : "hidden"
                 }`,
