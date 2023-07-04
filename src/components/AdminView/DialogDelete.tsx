@@ -67,11 +67,23 @@ export default function DialogFormSubmit(props: Props) {
     props.onClose(false);
   };
 
-  const packageToDelete = dataStorage.packages.filter((item) =>
-    item.productsIncludedId.some(
-      (productId) => productId === props.product?.[0].productId
-    )
-  );
+  const packageToDelete = dataStorage.packages.filter((item) => {
+    if (
+      item.productsIncludedId.some(
+        (productId) => productId === props.product?.[0].productId
+      )
+    ) {
+      return false;
+    }
+    if (
+      item.productsFreeId.some(
+        (productId) => productId === props.product?.[0].productId
+      )
+    ) {
+      return false;
+    }
+    return true;
+  });
 
   const packageToDeleteNames = packageToDelete.map((item) => item.packageName);
 
