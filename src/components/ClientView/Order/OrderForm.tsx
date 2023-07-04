@@ -11,6 +11,8 @@ export default function OrderForm() {
   const data = useContext(ProductsContext);
   const productItems = data?.productInSelectedYear;
   const packageItems = data?.packageInSelectedYear;
+  const years = data?.years
+
 
   // Form control
   const [formValues, setFormValues] = useState<OrderType | null>(null);
@@ -181,7 +183,7 @@ export default function OrderForm() {
 
       {/* Form */}
       <form method="POST">
-        <SelectYear />
+       {years && years.length > 0 && <SelectYear />} 
         <CheckboxProducts
           productItems={productItems}
           isCheckboxError={isCheckboxError}
