@@ -125,7 +125,7 @@ export default function FormAddEdit(props: Props) {
   useEffect(() => {
     setNewProductError(false);
     if (productName === "") setProductNameError(true);
-    if (productPriceInYear.find((obj) => obj.price === "" || obj.year === "" || Number(obj.price) <= 0))
+    if (productPriceInYear.find((obj) => obj.price === "" || obj.year === "" || Number(obj.price) <= 0 || Number(obj.year) < 2023 || Number(obj.year) > 2033))
       setProductPriceInYearError(true);
     if (productNameError || productPriceInYearError) setNewProductError(true);
     else setNewProductError(false);
