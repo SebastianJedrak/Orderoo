@@ -5,6 +5,7 @@ import {
   DialogContent,
   DialogContentText,
   DialogTitle,
+  FormHelperText,
   Stack,
 } from "@mui/material";
 import { SetStateAction, useContext, useState } from "react";
@@ -24,22 +25,23 @@ export default function DialogAdd(props: Props) {
   const [dataForm, setDataForm] = useState<ProductsType["productItems"] | null>(
     null
   );
-  const [isError, setIsError] = useState(true)
+  const [isError, setIsError] = useState(true);
+  const [submitTouched, setSubmitTouched] = useState(false);
 
   const closeHandler = () => {
     props.onClose(false);
   };
 
   const getDataHandler = (data: ProductsType["productItems"] | null) => {
-   if (data !== null) setDataForm(data)
+    if (data !== null) setDataForm(data);
   };
 
   const errorHandler = (error: boolean) => {
-    setIsError(error)
-  }
-  console.log(isError);
+    setIsError(error);
+  };
 
   const submitHandler = () => {
+    if (isError) return setSubmitTouched(true);
     props.onClose(false);
     const newData = {
       productItems: [...dataStorage.productItems, ...dataForm!],
@@ -54,6 +56,11 @@ export default function DialogAdd(props: Props) {
     <Dialog open={props.isOpen} onClose={closeHandler}>
       <DialogTitle sx={{ px: 15, mb: 2 }} textAlign={"center"} color="primary">
         Add New Product
+        {submitTouched && isError && (
+          <FormHelperText error sx={{ fontSize: "1rem", textAlign: "center" }}>
+            Input correct data
+          </FormHelperText>
+        )}
       </DialogTitle>
       <DialogContent>
         <DialogContentText
@@ -63,10 +70,9 @@ export default function DialogAdd(props: Props) {
             mb: 2,
           }}
         ></DialogContentText>
-        <FormAddEdit onGetData={getDataHandler} onError={errorHandler}/>
+        <FormAddEdit onGetData={getDataHandler} onError={errorHandler} />
       </DialogContent>
       <Stack direction={"row"} justifyContent={"center"}>
-        {" "}
         <DialogActions>
           <Button
             sx={{ width: "100px" }}
