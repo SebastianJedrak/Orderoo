@@ -1,6 +1,7 @@
 import {
   Autocomplete,
   Box,
+  FormHelperText,
   IconButton,
   Stack,
   TextField,
@@ -34,8 +35,6 @@ export default function FormAddEdit(props: Props) {
     if (target.value !== "") setProductNameError(false)
     setProductName(target.value);
   };
-
-  console.log(productNameError);
 
   // Handle Year and price
   const [yearsArr, setYearsArr] = useState<number[]>([years[0]]);
@@ -131,6 +130,7 @@ export default function FormAddEdit(props: Props) {
             onChange={productNameHandler}
             placeholder="Name"
           />
+          {productNameTouched && productNameError && <FormHelperText error>Enter a valid product name</FormHelperText>}
         </Stack>
 
         {/* Prices */}
