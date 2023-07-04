@@ -50,12 +50,16 @@ export default function FormAddEdit(props: Props) {
   const [productPriceInYear, setProductPriceInYear] = useState<
     { name?: string; year?: string; price?: string }[]
   >([{ name: "year-0" }]);
-  const [productPriceInYearTouched, setProductPriceInYearTouched] =
-    useState(false);
+  const [productYearIsTouched, setProductYearIsTouched] = useState(false);
+  const [productPriceIsTouched, setProductPriceIsTouched] = useState(false);
   const [productPriceInYearError, setProductPriceInYearError] = useState(true);
 
+  const productPriceInYearTouched = (type: string, _e: any) => {
+    if (type === "year") setProductYearIsTouched(true);
+    if (type === "price") setProductPriceIsTouched(true);
+  };
+
   const changeYearPriceHandler = (type: string, event: ChangeEvent) => {
-    setProductPriceInYearTouched(true);
     setProductPriceInYearError(false);
     const { name, value } = event.target as HTMLInputElement;
     const valueType =
@@ -125,7 +129,16 @@ export default function FormAddEdit(props: Props) {
   useEffect(() => {
     setNewProductError(false);
     if (productName === "") setProductNameError(true);
-    if (productPriceInYear.find((obj) => obj.price === "" || obj.year === "" || Number(obj.price) <= 0 || Number(obj.year) < 2023 || Number(obj.year) > 2033))
+    if (
+      productPriceInYear.find(
+        (obj) =>
+          obj.price === "" ||
+          obj.year === "" ||
+          Number(obj.price) <= 0 ||
+          Number(obj.year) < 2023 ||
+          Number(obj.year) > 2033
+      )
+    )
       setProductPriceInYearError(true);
     if (productNameError || productPriceInYearError) setNewProductError(true);
     else setNewProductError(false);
@@ -178,6 +191,7 @@ export default function FormAddEdit(props: Props) {
                   placeholder=""
                   name={`year-${i}`}
                   onChange={(e) => changeYearPriceHandler("year", e)}
+                  onClick={(e) => productPriceInYearTouched("year", e)}
                 />
                 <TextField
                   label="Price"
@@ -204,7 +218,7 @@ export default function FormAddEdit(props: Props) {
               error
               sx={{
                 visibility: `${
-                  productPriceInYearTouched && productPriceInYearError
+                  productPriceIsTouched && productYearIsTouched && productPriceInYearError
                     ? "visible"
                     : "hidden"
                 }`,
