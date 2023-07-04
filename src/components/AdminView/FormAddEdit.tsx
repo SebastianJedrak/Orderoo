@@ -106,11 +106,6 @@ export default function FormAddEdit(props: Props) {
   >(null);
 
   useEffect(() => {
-    // Validation
-    if (productName === "") setProductNameError(true);
-    if (productPriceInYear.find((obj) => obj.price === "" || obj.year === ""))
-      setProductPriceInYearError(true);
-    //New Product
     setNewProduct([
       {
         productId: productId,
@@ -123,6 +118,17 @@ export default function FormAddEdit(props: Props) {
     ]);
   }, [productId, productName, productPriceInYear, reqProducts]);
 
+  //Validation
+  const [newProductError, setNewProductError] = useState(true);
+
+  useEffect(() => {
+    if (productName === "") setProductNameError(true);
+    if (productPriceInYear.find((obj) => obj.price === "" || obj.year === ""))
+      setProductPriceInYearError(true);
+    if (productNameError || productPriceInYearError) setNewProductError(true);
+    else setNewProductError(false);
+  }, [productName, productPriceInYear, productNameError, productPriceInYearError])
+  
   useEffect(() => {
     props.onGetData(newProduct);
   }, [newProduct, props]);
