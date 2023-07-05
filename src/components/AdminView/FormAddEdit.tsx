@@ -134,12 +134,14 @@ export default function FormAddEdit(props: Props) {
       setProductNameError(false);
       setProductPriceInYear(product.productPrice);
       setProductPriceInYearError(false);
-      setReqProducts(product.productsRequired)
+      setReqProducts(product.productsRequired);
     }
   }, [product]);
 
   // Create new Product object
-  const productId = String(productItems!.length + 1);
+  const productId = product
+    ? product.productId
+    : String(productItems!.length + 1);
 
   const [newProduct, setNewProduct] = useState<
     ProductsType["productItems"] | null
