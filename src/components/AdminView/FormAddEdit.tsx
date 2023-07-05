@@ -47,7 +47,7 @@ export default function FormAddEdit(props: Props) {
   const productPriceInYears = product
     ? productFullPrice.productPrice.map((year: any) => year.year)
     : null;
-
+    
   const [yearsArr, setYearsArr] = useState<number[]>(
     product ? productPriceInYears! : [years[0]]
   );
@@ -209,6 +209,7 @@ export default function FormAddEdit(props: Props) {
                   name={`year-${i}`}
                   onChange={(e) => changeYearPriceHandler("year", e)}
                   onClick={(e) => productPriceInYearTouched("year", e)}
+                  defaultValue={product ? productFullPrice.productPrice[i].year : ""}
                 />
                 <TextField
                   label="Price"
@@ -217,6 +218,7 @@ export default function FormAddEdit(props: Props) {
                   name={`year-${i}`}
                   onChange={(e) => changeYearPriceHandler("price", e)}
                   onClick={(e) => productPriceInYearTouched("price", e)}
+                  defaultValue={product ? productFullPrice.productPrice[i].price : ""}
                 />
                 {i === arr.length - 1 && i > 0 ? (
                   <IconButton
