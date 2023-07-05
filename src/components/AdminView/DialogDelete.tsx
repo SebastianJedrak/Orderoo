@@ -73,16 +73,16 @@ export default function DialogFormSubmit(props: Props) {
         (productId) => productId === props.product?.[0].productId
       )
     ) {
-      return false;
+      return true;
     }
     if (
       item.productsFreeId.some(
         (productId) => productId === props.product?.[0].productId
       )
     ) {
-      return false;
+      return true;
     }
-    return true;
+    return false;
   });
 
   const packageToDeleteNames = packageToDelete.map((item) => item.packageName);
