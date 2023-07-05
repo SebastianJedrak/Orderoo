@@ -55,13 +55,10 @@ export default function DialogAddEdit(props: Props) {
     setData!(newData);
   };
 
-  console.log(props.product);
-
   return (
     <Dialog open={props.isOpen} onClose={closeHandler}>
       <DialogTitle sx={{ px: 15 }} textAlign={"center"} color="primary">
         {product ? `Edit ${product.productName}` : "Add New Product"}
-
         <FormHelperText
           error
           sx={{
@@ -81,7 +78,7 @@ export default function DialogAddEdit(props: Props) {
             mb: 2,
           }}
         ></DialogContentText>
-        <FormAddEdit onGetData={getDataHandler} onError={errorHandler} />
+        <FormAddEdit onGetData={getDataHandler} onError={errorHandler} product={props.product}/>
       </DialogContent>
       <Stack direction={"row"} justifyContent={"center"}>
         <DialogActions>

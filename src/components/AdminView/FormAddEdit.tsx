@@ -16,9 +16,13 @@ import { ProductsType } from "../../types";
 type Props = {
   onGetData: (data: ProductsType["productItems"] | null) => void;
   onError: (error: boolean) => void;
+  product: ProductsType["productItems"] | null;
 };
 
 export default function FormAddEdit(props: Props) {
+  const product = props.product ? props.product[0] : null;
+  console.log(product);
+
   const data = useContext(ProductsContext);
   const productItems = data!.productInSelectedYear;
   const years = data!.years;
