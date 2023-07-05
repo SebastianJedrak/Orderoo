@@ -18,10 +18,12 @@ import DialogDelete from "./DialogDelete";
 import { ProductsType } from "../../types";
 import DialogAdd from "./DialogAddEdit";
 
-export default function AdminView() {
-  const data = useContext(ProductsContext);
-  const productItems = data?.productInSelectedYear;
-  const packageItems = data?.packageInSelectedYear;
+type Props = {
+  products?: ProductsType["productItems"] | null;
+};
+
+export default function AdminView(props: Props) {
+  const productItems = props.products;
 
   const [isDeleteModalOpen, setDeleteIsModalOpen] = useState(false);
   const [isAddModalOpen, setAddIsModalOpen] = useState(false);
@@ -40,7 +42,7 @@ export default function AdminView() {
       if (btn.dataset.type === "product")
         setDialogProduct([JSON.parse(btn.dataset.product!)]);
       if (btn.dataset.type === "package")
-      setDialogPackage([JSON.parse(btn.dataset.product!)]);
+        setDialogPackage([JSON.parse(btn.dataset.product!)]);
     }
     if (btn.dataset.action === "edit") {
       setDialogProduct([JSON.parse(btn.dataset.product!)]);
@@ -49,7 +51,7 @@ export default function AdminView() {
   };
 
   const addProductHandler = () => {
-    setDialogProduct(null)
+    setDialogProduct(null);
     setAddIsModalOpen(true);
   };
 
@@ -79,7 +81,7 @@ export default function AdminView() {
             </Typography>
           </Stack>
           <Divider />
-          {productItems!.map((item) => (
+          {productItems?.map((item) => (
             <Fragment key={item.productId}>
               <Stack
                 direction={"row"}
