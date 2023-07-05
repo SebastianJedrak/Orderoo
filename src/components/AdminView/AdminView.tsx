@@ -1,10 +1,8 @@
-import { Fragment, useContext, useState } from "react";
-import { ProductsContext } from "../../ctx/ProductsContext";
+import { useState } from "react";
 import {
   Box,
   Button,
   Divider,
-  IconButton,
   Paper,
   Stack,
   Typography,
