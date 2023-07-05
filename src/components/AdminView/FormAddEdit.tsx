@@ -28,8 +28,8 @@ export default function FormAddEdit(props: Props) {
 
   // Handle Name
   const [productName, setProductName] = useState("");
-  const [productNameError, setProductNameError] = useState(true);
-  const [productNameTouched, setProductNameTouched] = useState(false);
+  const [productNameError, setProductNameError] = useState(product ? false : true);
+  const [productNameTouched, setProductNameTouched] = useState(product ? true : false);
 
   const productNameHandler = (e: ChangeEvent) => {
     setProductNameTouched(true);
@@ -47,7 +47,7 @@ export default function FormAddEdit(props: Props) {
   const productPriceInYears = product
     ? productFullPrice.productPrice.map((year: any) => year.year)
     : null;
-    
+
   const [yearsArr, setYearsArr] = useState<number[]>(
     product ? productPriceInYears! : [years[0]]
   );
@@ -64,9 +64,9 @@ export default function FormAddEdit(props: Props) {
   const [productPriceInYear, setProductPriceInYear] = useState<
     { name?: string; year?: string; price?: string }[]
   >([{ name: "year-0" }]);
-  const [productYearIsTouched, setProductYearIsTouched] = useState(false);
-  const [productPriceIsTouched, setProductPriceIsTouched] = useState(false);
-  const [productPriceInYearError, setProductPriceInYearError] = useState(true);
+  const [productYearIsTouched, setProductYearIsTouched] = useState(product ? true : false);
+  const [productPriceIsTouched, setProductPriceIsTouched] = useState(product ? true : false);
+  const [productPriceInYearError, setProductPriceInYearError] = useState(product ? false : true);
 
   const productPriceInYearTouched = (type: string, _e: any) => {
     if (type === "year") setProductYearIsTouched(true);
@@ -138,7 +138,7 @@ export default function FormAddEdit(props: Props) {
   }, [productId, productName, productPriceInYear, reqProducts]);
 
   //Validation
-  const [newProductError, setNewProductError] = useState(true);
+  const [newProductError, setNewProductError] = useState(product ? false : true);
 
   useEffect(() => {
     setNewProductError(false);
