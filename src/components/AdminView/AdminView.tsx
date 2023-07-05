@@ -76,7 +76,7 @@ export default function AdminView(props: Props) {
               ID
             </Typography>
             <Typography sx={{ fontWeight: "fontWeightBold" }}>
-              Product
+            {productItems ? "Product" : "Package"}
             </Typography>
           </Stack>
           <Divider />
