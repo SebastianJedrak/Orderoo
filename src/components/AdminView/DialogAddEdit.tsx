@@ -98,7 +98,7 @@ export default function DialogAddEdit(props: Props) {
             type="submit"
             onClick={submitHandler}
           >
-            Add
+            {props.product ? "Save" : "Add"}
           </Button>
         </DialogActions>
       </Stack>
