@@ -20,6 +20,8 @@ type Props = {
 };
 
 export default function DialogAddEdit(props: Props) {
+  const product = props.product ? props.product[0] : null;
+
   const dataStorage: ProductsType = JSON.parse(localStorage.getItem("data")!);
   const data = useContext(ProductsContext);
   const setData = data?.setData;
@@ -58,7 +60,8 @@ export default function DialogAddEdit(props: Props) {
   return (
     <Dialog open={props.isOpen} onClose={closeHandler}>
       <DialogTitle sx={{ px: 15 }} textAlign={"center"} color="primary">
-        Add New Product
+        {product ? `Edit ${product.productName}` : "Add New Product"}
+
         <FormHelperText
           error
           sx={{
@@ -98,7 +101,7 @@ export default function DialogAddEdit(props: Props) {
             type="submit"
             onClick={submitHandler}
           >
-            {props.product ? "Save" : "Add"}
+            {product ? "Save" : "Add"}
           </Button>
         </DialogActions>
       </Stack>
