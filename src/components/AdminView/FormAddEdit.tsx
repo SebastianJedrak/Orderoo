@@ -20,16 +20,20 @@ type Props = {
 };
 
 export default function FormAddEdit(props: Props) {
-  const product = props.product ? props.product[0] : null;
-
   const data = useContext(ProductsContext);
   const productItems = data!.productInSelectedYear;
   const years = data!.years;
 
+  const product = props.product ? props.product[0] : null;
+
   // Handle Name
   const [productName, setProductName] = useState("");
-  const [productNameError, setProductNameError] = useState(product ? false : true);
-  const [productNameTouched, setProductNameTouched] = useState(product ? true : false);
+  const [productNameError, setProductNameError] = useState(
+    product ? false : true
+  );
+  const [productNameTouched, setProductNameTouched] = useState(
+    product ? true : false
+  );
 
   const productNameHandler = (e: ChangeEvent) => {
     setProductNameTouched(true);
@@ -64,9 +68,15 @@ export default function FormAddEdit(props: Props) {
   const [productPriceInYear, setProductPriceInYear] = useState<
     { name?: string; year?: string; price?: string }[]
   >([{ name: "year-0" }]);
-  const [productYearIsTouched, setProductYearIsTouched] = useState(product ? true : false);
-  const [productPriceIsTouched, setProductPriceIsTouched] = useState(product ? true : false);
-  const [productPriceInYearError, setProductPriceInYearError] = useState(product ? false : true);
+  const [productYearIsTouched, setProductYearIsTouched] = useState(
+    product ? true : false
+  );
+  const [productPriceIsTouched, setProductPriceIsTouched] = useState(
+    product ? true : false
+  );
+  const [productPriceInYearError, setProductPriceInYearError] = useState(
+    product ? false : true
+  );
 
   const productPriceInYearTouched = (type: string, _e: any) => {
     if (type === "year") setProductYearIsTouched(true);
@@ -117,6 +127,17 @@ export default function FormAddEdit(props: Props) {
     );
   };
 
+  // Create edit object
+  useEffect(() => {
+    if (product) {
+      setProductName(product.productName);
+      setProductNameError(false);
+      setProductPriceInYear(product.productPrice);
+      setProductPriceInYearError(false);
+      setReqProducts(product.productsRequired)
+    }
+  }, [product]);
+
   // Create new Product object
   const productId = String(productItems!.length + 1);
 
@@ -138,7 +159,9 @@ export default function FormAddEdit(props: Props) {
   }, [productId, productName, productPriceInYear, reqProducts]);
 
   //Validation
-  const [newProductError, setNewProductError] = useState(product ? false : true);
+  const [newProductError, setNewProductError] = useState(
+    product ? false : true
+  );
 
   useEffect(() => {
     setNewProductError(false);
@@ -209,7 +232,9 @@ export default function FormAddEdit(props: Props) {
                   name={`year-${i}`}
                   onChange={(e) => changeYearPriceHandler("year", e)}
                   onClick={(e) => productPriceInYearTouched("year", e)}
-                  defaultValue={product ? productFullPrice.productPrice[i].year : ""}
+                  defaultValue={
+                    product ? productFullPrice.productPrice[i].year : ""
+                  }
                 />
                 <TextField
                   label="Price"
@@ -218,7 +243,9 @@ export default function FormAddEdit(props: Props) {
                   name={`year-${i}`}
                   onChange={(e) => changeYearPriceHandler("price", e)}
                   onClick={(e) => productPriceInYearTouched("price", e)}
-                  defaultValue={product ? productFullPrice.productPrice[i].price : ""}
+                  defaultValue={
+                    product ? productFullPrice.productPrice[i].price : ""
+                  }
                 />
                 {i === arr.length - 1 && i > 0 ? (
                   <IconButton
