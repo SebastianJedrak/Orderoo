@@ -171,6 +171,7 @@ export default function FormAddEdit(props: Props) {
             name="productName"
             onChange={productNameHandler}
             placeholder="Name"
+            value= {product ? product.productName : ""}
           />
 
           <FormHelperText
