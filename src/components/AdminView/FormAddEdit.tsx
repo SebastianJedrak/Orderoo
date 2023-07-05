@@ -171,7 +171,7 @@ export default function FormAddEdit(props: Props) {
             name="productName"
             onChange={productNameHandler}
             placeholder="Name"
-            value= {product ? product.productName : ""}
+            defaultValue= {product ? product.productName : ""}
           />
 
           <FormHelperText
@@ -258,6 +258,7 @@ export default function FormAddEdit(props: Props) {
             options={productItems!.map((product) => product.productName)}
             renderInput={(params) => <TextField {...params} />}
             onChange={(event, value) => reqHandler(event, value)}
+            defaultValue={product ? product.productsRequired.map(req => req.name) : undefined}
           />
         </Stack>
       </Stack>
