@@ -46,8 +46,12 @@ export default function DialogAddEdit(props: Props) {
   const submitHandler = () => {
     if (isError) return setSubmitTouched(true);
     props.onClose(false);
+    const filteredStorage = dataStorage.productItems.filter(
+      (product) => product.productId !== dataForm![0].productId
+    );
+    console.log(filteredStorage);
     const newData = {
-      productItems: [...dataStorage.productItems, ...dataForm!],
+      productItems: [...filteredStorage, ...dataForm!],
       packages: dataStorage.packages,
     };
 
@@ -78,7 +82,11 @@ export default function DialogAddEdit(props: Props) {
             mb: 2,
           }}
         ></DialogContentText>
-        <FormAddEdit onGetData={getDataHandler} onError={errorHandler} product={props.product}/>
+        <FormAddEdit
+          onGetData={getDataHandler}
+          onError={errorHandler}
+          product={props.product}
+        />
       </DialogContent>
       <Stack direction={"row"} justifyContent={"center"}>
         <DialogActions>
