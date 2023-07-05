@@ -63,6 +63,15 @@ export default function DialogFormSubmit(props: Props) {
       setData!(newData);
     }
     if (props.package !== null) {
+      const updatedPackages = dataStorage.packages.filter(
+        (item) => item.packageId !== props.product?.[0].productId
+      );
+      const newData = {
+        productItems: dataStorage.productItems,
+        packages: updatedPackages,
+      };
+      localStorage.setItem("data", JSON.stringify(newData));
+      setData!(newData);
     }
     props.onClose(false);
   };

@@ -77,7 +77,7 @@ export default function ItemList(props: Props) {
                   color="primary"
                   data-product={JSON.stringify(item)}
                   data-action={"edit"}
-                  data-type="product"
+                  data-type="package"
                 >
                   <EditIcon />
                 </IconButton>
@@ -86,7 +86,7 @@ export default function ItemList(props: Props) {
                   color="primary"
                   data-product={JSON.stringify(item)}
                   data-action={"delete"}
-                  data-type="product"
+                  data-type="package"
                 >
                   <DeleteIcon />
                 </IconButton>
