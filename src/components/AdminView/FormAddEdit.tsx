@@ -21,7 +21,6 @@ type Props = {
 
 export default function FormAddEdit(props: Props) {
   const product = props.product ? props.product[0] : null;
-  const productPriceInYears = props.product ? [1] : null;
 
   const data = useContext(ProductsContext);
   const productItems = data!.productInSelectedYear;
@@ -40,6 +39,15 @@ export default function FormAddEdit(props: Props) {
   };
 
   // Handle Year and price
+  const productFullPrice = product
+    ? JSON.parse(localStorage.getItem("data")!).productItems.find(
+        (item: any) => item.productId === product.productId
+      )
+    : null;
+  const productPriceInYears = product
+    ? productFullPrice.productPrice.map((year: any) => year.year)
+    : null;
+
   const [yearsArr, setYearsArr] = useState<number[]>(
     product ? productPriceInYears! : [years[0]]
   );
