@@ -19,7 +19,7 @@ type Props = {
   product: ProductsType["productItems"] | null;
 };
 
-export default function DialogAdd(props: Props) {
+export default function DialogAddEdit(props: Props) {
   const dataStorage: ProductsType = JSON.parse(localStorage.getItem("data")!);
   const data = useContext(ProductsContext);
   const setData = data?.setData;

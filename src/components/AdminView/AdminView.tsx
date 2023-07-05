@@ -16,7 +16,7 @@ import ControlPointIcon from "@mui/icons-material/ControlPoint";
 
 import DialogDelete from "./DialogDelete";
 import { ProductsType } from "../../types";
-import DialogAdd from "./DialogAdd";
+import DialogAdd from "./DialogAddEdit";
 
 export default function AdminView() {
   const data = useContext(ProductsContext);
