@@ -64,8 +64,9 @@ export default function DialogFormSubmit(props: Props) {
     }
     if (props.package !== null) {
       const updatedPackages = dataStorage.packages.filter(
-        (item) => item.packageId !== props.product?.[0].productId
-      );
+        (item) => item.packageId !== props.package?.[0].packageId
+        );
+        console.log(updatedPackages);
       const newData = {
         productItems: dataStorage.productItems,
         packages: updatedPackages,
