@@ -90,7 +90,7 @@ export default function AdminView(props: Props) {
             variant="contained"
             onClick={addProductHandler}
           >
-            Add Product
+            {productItems ? "Add Product" : "Add Package"}
           </Button>
         </Box>
       </Paper>
