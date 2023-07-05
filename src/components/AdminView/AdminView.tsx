@@ -20,10 +20,12 @@ import DialogAdd from "./DialogAddEdit";
 
 type Props = {
   products?: ProductsType["productItems"] | null;
+  packages?: ProductsType["packages"] | null;
 };
 
 export default function AdminView(props: Props) {
   const productItems = props.products;
+  const packages = props.packages;
 
   const [isDeleteModalOpen, setDeleteIsModalOpen] = useState(false);
   const [isAddModalOpen, setAddIsModalOpen] = useState(false);
@@ -69,7 +71,7 @@ export default function AdminView(props: Props) {
           textAlign="center"
           color="primary"
         >
-          Products
+          {productItems ? "Products" : "Packages"}
         </Typography>
         <Stack spacing={1} my={4} onClick={productClickHandler}>
           <Stack direction={"row"}>
@@ -81,6 +83,7 @@ export default function AdminView(props: Props) {
             </Typography>
           </Stack>
           <Divider />
+          
           {productItems?.map((item) => (
             <Fragment key={item.productId}>
               <Stack
@@ -129,8 +132,6 @@ export default function AdminView(props: Props) {
           </Button>
         </Box>
       </Paper>
-
-      {/* Packages */}
 
       {/* Dialogs */}
       <DialogDelete

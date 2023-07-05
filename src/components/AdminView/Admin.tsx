@@ -22,6 +22,7 @@ export default function Admin() {
     }}
   >
     <AdminView products={productItems}/>
+    <AdminView packages={packageItems}/>
   </Box>
   )
 }
