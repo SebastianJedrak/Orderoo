@@ -83,6 +83,7 @@ export default function AdminView(props: Props) {
           </Stack>
           <Divider />
           <ItemList products={productItems}/>
+          <ItemList packages={packages}/>
           
         </Stack>
         <Box textAlign={"center"}>
@@ -110,4 +111,5 @@ export default function AdminView(props: Props) {
       />
     </Box>
   );
+
 }

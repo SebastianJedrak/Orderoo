@@ -7,50 +7,97 @@ import { ProductsType } from "../../types";
 
 type Props = {
   products?: ProductsType["productItems"] | null;
+  packages?: ProductsType["packages"] | null;
 };
 
 export default function ItemList(props: Props) {
   const productItems = props.products;
+  if (productItems)
+    return (
+      <>
+        {productItems?.map((item) => (
+          <Fragment key={item.productId}>
+            <Stack
+              direction={"row"}
+              justifyContent={"space-between"}
+              alignItems={"center"}
+            >
+              <Stack direction={"row"}>
+                <Typography width={"32px"}>{item.productId}</Typography>
+                <Typography>{item.productName}</Typography>
+              </Stack>
 
-  return (
-    <>
-      {productItems?.map((item) => (
-        <Fragment key={item.productId}>
-          <Stack
-            direction={"row"}
-            justifyContent={"space-between"}
-            alignItems={"center"}
-          >
-            <Stack direction={"row"}>
-              <Typography width={"32px"}>{item.productId}</Typography>
-              <Typography>{item.productName}</Typography>
+              <Box>
+                <IconButton
+                  aria-label="edit"
+                  color="primary"
+                  data-product={JSON.stringify(item)}
+                  data-action={"edit"}
+                  data-type="product"
+                >
+                  <EditIcon />
+                </IconButton>
+                <IconButton
+                  aria-label="delete"
+                  color="primary"
+                  data-product={JSON.stringify(item)}
+                  data-action={"delete"}
+                  data-type="product"
+                >
+                  <DeleteIcon />
+                </IconButton>
+              </Box>
             </Stack>
 
-            <Box>
-              <IconButton
-                aria-label="edit"
-                color="primary"
-                data-product={JSON.stringify(item)}
-                data-action={"edit"}
-                data-type="product"
-              >
-                <EditIcon />
-              </IconButton>
-              <IconButton
-                aria-label="delete"
-                color="primary"
-                data-product={JSON.stringify(item)}
-                data-action={"delete"}
-                data-type="product"
-              >
-                <DeleteIcon />
-              </IconButton>
-            </Box>
-          </Stack>
+            <Divider />
+          </Fragment>
+        ))}
+      </>
+    );
 
-          <Divider />
-        </Fragment>
-      ))}
-    </>
-  );
+  const packages = props.packages;
+  if (packages)
+    return (
+      <>
+        {packages!.map((item) => (
+          <Fragment key={item.packageId}>
+            <Stack
+              direction={"row"}
+              justifyContent={"space-between"}
+              alignItems={"center"}
+            >
+              <Stack direction={"row"}>
+                <Typography width={"32px"}>{item.packageId}</Typography>
+                <Typography>{item.packageName}</Typography>
+              </Stack>
+
+              <Box>
+                <IconButton
+                  aria-label="edit"
+                  color="primary"
+                  data-product={JSON.stringify(item)}
+                  data-action={"edit"}
+                  data-type="product"
+                >
+                  <EditIcon />
+                </IconButton>
+                <IconButton
+                  aria-label="delete"
+                  color="primary"
+                  data-product={JSON.stringify(item)}
+                  data-action={"delete"}
+                  data-type="product"
+                >
+                  <DeleteIcon />
+                </IconButton>
+              </Box>
+            </Stack>
+
+            <Divider />
+          </Fragment>
+        ))}
+      </>
+    );
+
+    return <div></div>
 }
