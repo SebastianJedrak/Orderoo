@@ -59,7 +59,7 @@ export default function AdminView(props: Props) {
       <Paper
         component="section"
         elevation={3}
-        sx={{ mx: "auto",mb: 5, padding: 5, maxWidth: 700, ":last-child": {mb:0} }}
+        sx={{ mx: "auto", padding: 5, maxWidth: 700, mb:5 }}
       >
         {/* Products */}
         <Typography
