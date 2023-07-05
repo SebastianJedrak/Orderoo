@@ -10,13 +10,12 @@ import {
   Typography,
 } from "@mui/material";
 
-import EditIcon from "@mui/icons-material/Edit";
-import DeleteIcon from "@mui/icons-material/Delete";
 import ControlPointIcon from "@mui/icons-material/ControlPoint";
 
 import DialogDelete from "./DialogDelete";
 import { ProductsType } from "../../types";
 import DialogAdd from "./DialogAddEdit";
+import ItemList from "./ItemList";
 
 type Props = {
   products?: ProductsType["productItems"] | null;
@@ -83,44 +82,8 @@ export default function AdminView(props: Props) {
             </Typography>
           </Stack>
           <Divider />
+          <ItemList products={productItems}/>
           
-          {productItems?.map((item) => (
-            <Fragment key={item.productId}>
-              <Stack
-                direction={"row"}
-                justifyContent={"space-between"}
-                alignItems={"center"}
-              >
-                <Stack direction={"row"}>
-                  <Typography width={"32px"}>{item.productId}</Typography>
-                  <Typography>{item.productName}</Typography>
-                </Stack>
-
-                <Box>
-                  <IconButton
-                    aria-label="edit"
-                    color="primary"
-                    data-product={JSON.stringify(item)}
-                    data-action={"edit"}
-                    data-type="product"
-                  >
-                    <EditIcon />
-                  </IconButton>
-                  <IconButton
-                    aria-label="delete"
-                    color="primary"
-                    data-product={JSON.stringify(item)}
-                    data-action={"delete"}
-                    data-type="product"
-                  >
-                    <DeleteIcon />
-                  </IconButton>
-                </Box>
-              </Stack>
-
-              <Divider />
-            </Fragment>
-          ))}
         </Stack>
         <Box textAlign={"center"}>
           <Button
