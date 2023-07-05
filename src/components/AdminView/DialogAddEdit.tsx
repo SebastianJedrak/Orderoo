@@ -49,9 +49,12 @@ export default function DialogAddEdit(props: Props) {
     const filteredStorage = dataStorage.productItems.filter(
       (product) => product.productId !== dataForm![0].productId
     );
-    
+    const newProductItems = [...filteredStorage, ...dataForm!].sort(
+      (a, b) => Number(a.productId) - Number(b.productId)
+    );
+
     const newData = {
-      productItems: [...filteredStorage, ...dataForm!],
+      productItems: newProductItems,
       packages: dataStorage.packages,
     };
 
