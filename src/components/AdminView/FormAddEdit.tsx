@@ -27,7 +27,9 @@ export default function FormAddEdit(props: Props) {
   const product = props.product ? props.product[0] : null;
 
   // Handle Name
-  const [productName, setProductName] = useState("");
+  const [productName, setProductName] = useState(
+    product ? product.productName : ""
+  );
   const [productNameError, setProductNameError] = useState(
     product ? false : true
   );
@@ -67,7 +69,7 @@ export default function FormAddEdit(props: Props) {
 
   const [productPriceInYear, setProductPriceInYear] = useState<
     { name?: string; year?: string; price?: string }[]
-  >([{ name: "year-0" }]);
+  >(product ? productFullPrice.productPrice : [{ name: "year-0" }]);
   const [productYearIsTouched, setProductYearIsTouched] = useState(
     product ? true : false
   );
@@ -110,7 +112,7 @@ export default function FormAddEdit(props: Props) {
 
   const [reqProducts, setReqProducts] = useState<
     { id: string; name: string }[] | []
-  >([]);
+  >(product ? product.productsRequired : []);
 
   const reqHandler = (
     _event: React.SyntheticEvent<Element, Event>,
@@ -126,17 +128,6 @@ export default function FormAddEdit(props: Props) {
       })
     );
   };
-
-  // Create edit object
-  useEffect(() => {
-    if (product) {
-      setProductName(product.productName);
-      setProductNameError(false);
-      setProductPriceInYear(product.productPrice);
-      setProductPriceInYearError(false);
-      setReqProducts(product.productsRequired);
-    }
-  }, [product]);
 
   // Create new Product object
   const productId = product
