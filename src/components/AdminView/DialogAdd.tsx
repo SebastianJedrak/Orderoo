@@ -16,6 +16,7 @@ import { ProductsContext } from "../../ctx/ProductsContext";
 type Props = {
   isOpen: boolean;
   onClose: React.Dispatch<SetStateAction<boolean>>;
+  product: ProductsType["productItems"] | null;
 };
 
 export default function DialogAdd(props: Props) {
@@ -51,6 +52,8 @@ export default function DialogAdd(props: Props) {
     localStorage.setItem("data", JSON.stringify(newData));
     setData!(newData);
   };
+
+  console.log(props.product);
 
   return (
     <Dialog open={props.isOpen} onClose={closeHandler}>

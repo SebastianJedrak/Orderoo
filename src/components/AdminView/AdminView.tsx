@@ -40,11 +40,16 @@ export default function AdminView() {
       if (btn.dataset.type === "product")
         setDialogProduct([JSON.parse(btn.dataset.product!)]);
       if (btn.dataset.type === "package")
-        setDialogPackage([JSON.parse(btn.dataset.product!)]);
+      setDialogPackage([JSON.parse(btn.dataset.product!)]);
+    }
+    if (btn.dataset.action === "edit") {
+      setDialogProduct([JSON.parse(btn.dataset.product!)]);
+      setAddIsModalOpen(true);
     }
   };
 
   const addProductHandler = () => {
+    setDialogProduct(null)
     setAddIsModalOpen(true);
   };
 
@@ -132,7 +137,11 @@ export default function AdminView() {
         product={dialogProduct}
         package={dialogPackage}
       />
-      <DialogAdd isOpen={isAddModalOpen} onClose={setAddIsModalOpen} />
+      <DialogAdd
+        isOpen={isAddModalOpen}
+        onClose={setAddIsModalOpen}
+        product={dialogProduct}
+      />
     </Box>
   );
 }
