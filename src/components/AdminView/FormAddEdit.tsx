@@ -21,7 +21,7 @@ type Props = {
 
 export default function FormAddEdit(props: Props) {
   const product = props.product ? props.product[0] : null;
-  console.log(product);
+  const productPriceInYears = props.product ? [1] : null;
 
   const data = useContext(ProductsContext);
   const productItems = data!.productInSelectedYear;
@@ -40,7 +40,9 @@ export default function FormAddEdit(props: Props) {
   };
 
   // Handle Year and price
-  const [yearsArr, setYearsArr] = useState<number[]>([years[0]]);
+  const [yearsArr, setYearsArr] = useState<number[]>(
+    product ? productPriceInYears! : [years[0]]
+  );
 
   const addYearHandler = () => {
     setYearsArr((prev) => [...prev, prev.at(-1)! + 1]);
@@ -171,7 +173,7 @@ export default function FormAddEdit(props: Props) {
             name="productName"
             onChange={productNameHandler}
             placeholder="Name"
-            defaultValue= {product ? product.productName : ""}
+            defaultValue={product ? product.productName : ""}
           />
 
           <FormHelperText
@@ -258,7 +260,11 @@ export default function FormAddEdit(props: Props) {
             options={productItems!.map((product) => product.productName)}
             renderInput={(params) => <TextField {...params} />}
             onChange={(event, value) => reqHandler(event, value)}
-            defaultValue={product ? product.productsRequired.map(req => req.name) : undefined}
+            defaultValue={
+              product
+                ? product.productsRequired.map((req) => req.name)
+                : undefined
+            }
           />
         </Stack>
       </Stack>
