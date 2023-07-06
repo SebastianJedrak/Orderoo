@@ -21,7 +21,6 @@ type Props = {
 
 export default function DialogAddPackage(props: Props) {
   const packet = props.package ? props.package[0] : null;
-  console.log(packet);
 
   const dataStorage: ProductsType = JSON.parse(localStorage.getItem("data")!);
   const data = useContext(ProductsContext);

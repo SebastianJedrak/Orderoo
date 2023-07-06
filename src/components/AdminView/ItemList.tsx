@@ -1,13 +1,23 @@
-import { Box, Divider, IconButton, Stack, Typography } from "@mui/material";
+import {
+  Box,
+  Button,
+  Divider,
+  IconButton,
+  Stack,
+  Typography,
+} from "@mui/material";
 import { Fragment } from "react";
 
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
+import ControlPointIcon from "@mui/icons-material/ControlPoint";
+
 import { ProductsType } from "../../types";
 
 type Props = {
   products?: ProductsType["productItems"] | null;
   packages?: ProductsType["packages"] | null;
+  onAdd: () => void;
 };
 
 export default function ItemList(props: Props) {
@@ -52,6 +62,15 @@ export default function ItemList(props: Props) {
             <Divider />
           </Fragment>
         ))}
+        <Box textAlign={"center"}>
+          <Button
+            endIcon={<ControlPointIcon />}
+            variant="contained"
+            onClick={props.onAdd}
+          >
+            {productItems ? "Add Product" : "Add Package"}
+          </Button>
+        </Box>
       </>
     );
 
@@ -99,5 +118,5 @@ export default function ItemList(props: Props) {
       </>
     );
 
-    return <div></div>
+  return <div></div>;
 }

@@ -1,7 +1,6 @@
 import { useState } from "react";
-import { Box, Button, Divider, Paper, Stack, Typography } from "@mui/material";
+import { Box,  Divider, Paper, Stack, Typography } from "@mui/material";
 
-import ControlPointIcon from "@mui/icons-material/ControlPoint";
 
 import DialogDelete from "./DialogDelete";
 import { ProductsType } from "../../types";
@@ -50,7 +49,7 @@ export default function AdminView(props: Props) {
     }
   };
 
-  const addProductHandler = () => {
+  const addHandler = () => {
     setDialogProduct(null);
     setIsProductAddModalOpen(true);
   };
@@ -81,18 +80,10 @@ export default function AdminView(props: Props) {
             </Typography>
           </Stack>
           <Divider />
-          <ItemList products={productItems} />
-          <ItemList packages={packages} />
+          <ItemList products={productItems} onAdd={addHandler}/>
+          <ItemList packages={packages} onAdd={addHandler}/>
         </Stack>
-        <Box textAlign={"center"}>
-          <Button
-            endIcon={<ControlPointIcon />}
-            variant="contained"
-            onClick={addProductHandler}
-          >
-            {productItems ? "Add Product" : "Add Package"}
-          </Button>
-        </Box>
+
       </Paper>
 
       {/* Dialogs */}
