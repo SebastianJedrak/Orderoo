@@ -95,10 +95,10 @@ export default function FormAddPackage(props: Props) {
   // Handle Free Products
   const freeProductsWhenEdit = packet?.productsFreeId.map(
     (free) =>
-      productItems?.find((product) => product.productId === free)?.productName
-  );
+      productItems?.find((product) => product.productId === free)?.productName || null
+  ) || [];
   const [freeProducts, setFreeProducts] = useState<(string | null)[] | []>(
-    packet ? packet.productsFreeId : []
+    packet ? freeProductsWhenEdit : []
   );
 
   const freeProductHandler = (
