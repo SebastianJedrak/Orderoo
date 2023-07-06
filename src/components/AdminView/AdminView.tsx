@@ -1,6 +1,5 @@
 import { useState } from "react";
-import { Box,  Divider, Paper, Stack, Typography } from "@mui/material";
-
+import { Box, Divider, Paper, Stack, Typography } from "@mui/material";
 
 import DialogDelete from "./DialogDelete";
 import { ProductsType } from "../../types";
@@ -49,9 +48,17 @@ export default function AdminView(props: Props) {
     }
   };
 
-  const addHandler = () => {
-    setDialogProduct(null);
-    setIsProductAddModalOpen(true);
+  const addHandler = (e: React.SyntheticEvent) => {
+    const btn = (e.target as HTMLElement).closest("button");
+    if (!btn) return;
+    if (btn.dataset.type === "product") {
+      setDialogProduct(null);
+      setIsProductAddModalOpen(true);
+    }
+    if (btn.dataset.type === "package") {
+      setDialogPackage(null);
+      setIsPackageAddModalOpen(true);
+    }
   };
 
   return (
@@ -80,10 +87,9 @@ export default function AdminView(props: Props) {
             </Typography>
           </Stack>
           <Divider />
-          <ItemList products={productItems} onAdd={addHandler}/>
-          <ItemList packages={packages} onAdd={addHandler}/>
+          <ItemList products={productItems} onAdd={addHandler} />
+          <ItemList packages={packages} onAdd={addHandler} />
         </Stack>
-
       </Paper>
 
       {/* Dialogs */}

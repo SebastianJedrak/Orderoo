@@ -17,7 +17,7 @@ import { ProductsType } from "../../types";
 type Props = {
   products?: ProductsType["productItems"] | null;
   packages?: ProductsType["packages"] | null;
-  onAdd: () => void;
+  onAdd: (e: React.SyntheticEvent) => void;
 };
 
 export default function ItemList(props: Props) {
@@ -67,8 +67,9 @@ export default function ItemList(props: Props) {
             endIcon={<ControlPointIcon />}
             variant="contained"
             onClick={props.onAdd}
+            data-type="product"
           >
-            {productItems ? "Add Product" : "Add Package"}
+            Add Product
           </Button>
         </Box>
       </>
@@ -115,6 +116,16 @@ export default function ItemList(props: Props) {
             <Divider />
           </Fragment>
         ))}
+        <Box textAlign={"center"}>
+          <Button
+            endIcon={<ControlPointIcon />}
+            variant="contained"
+            onClick={props.onAdd}
+            data-type="package"
+          >
+            Add Package
+          </Button>
+        </Box>
       </>
     );
 
