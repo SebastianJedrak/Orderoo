@@ -27,6 +27,23 @@ export default function FormAddPackage(props: Props) {
   const packet = props.package ? props.package[0] : null;
 
   // Handle Products Included
+  const includedProductsWhenEdit = packet?.productsIncludedId.map(
+    (free) =>
+      productItems?.find((product) => product.productId === free)?.productName || null
+  ) || [];
+
+  const [includedProducts, setIncludedProducts] = useState<(string | null)[] | []>(
+    packet ? includedProductsWhenEdit : []
+  );
+
+  const includedProductHandler = (
+    _event: React.SyntheticEvent<Element, Event>,
+    value: any
+  ) => {
+    setIncludedProducts(value)
+  };
+
+  console.log(includedProducts);
 
   // Handle Year and price
   const packageFullPrice = packet
@@ -171,6 +188,14 @@ export default function FormAddPackage(props: Props) {
         {/* Products Included */}
         <Stack spacing={1} width={"calc(100% - 40px)"}>
           <Typography variant="body1">Products Included*</Typography>
+          <Autocomplete
+            multiple
+            id="includedProducts"
+            options={productItems!.map((product) => product.productName)}
+            renderInput={(params) => <TextField {...params} />}
+            onChange={(event, value) => freeProductHandler(event, value)}
+            defaultValue={packet ? includedProductsWhenEdit : undefined}
+          />
         </Stack>
 
         {/* Prices */}
