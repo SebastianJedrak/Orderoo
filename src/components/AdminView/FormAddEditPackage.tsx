@@ -51,6 +51,7 @@ export default function FormAddPackage(props: Props) {
     _event: React.SyntheticEvent<Element, Event>,
     value: any
   ) => {
+    setIncludedProductsError(false)
     setIncludedProducts(value);
   };
 
@@ -204,6 +205,8 @@ export default function FormAddPackage(props: Props) {
     includedProductsError,
     packagePriceInYearError,
   ]);
+
+  console.log(includedProductsError, includedProducts.length );
 
   useEffect(() => {
     props.onGetData(newPackage);
