@@ -14,7 +14,7 @@ import { ProductsContext } from "../../ctx/ProductsContext";
 import { ProductsType } from "../../types";
 
 type Props = {
-  onGetData: (data: ProductsType["productItems"] | null) => void;
+  onGetData: (data: ProductsType["packages"] | null) => void;
   onError: (error: boolean) => void;
   package: ProductsType["packages"] | null;
 };
@@ -29,17 +29,17 @@ export default function FormAddPackage(props: Props) {
   // Handle Products Included
 
   // Handle Year and price
-  const productFullPrice = product
-    ? JSON.parse(localStorage.getItem("data")!).productItems.find(
-        (item: any) => item.productId === product.productId
+  const packageFullPrice = packet
+    ? JSON.parse(localStorage.getItem("data")!).packages.find(
+        (item: any) => item.packageId === packet.packageId
       )
     : null;
-  const productPriceInYears = product
-    ? productFullPrice.productPrice.map((year: any) => year.year)
+  const productPriceInYears = packet
+    ? packageFullPrice.packagePrice.map((year: any) => year.year)
     : null;
 
   const [yearsArr, setYearsArr] = useState<number[]>(
-    product ? productPriceInYears! : [years[0]]
+    packet ? productPriceInYears! : [years[0]]
   );
 
   const addYearHandler = () => {
@@ -48,35 +48,35 @@ export default function FormAddPackage(props: Props) {
 
   const removeYearHandler = () => {
     setYearsArr((prev) => prev.slice(0, -1));
-    setProductPriceInYear((prev) => prev.slice(0, -1));
+    setPackagePriceInYear((prev) => prev.slice(0, -1));
   };
 
-  const [productPriceInYear, setProductPriceInYear] = useState<
+  const [packagePriceInYears, setPackagePriceInYear] = useState<
     { name?: string; year?: string; price?: string }[]
-  >(product ? productFullPrice.productPrice : [{ name: "year-0" }]);
-  const [productYearIsTouched, setProductYearIsTouched] = useState(
-    product ? true : false
+  >(packet ? packageFullPrice.packagePrice : [{ name: "year-0" }]);
+  const [packageYearIsTouched, setPackageYearIsTouched] = useState(
+    packet ? true : false
   );
-  const [productPriceIsTouched, setProductPriceIsTouched] = useState(
-    product ? true : false
+  const [packagePriceIsTouched, setPackagePriceIsTouched] = useState(
+    packet ? true : false
   );
-  const [productPriceInYearError, setProductPriceInYearError] = useState(
-    product ? false : true
+  const [packagePriceInYearError, setPackagePriceInYearError] = useState(
+    packet ? false : true
   );
 
-  const productPriceInYearTouched = (type: string, _e: any) => {
-    if (type === "year") setProductYearIsTouched(true);
-    if (type === "price") setProductPriceIsTouched(true);
+  const packagePriceInYearTouched = (type: string, _e: any) => {
+    if (type === "year") setPackageYearIsTouched(true);
+    if (type === "price") setPackagePriceIsTouched(true);
   };
 
   const changeYearPriceHandler = (type: string, event: ChangeEvent) => {
-    setProductPriceInYearError(false);
+    setPackagePriceInYearError(false);
     const { name, value } = event.target as HTMLInputElement;
     const valueType =
       type === "year"
         ? { name: name, year: value }
         : { name: name, price: value };
-    setProductPriceInYear((prev) => {
+    setPackagePriceInYear((prev) => {
       const addedValue = {
         ...prev.find((obj) => obj.name === name),
         ...valueType,
@@ -94,10 +94,9 @@ export default function FormAddPackage(props: Props) {
 
   // Handle Free Products
 
-
   // // Create new Product object
-  // const productId = product
-  //   ? product.productId
+  // const productId = packet
+  //   ? packet.productId
   //   : String(productItems!.length + 1);
 
   // const [newProduct, setNewProduct] = useState<
@@ -109,24 +108,24 @@ export default function FormAddPackage(props: Props) {
   //     {
   //       productId: productId,
   //       productName: productName,
-  //       productPrice: productPriceInYear.map((obj) => {
+  //       productPrice: packagePriceInYears.map((obj) => {
   //         return { year: obj.year!, price: obj.price! };
   //       }),
   //       productsRequired: reqProducts,
   //     },
   //   ]);
-  // }, [productId, productName, productPriceInYear, reqProducts]);
+  // }, [productId, productName, packagePriceInYears, reqProducts]);
 
   // //Validation
   // const [newProductError, setNewProductError] = useState(
-  //   product ? false : true
+  //   packet ? false : true
   // );
 
   // useEffect(() => {
   //   setNewProductError(false);
   //   if (productName === "") setProductNameError(true);
   //   if (
-  //     productPriceInYear.find(
+  //     packagePriceInYears.find(
   //       (obj) =>
   //         !obj.year ||
   //         !obj.price ||
@@ -142,7 +141,7 @@ export default function FormAddPackage(props: Props) {
   //   else setNewProductError(false);
   // }, [
   //   productName,
-  //   productPriceInYear,
+  //   packagePriceInYears,
   //   productNameError,
   //   productPriceInYearError,
   // ]);
@@ -157,7 +156,7 @@ export default function FormAddPackage(props: Props) {
       <Stack spacing={1}>
         {/* Products Included */}
         <Stack spacing={1} width={"calc(100% - 40px)"}>
-        <Typography variant="body1">Products Included*</Typography>
+          <Typography variant="body1">Products Included*</Typography>
         </Stack>
 
         {/* Prices */}
@@ -172,9 +171,9 @@ export default function FormAddPackage(props: Props) {
                   placeholder=""
                   name={`year-${i}`}
                   onChange={(e) => changeYearPriceHandler("year", e)}
-                  onClick={(e) => productPriceInYearTouched("year", e)}
+                  onClick={(e) => packagePriceInYearTouched("year", e)}
                   defaultValue={
-                    product ? productFullPrice.productPrice[i].year : ""
+                    packet ? packageFullPrice.packagePrice[i].year : ""
                   }
                 />
                 <TextField
@@ -183,9 +182,9 @@ export default function FormAddPackage(props: Props) {
                   InputProps={{ endAdornment: "PLN" }}
                   name={`year-${i}`}
                   onChange={(e) => changeYearPriceHandler("price", e)}
-                  onClick={(e) => productPriceInYearTouched("price", e)}
+                  onClick={(e) => packagePriceInYearTouched("price", e)}
                   defaultValue={
-                    product ? productFullPrice.productPrice[i].price : ""
+                    packet ? packageFullPrice.packagePrice[i].price : ""
                   }
                 />
                 {i === arr.length - 1 && i > 0 ? (
@@ -206,9 +205,9 @@ export default function FormAddPackage(props: Props) {
               error
               sx={{
                 visibility: `${
-                  productPriceIsTouched &&
-                  productYearIsTouched &&
-                  productPriceInYearError
+                  packagePriceIsTouched &&
+                  packageYearIsTouched &&
+                  packagePriceInYearError
                     ? "visible"
                     : "hidden"
                 }`,

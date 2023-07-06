@@ -85,11 +85,11 @@ export default function DialogAddPackage(props: Props) {
             mb: 2,
           }}
         ></DialogContentText>
-        {/* <FormAddEdit
+        <FormAddEdit
           onGetData={getDataHandler}
           onError={errorHandler}
-          product={props.product}
-        /> */}
+          product={props.package}
+        />
       </DialogContent>
       <Stack direction={"row"} justifyContent={"center"}>
         <DialogActions>
