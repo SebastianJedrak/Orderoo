@@ -9,7 +9,7 @@ import {
 } from "@mui/material";
 import ControlPointIcon from "@mui/icons-material/ControlPoint";
 import RemoveCircleOutlineIcon from "@mui/icons-material/RemoveCircleOutline";
-import { useContext, useState, ChangeEvent } from "react";
+import { useContext, useState, ChangeEvent, useEffect } from "react";
 import { ProductsContext } from "../../ctx/ProductsContext";
 import { ProductsType } from "../../types";
 
@@ -125,27 +125,34 @@ export default function FormAddPackage(props: Props) {
     setFreeProducts(value)
   };
 
-  // // Create new Product object
-  // const productId = packet
-  //   ? packet.productId
-  //   : String(productItems!.length + 1);
+  // Create new Package object
+  const packageId = packet
+    ? packet.packageId
+    : String(productItems!.length + 1);
 
-  // const [newProduct, setNewProduct] = useState<
-  //   ProductsType["productItems"] | null
-  // >(null);
+  const [newPackage, setNewPackage] = useState<
+    ProductsType["packages"] | null
+  >(null);
 
-  // useEffect(() => {
-  //   setNewProduct([
-  //     {
-  //       productId: productId,
-  //       productName: productName,
-  //       productPrice: packagePriceInYears.map((obj) => {
-  //         return { year: obj.year!, price: obj.price! };
-  //       }),
-  //       productsRequired: reqProducts,
-  //     },
-  //   ]);
-  // }, [productId, productName, packagePriceInYears, reqProducts]);
+  const namesToIdProducts = (arr: string[]) => {
+
+  }
+
+  useEffect(() => {
+    setNewPackage([
+      {
+        packageId: packageId,
+        packageName: includedProducts.join(" + "),
+        packagePrice: packagePriceInYears.map((obj) => {
+          return { year: obj.year!, price: obj.price! };
+        }),
+        productsIncludedId: [""],
+        productsFreeId: [""]
+      },
+    ]);
+  }, [packageId, includedProducts, packagePriceInYears]);
+
+  console.log(newPackage);
 
   // //Validation
   // const [newProductError, setNewProductError] = useState(
