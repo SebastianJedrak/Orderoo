@@ -176,8 +176,6 @@ export default function FormAddPackage(props: Props) {
     namesToIdProducts,
   ]);
 
-  console.log(newPackage);
-
   //Validation
   const [newPackageError, setNewPackageError] = useState(packet ? false : true);
 
@@ -207,10 +205,10 @@ export default function FormAddPackage(props: Props) {
     packagePriceInYearError,
   ]);
 
-  // useEffect(() => {
-  //   props.onGetData(newProduct);
-  //   props.onError(newProductError);
-  // }, [newProduct, newProductError, props]);
+  useEffect(() => {
+    props.onGetData(newPackage);
+    props.onError(newPackageError);
+  }, [newPackage, newPackageError, props]);
 
   return (
     <form method="POST">
