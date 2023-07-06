@@ -16,33 +16,17 @@ import { ProductsType } from "../../types";
 type Props = {
   onGetData: (data: ProductsType["productItems"] | null) => void;
   onError: (error: boolean) => void;
-  product: ProductsType["productItems"] | null;
+  package: ProductsType["packages"] | null;
 };
 
 export default function FormAddPackage(props: Props) {
   const data = useContext(ProductsContext);
-  const productItems = data!.productInSelectedYear;
+  // const productItems = data!.productInSelectedYear;
   const years = data!.years;
 
-  const product = props.product ? props.product[0] : null;
+  const packet = props.package ? props.package[0] : null;
 
-  // Handle Name
-  const [productName, setProductName] = useState(
-    product ? product.productName : ""
-  );
-  const [productNameError, setProductNameError] = useState(
-    product ? false : true
-  );
-  const [productNameTouched, setProductNameTouched] = useState(
-    product ? true : false
-  );
-
-  const productNameHandler = (e: ChangeEvent) => {
-    setProductNameTouched(true);
-    setProductNameError(false);
-    const target = e.target as HTMLInputElement;
-    setProductName(target.value);
-  };
+  // Handle Products Included
 
   // Handle Year and price
   const productFullPrice = product
@@ -108,108 +92,72 @@ export default function FormAddPackage(props: Props) {
     });
   };
 
-  // Handle req Products
+  // Handle Free Products
 
-  const [reqProducts, setReqProducts] = useState<
-    { id: string; name: string }[] | []
-  >(product ? product.productsRequired : []);
 
-  const reqHandler = (
-    _event: React.SyntheticEvent<Element, Event>,
-    value: any
-  ) => {
-    setReqProducts(
-      value.map((item: string) => {
-        return {
-          id: productItems!.find((products) => products.productName === item)!
-            .productId,
-          name: item,
-        };
-      })
-    );
-  };
+  // // Create new Product object
+  // const productId = product
+  //   ? product.productId
+  //   : String(productItems!.length + 1);
 
-  // Create new Product object
-  const productId = product
-    ? product.productId
-    : String(productItems!.length + 1);
+  // const [newProduct, setNewProduct] = useState<
+  //   ProductsType["productItems"] | null
+  // >(null);
 
-  const [newProduct, setNewProduct] = useState<
-    ProductsType["productItems"] | null
-  >(null);
+  // useEffect(() => {
+  //   setNewProduct([
+  //     {
+  //       productId: productId,
+  //       productName: productName,
+  //       productPrice: productPriceInYear.map((obj) => {
+  //         return { year: obj.year!, price: obj.price! };
+  //       }),
+  //       productsRequired: reqProducts,
+  //     },
+  //   ]);
+  // }, [productId, productName, productPriceInYear, reqProducts]);
 
-  useEffect(() => {
-    setNewProduct([
-      {
-        productId: productId,
-        productName: productName,
-        productPrice: productPriceInYear.map((obj) => {
-          return { year: obj.year!, price: obj.price! };
-        }),
-        productsRequired: reqProducts,
-      },
-    ]);
-  }, [productId, productName, productPriceInYear, reqProducts]);
+  // //Validation
+  // const [newProductError, setNewProductError] = useState(
+  //   product ? false : true
+  // );
 
-  //Validation
-  const [newProductError, setNewProductError] = useState(
-    product ? false : true
-  );
+  // useEffect(() => {
+  //   setNewProductError(false);
+  //   if (productName === "") setProductNameError(true);
+  //   if (
+  //     productPriceInYear.find(
+  //       (obj) =>
+  //         !obj.year ||
+  //         !obj.price ||
+  //         obj.price === "" ||
+  //         obj.year === "" ||
+  //         Number(obj.price) <= 0 ||
+  //         Number(obj.year) < 2023 ||
+  //         Number(obj.year) > 2033
+  //     )
+  //   )
+  //     setProductPriceInYearError(true);
+  //   if (productNameError || productPriceInYearError) setNewProductError(true);
+  //   else setNewProductError(false);
+  // }, [
+  //   productName,
+  //   productPriceInYear,
+  //   productNameError,
+  //   productPriceInYearError,
+  // ]);
 
-  useEffect(() => {
-    setNewProductError(false);
-    if (productName === "") setProductNameError(true);
-    if (
-      productPriceInYear.find(
-        (obj) =>
-          !obj.year ||
-          !obj.price ||
-          obj.price === "" ||
-          obj.year === "" ||
-          Number(obj.price) <= 0 ||
-          Number(obj.year) < 2023 ||
-          Number(obj.year) > 2033
-      )
-    )
-      setProductPriceInYearError(true);
-    if (productNameError || productPriceInYearError) setNewProductError(true);
-    else setNewProductError(false);
-  }, [
-    productName,
-    productPriceInYear,
-    productNameError,
-    productPriceInYearError,
-  ]);
-
-  useEffect(() => {
-    props.onGetData(newProduct);
-    props.onError(newProductError);
-  }, [newProduct, newProductError, props]);
+  // useEffect(() => {
+  //   props.onGetData(newProduct);
+  //   props.onError(newProductError);
+  // }, [newProduct, newProductError, props]);
 
   return (
     <form method="POST">
       <Stack spacing={1}>
-        {/* NAME */}
+        {/* Products Included */}
         <Stack spacing={1} width={"calc(100% - 40px)"}>
-          <Typography variant="body1">Product Name*</Typography>
-          <TextField
-            type="text"
-            name="productName"
-            onChange={productNameHandler}
-            placeholder="Name"
-            defaultValue={product ? product.productName : ""}
-          />
-
-          <FormHelperText
-            error
-            sx={{
-              visibility: `${
-                productNameTouched && productNameError ? "visible" : "hidden"
-              }`,
-            }}
-          >
-            Enter a valid product name
-          </FormHelperText>
+        <Typography variant="body1">Products Included*</Typography>
         </Stack>
 
         {/* Prices */}
@@ -279,23 +227,11 @@ export default function FormAddPackage(props: Props) {
           </Stack>
         </Stack>
 
-        {/* REQ */}
+        {/* Free Products */}
         <Stack spacing={1} width={"calc(100% - 40px)"}>
           <Typography variant="body1" gutterBottom>
-            Required Products
+            Free Products
           </Typography>
-          <Autocomplete
-            multiple
-            id="reqProducts"
-            options={productItems!.map((product) => product.productName)}
-            renderInput={(params) => <TextField {...params} />}
-            onChange={(event, value) => reqHandler(event, value)}
-            defaultValue={
-              product
-                ? product.productsRequired.map((req) => req.name)
-                : undefined
-            }
-          />
         </Stack>
       </Stack>
     </form>
