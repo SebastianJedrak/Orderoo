@@ -9,7 +9,7 @@ import {
   Stack,
 } from "@mui/material";
 import { SetStateAction, useContext, useState } from "react";
-import FormAddEdit from "./FormAddEdit";
+import FormAddEdit from "./FormAddEditProduct";
 import { ProductsType } from "../../types";
 import { ProductsContext } from "../../ctx/ProductsContext";
 
@@ -19,7 +19,7 @@ type Props = {
   product: ProductsType["productItems"] | null;
 };
 
-export default function DialogAddEdit(props: Props) {
+export default function DialogAddPackage(props: Props) {
   const product = props.product ? props.product[0] : null;
 
   const dataStorage: ProductsType = JSON.parse(localStorage.getItem("data")!);

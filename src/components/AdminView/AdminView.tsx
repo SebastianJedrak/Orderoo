@@ -12,7 +12,7 @@ import ControlPointIcon from "@mui/icons-material/ControlPoint";
 
 import DialogDelete from "./DialogDelete";
 import { ProductsType } from "../../types";
-import DialogAdd from "./DialogAddEdit";
+import DialogAddEditProduct from "./DialogAddEditProduct";
 import ItemList from "./ItemList";
 
 type Props = {
@@ -102,7 +102,7 @@ export default function AdminView(props: Props) {
         product={dialogProduct}
         package={dialogPackage}
       />
-      <DialogAdd
+      <DialogAddEditProduct
         isOpen={isAddModalOpen}
         onClose={setAddIsModalOpen}
         product={dialogProduct}
