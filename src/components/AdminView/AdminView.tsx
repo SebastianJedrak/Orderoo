@@ -25,7 +25,8 @@ export default function AdminView(props: Props) {
   const packages = props.packages;
 
   const [isDeleteModalOpen, setDeleteIsModalOpen] = useState(false);
-  const [isAddModalOpen, setAddIsModalOpen] = useState(false);
+  const [isProductAddModalOpen, setIsProductAddModalOpen] = useState(false);
+  const [isPackageAddModalOpen, setIsPackageAddModalOpen] = useState(false);
   const [dialogProduct, setDialogProduct] = useState<
     ProductsType["productItems"] | null
   >(null);
@@ -45,13 +46,13 @@ export default function AdminView(props: Props) {
     }
     if (btn.dataset.action === "edit") {
       setDialogProduct([JSON.parse(btn.dataset.product!)]);
-      setAddIsModalOpen(true);
+      setIsProductAddModalOpen(true);
     }
   };
 
   const addProductHandler = () => {
     setDialogProduct(null);
-    setAddIsModalOpen(true);
+    setIsProductAddModalOpen(true);
   };
 
   return (
@@ -103,8 +104,8 @@ export default function AdminView(props: Props) {
         package={dialogPackage}
       />
       <DialogAddEditProduct
-        isOpen={isAddModalOpen}
-        onClose={setAddIsModalOpen}
+        isOpen={isProductAddModalOpen}
+        onClose={setIsProductAddModalOpen}
         product={dialogProduct}
       />
     </Box>
