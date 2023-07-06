@@ -9,7 +9,7 @@ import {
   Stack,
 } from "@mui/material";
 import { SetStateAction, useContext, useState } from "react";
-import FormAddEdit from "./FormAddEditProduct";
+import FormAddEditPackage from "./FormAddEditPackage";
 import { ProductsType } from "../../types";
 import { ProductsContext } from "../../ctx/ProductsContext";
 
@@ -85,10 +85,10 @@ export default function DialogAddPackage(props: Props) {
             mb: 2,
           }}
         ></DialogContentText>
-        <FormAddEdit
+        <FormAddEditPackage
           onGetData={getDataHandler}
           onError={errorHandler}
-          product={props.package}
+          package={props.package}
         />
       </DialogContent>
       <Stack direction={"row"} justifyContent={"center"}>
