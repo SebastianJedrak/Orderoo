@@ -93,6 +93,10 @@ export default function FormAddPackage(props: Props) {
   };
 
   // Handle Free Products
+  const freeProductsWhenEdit = packet?.productsFreeId.map(
+    (free) =>
+      productItems?.find((product) => product.productId === free)?.productName
+  );
   const [freeProducts, setFreeProducts] = useState<(string | null)[] | []>(
     packet ? packet.productsFreeId : []
   );
@@ -101,17 +105,9 @@ export default function FormAddPackage(props: Props) {
     _event: React.SyntheticEvent<Element, Event>,
     value: any
   ) => {
-    // setFreeProducts(
-    //   value.map((item: string) => {
-    //     return {
-    //       id: productItems!.find((products) => products.productName === item)!
-    //         .productId,
-    //       name: item,
-    //     };
-    //   })
-    // );
+    setFreeProducts(value)
   };
-
+console.log(freeProducts);
   // // Create new Product object
   // const productId = packet
   //   ? packet.productId
@@ -255,16 +251,7 @@ export default function FormAddPackage(props: Props) {
             options={productItems!.map((product) => product.productName)}
             renderInput={(params) => <TextField {...params} />}
             onChange={(event, value) => freeProductHandler(event, value)}
-            defaultValue={
-              packet
-                ? packet?.productsIncludedId.map(
-                    (free) =>
-                      productItems?.find(
-                        (product) => product.productId === free
-                      )?.productName
-                  )
-                : undefined
-            }
+            defaultValue={packet ? freeProductsWhenEdit : undefined}
           />
         </Stack>
       </Stack>
