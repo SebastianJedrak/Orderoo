@@ -21,7 +21,7 @@ type Props = {
 
 export default function FormAddPackage(props: Props) {
   const data = useContext(ProductsContext);
-  // const productItems = data!.productInSelectedYear;
+  const productItems = data!.productInSelectedYear;
   const years = data!.years;
 
   const packet = props.package ? props.package[0] : null;
@@ -93,6 +93,24 @@ export default function FormAddPackage(props: Props) {
   };
 
   // Handle Free Products
+  const [freeProducts, setFreeProducts] = useState<(string | null)[] | []>(
+    packet ? packet.productsFreeId : []
+  );
+
+  const freeProductHandler = (
+    _event: React.SyntheticEvent<Element, Event>,
+    value: any
+  ) => {
+    // setFreeProducts(
+    //   value.map((item: string) => {
+    //     return {
+    //       id: productItems!.find((products) => products.productName === item)!
+    //         .productId,
+    //       name: item,
+    //     };
+    //   })
+    // );
+  };
 
   // // Create new Product object
   // const productId = packet
@@ -231,6 +249,23 @@ export default function FormAddPackage(props: Props) {
           <Typography variant="body1" gutterBottom>
             Free Products
           </Typography>
+          <Autocomplete
+            multiple
+            id="freeProducts"
+            options={productItems!.map((product) => product.productName)}
+            renderInput={(params) => <TextField {...params} />}
+            onChange={(event, value) => freeProductHandler(event, value)}
+            defaultValue={
+              packet
+                ? packet?.productsIncludedId.map(
+                    (free) =>
+                      productItems?.find(
+                        (product) => product.productId === free
+                      )?.productName
+                  )
+                : undefined
+            }
+          />
         </Stack>
       </Stack>
     </form>
