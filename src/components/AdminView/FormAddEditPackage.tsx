@@ -28,6 +28,7 @@ type Props = {
 export default function FormAddPackage(props: Props) {
   const data = useContext(ProductsContext);
   const productItems = data!.productInSelectedYear;
+  const packageItems = data!.packageInSelectedYear;
   const years = data!.years;
 
   const packet = props.package ? props.package[0] : null;
@@ -140,7 +141,7 @@ export default function FormAddPackage(props: Props) {
   // Create new Package object
   const packageId = packet
     ? packet.packageId
-    : String(productItems!.length + 1);
+    : String(packageItems!.length + 1);
 
   const [newPackage, setNewPackage] = useState<ProductsType["packages"] | null>(
     null
@@ -205,8 +206,6 @@ export default function FormAddPackage(props: Props) {
     includedProductsError,
     packagePriceInYearError,
   ]);
-
-  console.log(includedProductsError, includedProducts.length );
 
   useEffect(() => {
     props.onGetData(newPackage);
