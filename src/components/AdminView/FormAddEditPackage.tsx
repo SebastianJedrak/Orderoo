@@ -9,7 +9,7 @@ import {
 } from "@mui/material";
 import ControlPointIcon from "@mui/icons-material/ControlPoint";
 import RemoveCircleOutlineIcon from "@mui/icons-material/RemoveCircleOutline";
-import { useContext, useState, ChangeEvent, useEffect } from "react";
+import { useContext, useState, ChangeEvent, useEffect, useCallback } from "react";
 import { ProductsContext } from "../../ctx/ProductsContext";
 import { ProductsType } from "../../types";
 
@@ -27,23 +27,23 @@ export default function FormAddPackage(props: Props) {
   const packet = props.package ? props.package[0] : null;
 
   // Handle Products Included
-  const includedProductsWhenEdit = packet?.productsIncludedId.map(
-    (free) =>
-      productItems?.find((product) => product.productId === free)?.productName || null
-  ) || [];
+  const includedProductsWhenEdit =
+    packet?.productsIncludedId.map(
+      (free) =>
+        productItems?.find((product) => product.productId === free)
+          ?.productName || null
+    ) || [];
 
-  const [includedProducts, setIncludedProducts] = useState<(string | null)[] | []>(
-    packet ? includedProductsWhenEdit : []
-  );
+  const [includedProducts, setIncludedProducts] = useState<
+    (string | null)[] | []
+  >(packet ? includedProductsWhenEdit : []);
 
   const includedProductHandler = (
     _event: React.SyntheticEvent<Element, Event>,
     value: any
   ) => {
-    setIncludedProducts(value)
+    setIncludedProducts(value);
   };
-
-  console.log(includedProducts);
 
   // Handle Year and price
   const packageFullPrice = packet
@@ -110,10 +110,12 @@ export default function FormAddPackage(props: Props) {
   };
 
   // Handle Free Products
-  const freeProductsWhenEdit = packet?.productsFreeId.map(
-    (free) =>
-      productItems?.find((product) => product.productId === free)?.productName || null
-  ) || [];
+  const freeProductsWhenEdit =
+    packet?.productsFreeId.map(
+      (free) =>
+        productItems?.find((product) => product.productId === free)
+          ?.productName || null
+    ) || [];
   const [freeProducts, setFreeProducts] = useState<(string | null)[] | []>(
     packet ? freeProductsWhenEdit : []
   );
@@ -122,7 +124,7 @@ export default function FormAddPackage(props: Props) {
     _event: React.SyntheticEvent<Element, Event>,
     value: any
   ) => {
-    setFreeProducts(value)
+    setFreeProducts(value);
   };
 
   // Create new Package object
@@ -130,13 +132,20 @@ export default function FormAddPackage(props: Props) {
     ? packet.packageId
     : String(productItems!.length + 1);
 
-  const [newPackage, setNewPackage] = useState<
-    ProductsType["packages"] | null
-  >(null);
+  const [newPackage, setNewPackage] = useState<ProductsType["packages"] | null>(
+    null
+  );
 
-  const namesToIdProducts = (arr: string[]) => {
+  const namesToIdProducts =  useCallback(
+  (arr: (string | null)[] | []) => {
+    return arr.map(
+      (product) =>
+        productItems!.find((items) => items.productName === product)!.productId
+    );
+  },
+   [productItems],
+ )
 
-  }
 
   useEffect(() => {
     setNewPackage([
@@ -146,11 +155,17 @@ export default function FormAddPackage(props: Props) {
         packagePrice: packagePriceInYears.map((obj) => {
           return { year: obj.year!, price: obj.price! };
         }),
-        productsIncludedId: [""],
-        productsFreeId: [""]
+        productsIncludedId: namesToIdProducts(includedProducts),
+        productsFreeId:  namesToIdProducts(freeProducts),
       },
     ]);
-  }, [packageId, includedProducts, packagePriceInYears]);
+  }, [
+    packageId,
+    includedProducts,
+    packagePriceInYears,
+    freeProducts,
+    namesToIdProducts,
+  ]);
 
   console.log(newPackage);
 
@@ -200,7 +215,7 @@ export default function FormAddPackage(props: Props) {
             id="includedProducts"
             options={productItems!.map((product) => product.productName)}
             renderInput={(params) => <TextField {...params} />}
-            onChange={(event, value) => freeProductHandler(event, value)}
+            onChange={(event, value) => includedProductHandler(event, value)}
             defaultValue={packet ? includedProductsWhenEdit : undefined}
           />
         </Stack>
