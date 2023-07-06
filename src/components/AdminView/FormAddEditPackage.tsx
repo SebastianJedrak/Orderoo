@@ -9,7 +9,7 @@ import {
 } from "@mui/material";
 import ControlPointIcon from "@mui/icons-material/ControlPoint";
 import RemoveCircleOutlineIcon from "@mui/icons-material/RemoveCircleOutline";
-import { useContext, useState, ChangeEvent, useEffect } from "react";
+import { useContext, useState, ChangeEvent } from "react";
 import { ProductsContext } from "../../ctx/ProductsContext";
 import { ProductsType } from "../../types";
 
@@ -107,7 +107,7 @@ export default function FormAddPackage(props: Props) {
   ) => {
     setFreeProducts(value)
   };
-console.log(freeProducts);
+
   // // Create new Product object
   // const productId = packet
   //   ? packet.productId
