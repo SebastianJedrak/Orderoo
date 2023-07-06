@@ -9,7 +9,13 @@ import {
 } from "@mui/material";
 import ControlPointIcon from "@mui/icons-material/ControlPoint";
 import RemoveCircleOutlineIcon from "@mui/icons-material/RemoveCircleOutline";
-import { useContext, useState, ChangeEvent, useEffect, useCallback } from "react";
+import {
+  useContext,
+  useState,
+  ChangeEvent,
+  useEffect,
+  useCallback,
+} from "react";
 import { ProductsContext } from "../../ctx/ProductsContext";
 import { ProductsType } from "../../types";
 
@@ -37,6 +43,9 @@ export default function FormAddPackage(props: Props) {
   const [includedProducts, setIncludedProducts] = useState<
     (string | null)[] | []
   >(packet ? includedProductsWhenEdit : []);
+  const [includedProductsError, setIncludedProductsError] = useState(
+    packet ? false : true
+  );
 
   const includedProductHandler = (
     _event: React.SyntheticEvent<Element, Event>,
@@ -136,16 +145,16 @@ export default function FormAddPackage(props: Props) {
     null
   );
 
-  const namesToIdProducts =  useCallback(
-  (arr: (string | null)[] | []) => {
-    return arr.map(
-      (product) =>
-        productItems!.find((items) => items.productName === product)!.productId
-    );
-  },
-   [productItems],
- )
-
+  const namesToIdProducts = useCallback(
+    (arr: (string | null)[] | []) => {
+      return arr.map(
+        (product) =>
+          productItems!.find((items) => items.productName === product)!
+            .productId
+      );
+    },
+    [productItems]
+  );
 
   useEffect(() => {
     setNewPackage([
@@ -156,7 +165,7 @@ export default function FormAddPackage(props: Props) {
           return { year: obj.year!, price: obj.price! };
         }),
         productsIncludedId: namesToIdProducts(includedProducts),
-        productsFreeId:  namesToIdProducts(freeProducts),
+        productsFreeId: namesToIdProducts(freeProducts),
       },
     ]);
   }, [
@@ -169,35 +178,34 @@ export default function FormAddPackage(props: Props) {
 
   console.log(newPackage);
 
-  // //Validation
-  // const [newProductError, setNewProductError] = useState(
-  //   packet ? false : true
-  // );
+  //Validation
+  const [newPackageError, setNewPackageError] = useState(packet ? false : true);
 
-  // useEffect(() => {
-  //   setNewProductError(false);
-  //   if (productName === "") setProductNameError(true);
-  //   if (
-  //     packagePriceInYears.find(
-  //       (obj) =>
-  //         !obj.year ||
-  //         !obj.price ||
-  //         obj.price === "" ||
-  //         obj.year === "" ||
-  //         Number(obj.price) <= 0 ||
-  //         Number(obj.year) < 2023 ||
-  //         Number(obj.year) > 2033
-  //     )
-  //   )
-  //     setProductPriceInYearError(true);
-  //   if (productNameError || productPriceInYearError) setNewProductError(true);
-  //   else setNewProductError(false);
-  // }, [
-  //   productName,
-  //   packagePriceInYears,
-  //   productNameError,
-  //   productPriceInYearError,
-  // ]);
+  useEffect(() => {
+    setNewPackageError(false);
+    if (includedProducts.length < 2) setIncludedProductsError(true);
+    if (
+      packagePriceInYears.find(
+        (obj) =>
+          !obj.year ||
+          !obj.price ||
+          obj.price === "" ||
+          obj.year === "" ||
+          Number(obj.price) <= 0 ||
+          Number(obj.year) < 2023 ||
+          Number(obj.year) > 2033
+      )
+    )
+      setPackagePriceInYearError(true);
+    if (includedProductsError || packagePriceInYearError)
+      setNewPackageError(true);
+    else setNewPackageError(false);
+  }, [
+    includedProducts,
+    packagePriceInYears,
+    includedProductsError,
+    packagePriceInYearError,
+  ]);
 
   // useEffect(() => {
   //   props.onGetData(newProduct);
