@@ -314,7 +314,7 @@ export default function FormAddPackage(props: Props) {
               }`,
             }}
           >
-            You need to select year first
+            You need to select years first, product must be available in all years
           </FormHelperText>
         </Stack>
 
