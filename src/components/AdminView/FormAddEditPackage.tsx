@@ -307,6 +307,15 @@ export default function FormAddPackage(props: Props) {
             onChange={(event, value) => includedProductHandler(event, value)}
             defaultValue={packet ? includedProductsWhenEdit : undefined}
           />
+          <FormHelperText
+            sx={{
+              visibility: `${
+                productsIncludedOptions.length === 0 ? "visible" : "hidden" 
+              }`,
+            }}
+          >
+            You need to select year first
+          </FormHelperText>
         </Stack>
 
         {/* Free Products */}
