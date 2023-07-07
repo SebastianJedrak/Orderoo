@@ -67,9 +67,15 @@ export default function FormAddEdit(props: Props) {
     setProductPriceInYear((prev) => prev.slice(0, -1));
   };
 
+  const productPriceInYearNameWhenEdit = product
+    ? productFullPrice.productPrice.map((product: any, i: number) => {
+        return { name: `year-${i }`, ...product };
+      })
+    : null;
+
   const [productPriceInYear, setProductPriceInYear] = useState<
     { name?: string; year?: string; price?: string }[]
-  >(product ? productFullPrice.productPrice : [{ name: "year-0" }]);
+  >(productPriceInYearNameWhenEdit || [{ name: "year-0" }]);
   const [productYearIsTouched, setProductYearIsTouched] = useState(
     product ? true : false
   );
