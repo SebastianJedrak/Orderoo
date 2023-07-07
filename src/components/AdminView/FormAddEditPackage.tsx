@@ -98,14 +98,18 @@ export default function FormAddPackage(props: Props) {
   };
 
   // Handle Products Included
-  const [productsIndludedOptions, setProductsIndludedOptions] = useState<
+  const [productsIncludedOptions, setProductsIncludedOptions] = useState<
     string[] | []
   >([]);
-  useEffect(() => {
-    const storageProducts = JSON.parse(localStorage.getItem("data")!).productItems
-    const optionsArr = packagePriceInYears.map();
 
-    setProductsIndludedOptions(optionsArr);
+  useEffect(() => {
+    const storageProducts: ProductsType["productItems"] = JSON.parse(
+      localStorage.getItem("data")!
+    ).productItems;
+
+    const optionsArr = storageProducts.filter(item => item.productPrice.map(year => year.year).some(year => packagePriceInYears.map(packet => packet.year!).includes(year)));
+
+    setProductsIncludedOptions(optionsArr.map(item => item.productName));
   }, [packagePriceInYears]);
 
   const includedProductsWhenEdit =
@@ -295,16 +299,14 @@ export default function FormAddPackage(props: Props) {
         {/* Products Included */}
         <Stack spacing={1} width={"calc(100% - 40px)"}>
           <Typography variant="body1">Products Included*</Typography>
-          {/* <Autocomplete
+          <Autocomplete
             multiple
             id="includedProducts"
-            options={productsIndludedOptions!.map(
-              (product) => product.productName
-            )}
+            options={productsIncludedOptions}
             renderInput={(params) => <TextField {...params} />}
             onChange={(event, value) => includedProductHandler(event, value)}
             defaultValue={packet ? includedProductsWhenEdit : undefined}
-          /> */}
+          />
         </Stack>
 
         {/* Free Products */}
