@@ -112,10 +112,16 @@ export default function FormAddPackage(props: Props) {
     const storageProducts: ProductsType["productItems"] = JSON.parse(
       localStorage.getItem("data")!
     ).productItems;
-    
-    const optionsArr = storageProducts.filter(item => packagePriceInYears.map(packet => packet.year!).every(year => item.productPrice.map(year => year.year).includes(year)));
 
-    setProductsIncludedOptions(optionsArr.map(item => item.productName));
+    const optionsArr = storageProducts.filter((item) =>
+      packagePriceInYears
+        .map((packet) => packet.year!)
+        .every((year) =>
+          item.productPrice.map((year) => year.year).includes(year)
+        )
+    );
+
+    setProductsIncludedOptions(optionsArr.map((item) => item.productName));
   }, [packagePriceInYears]);
 
   const includedProductsWhenEdit =
@@ -131,11 +137,15 @@ export default function FormAddPackage(props: Props) {
   const [includedProductsError, setIncludedProductsError] = useState(
     packet ? false : true
   );
+  const [includedProductsTouched, setIncludedProductsTouched] = useState(
+    packet ? true : false
+  );
 
   const includedProductHandler = (
     _event: React.SyntheticEvent<Element, Event>,
     value: any
   ) => {
+    setIncludedProductsTouched(true);
     setIncludedProductsError(false);
     setIncludedProducts(value);
   };
@@ -314,14 +324,23 @@ export default function FormAddPackage(props: Props) {
             defaultValue={packet ? includedProductsWhenEdit : undefined}
           />
           <FormHelperText
+            error
             sx={{
               visibility: `${
-                productsIncludedOptions.length === 0 ? "visible" : "hidden" 
+                includedProductsTouched && includedProductsError
+                  ? "visible"
+                  : "hidden"
               }`,
             }}
           >
-            You need to select years first, product must be available in all years
+            You need to choose minimum two products
           </FormHelperText>
+          {productsIncludedOptions.length === 0 && (
+            <FormHelperText>
+              You need to select years first, product must be available in all
+              years
+            </FormHelperText>
+          )}
         </Stack>
 
         {/* Free Products */}
