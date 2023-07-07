@@ -33,29 +33,6 @@ export default function FormAddPackage(props: Props) {
 
   const packet = props.package ? props.package[0] : null;
 
-  // Handle Products Included
-  const includedProductsWhenEdit =
-    packet?.productsIncludedId.map(
-      (free) =>
-        productItems?.find((product) => product.productId === free)
-          ?.productName || null
-    ) || [];
-
-  const [includedProducts, setIncludedProducts] = useState<
-    (string | null)[] | []
-  >(packet ? includedProductsWhenEdit : []);
-  const [includedProductsError, setIncludedProductsError] = useState(
-    packet ? false : true
-  );
-
-  const includedProductHandler = (
-    _event: React.SyntheticEvent<Element, Event>,
-    value: any
-  ) => {
-    setIncludedProductsError(false);
-    setIncludedProducts(value);
-  };
-
   // Handle Year and price
   const packageFullPrice = packet
     ? JSON.parse(localStorage.getItem("data")!).packages.find(
@@ -118,6 +95,39 @@ export default function FormAddPackage(props: Props) {
         addedValue,
       ];
     });
+  };
+
+  // Handle Products Included
+  const [productsIndludedOptions, setProductsIndludedOptions] = useState<
+    string[] | []
+  >([]);
+  useEffect(() => {
+    const storageProducts = JSON.parse(localStorage.getItem("data")!).productItems
+    const optionsArr = packagePriceInYears.map();
+
+    setProductsIndludedOptions(optionsArr);
+  }, [packagePriceInYears]);
+
+  const includedProductsWhenEdit =
+    packet?.productsIncludedId.map(
+      (free) =>
+        productItems?.find((product) => product.productId === free)
+          ?.productName || null
+    ) || [];
+
+  const [includedProducts, setIncludedProducts] = useState<
+    (string | null)[] | []
+  >(packet ? includedProductsWhenEdit : []);
+  const [includedProductsError, setIncludedProductsError] = useState(
+    packet ? false : true
+  );
+
+  const includedProductHandler = (
+    _event: React.SyntheticEvent<Element, Event>,
+    value: any
+  ) => {
+    setIncludedProductsError(false);
+    setIncludedProducts(value);
   };
 
   // Handle Free Products
@@ -285,14 +295,16 @@ export default function FormAddPackage(props: Props) {
         {/* Products Included */}
         <Stack spacing={1} width={"calc(100% - 40px)"}>
           <Typography variant="body1">Products Included*</Typography>
-          <Autocomplete
+          {/* <Autocomplete
             multiple
             id="includedProducts"
-            options={productItems!.map((product) => product.productName)}
+            options={productsIndludedOptions!.map(
+              (product) => product.productName
+            )}
             renderInput={(params) => <TextField {...params} />}
             onChange={(event, value) => includedProductHandler(event, value)}
             defaultValue={packet ? includedProductsWhenEdit : undefined}
-          />
+          /> */}
         </Stack>
 
         {/* Free Products */}
