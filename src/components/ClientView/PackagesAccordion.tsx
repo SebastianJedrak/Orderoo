@@ -49,6 +49,7 @@ export default function Packages() {
       <Box my={4}>
         {packages?.map((packageItem) => {
           if (!packageItem.packagePrice[0]) return "";
+          // if (!packageItem.productsIncludedId.find(id => productItems?.some(product => product.productId === id))) return "";
           return (
             <Accordion
               key={packageItem.packageId}

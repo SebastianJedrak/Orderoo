@@ -16,8 +16,8 @@ import {
   useEffect,
   useCallback,
 } from "react";
-import { ProductsContext } from "../../ctx/ProductsContext";
-import { ProductsType } from "../../types";
+import { ProductsContext } from "../../../ctx/ProductsContext";
+import { ProductsType } from "../../../types";
 
 type Props = {
   onGetData: (data: ProductsType["packages"] | null) => void;

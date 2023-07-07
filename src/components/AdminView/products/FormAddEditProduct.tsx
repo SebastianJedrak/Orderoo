@@ -10,8 +10,8 @@ import {
 import ControlPointIcon from "@mui/icons-material/ControlPoint";
 import RemoveCircleOutlineIcon from "@mui/icons-material/RemoveCircleOutline";
 import { useContext, useState, ChangeEvent, useEffect } from "react";
-import { ProductsContext } from "../../ctx/ProductsContext";
-import { ProductsType } from "../../types";
+import { ProductsContext } from "../../../ctx/ProductsContext";
+import { ProductsType } from "../../../types";
 
 type Props = {
   onGetData: (data: ProductsType["productItems"] | null) => void;
