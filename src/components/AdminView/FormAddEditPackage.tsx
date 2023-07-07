@@ -52,7 +52,7 @@ export default function FormAddPackage(props: Props) {
     _event: React.SyntheticEvent<Element, Event>,
     value: any
   ) => {
-    setIncludedProductsError(false)
+    setIncludedProductsError(false);
     setIncludedProducts(value);
   };
 
@@ -215,19 +215,6 @@ export default function FormAddPackage(props: Props) {
   return (
     <form method="POST">
       <Stack spacing={1}>
-        {/* Products Included */}
-        <Stack spacing={1} width={"calc(100% - 40px)"}>
-          <Typography variant="body1">Products Included*</Typography>
-          <Autocomplete
-            multiple
-            id="includedProducts"
-            options={productItems!.map((product) => product.productName)}
-            renderInput={(params) => <TextField {...params} />}
-            onChange={(event, value) => includedProductHandler(event, value)}
-            defaultValue={packet ? includedProductsWhenEdit : undefined}
-          />
-        </Stack>
-
         {/* Prices */}
         <Stack spacing={1}>
           <Typography variant="body1">Prices*</Typography>
@@ -293,6 +280,19 @@ export default function FormAddPackage(props: Props) {
               <ControlPointIcon />
             </IconButton>
           </Stack>
+        </Stack>
+
+        {/* Products Included */}
+        <Stack spacing={1} width={"calc(100% - 40px)"}>
+          <Typography variant="body1">Products Included*</Typography>
+          <Autocomplete
+            multiple
+            id="includedProducts"
+            options={productItems!.map((product) => product.productName)}
+            renderInput={(params) => <TextField {...params} />}
+            onChange={(event, value) => includedProductHandler(event, value)}
+            defaultValue={packet ? includedProductsWhenEdit : undefined}
+          />
         </Stack>
 
         {/* Free Products */}
