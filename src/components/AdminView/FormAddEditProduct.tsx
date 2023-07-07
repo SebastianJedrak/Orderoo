@@ -69,7 +69,7 @@ export default function FormAddEdit(props: Props) {
 
   const productPriceInYearNameWhenEdit = product
     ? productFullPrice.productPrice.map((product: any, i: number) => {
-        return { name: `year-${i }`, ...product };
+        return { name: `year-${i}`, ...product };
       })
     : null;
 

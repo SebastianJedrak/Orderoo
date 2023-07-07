@@ -56,9 +56,15 @@ export default function FormAddPackage(props: Props) {
     setPackagePriceInYear((prev) => prev.slice(0, -1));
   };
 
+  const productPriceInYearNameWhenEdit = packet
+    ? packageFullPrice.packagePrice.map((product: any, i: number) => {
+        return { name: `year-${i}`, ...product };
+      })
+    : null;
+
   const [packagePriceInYears, setPackagePriceInYear] = useState<
     { name?: string; year?: string; price?: string }[]
-  >(packet ? packageFullPrice.packagePrice : [{ name: "year-0" }]);
+  >(productPriceInYearNameWhenEdit || [{ name: "year-0" }]);
   const [packageYearIsTouched, setPackageYearIsTouched] = useState(
     packet ? true : false
   );
