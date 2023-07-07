@@ -106,8 +106,8 @@ export default function FormAddPackage(props: Props) {
     const storageProducts: ProductsType["productItems"] = JSON.parse(
       localStorage.getItem("data")!
     ).productItems;
-
-    const optionsArr = storageProducts.filter(item => item.productPrice.map(year => year.year).some(year => packagePriceInYears.map(packet => packet.year!).includes(year)));
+    
+    const optionsArr = storageProducts.filter(item => packagePriceInYears.map(packet => packet.year!).every(year => item.productPrice.map(year => year.year).includes(year)));
 
     setProductsIncludedOptions(optionsArr.map(item => item.productName));
   }, [packagePriceInYears]);
