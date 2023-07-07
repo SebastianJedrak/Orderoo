@@ -237,7 +237,7 @@ export default function FormAddPackage(props: Props) {
               <Stack key={i} direction={"row"} alignItems={"center"}>
                 <TextField
                   label="Year"
-                  type="number"
+                  type="text"
                   placeholder=""
                   name={`year-${i}`}
                   onChange={(e) => changeYearPriceHandler("year", e)}
@@ -248,7 +248,7 @@ export default function FormAddPackage(props: Props) {
                 />
                 <TextField
                   label="Price"
-                  type="number"
+                  type="text"
                   InputProps={{ endAdornment: "PLN" }}
                   name={`year-${i}`}
                   onChange={(e) => changeYearPriceHandler("price", e)}
@@ -326,7 +326,7 @@ export default function FormAddPackage(props: Props) {
           <Autocomplete
             multiple
             id="freeProducts"
-            options={productItems!.map((product) => product.productName)}
+            options={productsIncludedOptions}
             renderInput={(params) => <TextField {...params} />}
             onChange={(event, value) => freeProductHandler(event, value)}
             defaultValue={packet ? freeProductsWhenEdit : undefined}
