@@ -3,8 +3,8 @@ import { Box, Divider, Paper, Stack, Typography } from "@mui/material";
 
 import DialogDelete from "./DialogDelete";
 import { ProductsType } from "../../types";
-import DialogAddEditProduct from "./DialogAddEditProduct";
-import DialogAddEditPackage from "./DialogAddEditPackage";
+import DialogAddEditProduct from "./products/DialogAddEditProduct";
+import DialogAddEditPackage from "./packages/DialogAddEditPackage";
 import ItemList from "./ItemList";
 
 type Props = {

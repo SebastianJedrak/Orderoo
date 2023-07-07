@@ -9,37 +9,37 @@ import {
   Stack,
 } from "@mui/material";
 import { SetStateAction, useContext, useEffect, useState } from "react";
-import FormAddEdit from "./FormAddEditProduct";
-import { ProductsType } from "../../types";
-import { ProductsContext } from "../../ctx/ProductsContext";
+import FormAddEditPackage from "./FormAddEditPackage";
+import { ProductsType } from "../../../types";
+import { ProductsContext } from "../../../ctx/ProductsContext";
 
 type Props = {
   isOpen: boolean;
   onClose: React.Dispatch<SetStateAction<boolean>>;
-  product: ProductsType["productItems"] | null;
+  package: ProductsType["packages"] | null;
 };
 
-export default function DialogAddEdit(props: Props) {
-  const product = props.product ? props.product[0] : null;
+export default function DialogAddPackage(props: Props) {
+  const packet = props.package ? props.package[0] : null;
 
   const dataStorage: ProductsType = JSON.parse(localStorage.getItem("data")!);
   const data = useContext(ProductsContext);
   const setData = data?.setData;
-  const [dataForm, setDataForm] = useState<ProductsType["productItems"] | null>(
+  const [dataForm, setDataForm] = useState<ProductsType["packages"] | null>(
     null
   );
   const [isError, setIsError] = useState(true);
   const [submitTouched, setSubmitTouched] = useState(false);
 
   useEffect(() => {
-    if (props.isOpen) setSubmitTouched(false)
-  }, [props])
-  
+    if (props.isOpen) setSubmitTouched(false);
+  }, [props]);
+
   const closeHandler = () => {
     props.onClose(false);
   };
 
-  const getDataHandler = (data: ProductsType["productItems"] | null) => {
+  const getDataHandler = (data: ProductsType["packages"] | null) => {
     if (data !== null) setDataForm(data);
   };
 
@@ -50,16 +50,16 @@ export default function DialogAddEdit(props: Props) {
   const submitHandler = () => {
     if (isError) return setSubmitTouched(true);
     props.onClose(false);
-    const filteredStorage = dataStorage.productItems.filter(
-      (product) => product.productId !== dataForm![0].productId
+    const filteredStorage = dataStorage.packages.filter(
+      (packet) => packet.packageId !== dataForm![0].packageId
     );
-    const newProductItems = [...filteredStorage, ...dataForm!].sort(
-      (a, b) => Number(a.productId) - Number(b.productId)
+    const newPackageItems = [...filteredStorage, ...dataForm!].sort(
+      (a, b) => Number(a.packageId) - Number(b.packageId)
     );
 
     const newData = {
-      productItems: newProductItems,
-      packages: dataStorage.packages,
+      productItems: dataStorage.productItems,
+      packages: newPackageItems,
     };
 
     localStorage.setItem("data", JSON.stringify(newData));
@@ -69,7 +69,7 @@ export default function DialogAddEdit(props: Props) {
   return (
     <Dialog open={props.isOpen} onClose={closeHandler}>
       <DialogTitle sx={{ px: 15 }} textAlign={"center"} color="primary">
-        {product ? `Edit ${product.productName}` : "Add New Product"}
+        {packet ? `Edit ${packet.packageName}` : "Add New Package"}
         <FormHelperText
           error
           sx={{
@@ -89,10 +89,10 @@ export default function DialogAddEdit(props: Props) {
             mb: 2,
           }}
         ></DialogContentText>
-        <FormAddEdit
+        <FormAddEditPackage
           onGetData={getDataHandler}
           onError={errorHandler}
-          product={props.product}
+          package={props.package}
         />
       </DialogContent>
       <Stack direction={"row"} justifyContent={"center"}>
@@ -113,7 +113,7 @@ export default function DialogAddEdit(props: Props) {
             type="submit"
             onClick={submitHandler}
           >
-            {product ? "Save" : "Add"}
+            {packet ? "Save" : "Add"}
           </Button>
         </DialogActions>
       </Stack>
