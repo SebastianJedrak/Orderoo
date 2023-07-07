@@ -8,7 +8,7 @@ import {
   FormHelperText,
   Stack,
 } from "@mui/material";
-import { SetStateAction, useContext, useState } from "react";
+import { SetStateAction, useContext, useEffect, useState } from "react";
 import FormAddEditPackage from "./FormAddEditPackage";
 import { ProductsType } from "../../types";
 import { ProductsContext } from "../../ctx/ProductsContext";
@@ -30,6 +30,10 @@ export default function DialogAddPackage(props: Props) {
   );
   const [isError, setIsError] = useState(true);
   const [submitTouched, setSubmitTouched] = useState(false);
+
+  useEffect(() => {
+    if (props.isOpen) setSubmitTouched(false)
+  }, [props])
 
   const closeHandler = () => {
     props.onClose(false);

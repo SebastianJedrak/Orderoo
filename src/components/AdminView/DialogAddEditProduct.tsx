@@ -35,7 +35,6 @@ export default function DialogAddEdit(props: Props) {
     if (props.isOpen) setSubmitTouched(false)
   }, [props])
   
-
   const closeHandler = () => {
     props.onClose(false);
   };
