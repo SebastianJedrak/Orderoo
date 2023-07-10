@@ -35,11 +35,11 @@ export default function Packages() {
     };
 
     // Product without price check
-    const [noPriceProductId, setNoPriceProductId] = useState<string[] | []>([])
-    useEffect(() => {
-      const noPriceArr = productItems!.filter(product => product.productPrice.length === 0)
-      setNoPriceProductId(noPriceArr.map(product => product.productId))
-    }, [productItems])
+    // const [noPriceProductId, setNoPriceProductId] = useState<string[] | [] >([])
+    // useEffect(() => {
+    //   const noPriceArr = productItems!.filter(product => product.productPrice.length === 0)
+    //   setNoPriceProductId(noPriceArr.map(product => product.productId))
+    // }, [productItems])
     
   return (
     <Paper
@@ -56,7 +56,7 @@ export default function Packages() {
       <Box my={4}>
         {packages?.map((packageItem) => {
           if (!packageItem.packagePrice[0]) return "";
-          if () return "";
+          //  if (packageItem.productsIncludedId.some(id => noPriceProductId.includes(id))) return "";
           
           
           return (

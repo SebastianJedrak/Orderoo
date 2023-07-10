@@ -25,7 +25,7 @@ export default function ProductsProvider(props: { children: React.ReactNode }) {
   // Fetch data
   async function getData() {
     try {
-      const response = await window.fetch("/products.json");
+      const response = await window.fetch("https://orderoo-b6ce1-default-rtdb.europe-west1.firebasedatabase.app/");
       if (!response.ok) throw new Error("Failed to fetch data");
       const data = await response.json();
       setData(data);
