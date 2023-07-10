@@ -6,7 +6,7 @@ import {
   Typography,
   Box,
 } from "@mui/material";
-import { useContext, useEffect, useState } from "react";
+import { useContext, useState } from "react";
 import { ProductsContext } from "../../ctx/ProductsContext";
 import { ExpandMore } from "@mui/icons-material";
 
