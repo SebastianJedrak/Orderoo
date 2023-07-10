@@ -6,7 +6,7 @@ import {
   Typography,
   Box,
 } from "@mui/material";
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { ProductsContext } from "../../ctx/ProductsContext";
 import { ExpandMore } from "@mui/icons-material";
 
@@ -34,6 +34,13 @@ export default function Packages() {
       setExpanded(isExpanded ? panel : false);
     };
 
+    // Product without price check
+    const [noPriceProductId, setNoPriceProductId] = useState<string[] | []>([])
+    useEffect(() => {
+      const noPriceArr = productItems!.filter(product => product.productPrice.length === 0)
+      setNoPriceProductId(noPriceArr.map(product => product.productId))
+    }, [productItems])
+    
   return (
     <Paper
       component="section"
@@ -49,7 +56,9 @@ export default function Packages() {
       <Box my={4}>
         {packages?.map((packageItem) => {
           if (!packageItem.packagePrice[0]) return "";
-          // if (!packageItem.productsIncludedId.find(id => productItems?.some(product => product.productId === id))) return "";
+          if () return "";
+          
+          
           return (
             <Accordion
               key={packageItem.packageId}
