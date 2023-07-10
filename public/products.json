@@ -1,0 +1,69 @@
+{
+  "productItems": [
+    {
+      "productId": "1",
+      "productName": "Internet",
+      "productPrice": [
+        { "year": "2023", "price": "39" },
+        { "year": "2024", "price": "49" },
+        { "year": "2025", "price": "59" }
+      ],
+      "productsRequired" : []
+    },
+    {
+      "productId": "2",
+      "productName": "TV",
+      "productPrice": [
+        { "year": "2023", "price": "49" },
+        { "year": "2024", "price": "49" },
+        { "year": "2025", "price": "59" }
+      ],
+      "productsRequired" : []
+    },
+    {
+      "productId": "3",
+      "productName": "Phone subscription",
+      "productPrice": [
+        { "year": "2023", "price": "29" },
+        { "year": "2024", "price": "29" },
+        { "year": "2025", "price": "29" }
+      ],
+      "productsRequired" : []
+    },
+    {
+      "productId": "4",
+      "productName": "4k Decoder",
+      "productPrice": [
+        { "year": "2023", "price": "29" },
+        { "year": "2024", "price": "29" },
+        { "year": "2025", "price": "29" }
+      ],
+      "productsRequired" : [{"id": "2", "name":"TV"}]
+    }
+  ],
+
+  "packages": [
+    {
+      "packageId": "1",
+      "packageName": "Internet + TV",
+      "packagePrice": [
+        { "year": "2023", "price": "79" },
+        { "year": "2024", "price": "89" },
+        { "year": "2025", "price": "99" }
+      ],
+      "productsIncludedId": ["1","2"],
+      "productsFreeId": ["4"]
+    },
+    {
+      "packageId": "2",
+      "packageName": "Internet + Phone subscription",
+      "packagePrice": [
+        { "year": "2023", "price": "64" },
+        { "year": "2024", "price": "64" },
+        { "year": "2025", "price": "64" }
+      ],
+      "productsIncludedId": ["1", "3"],
+      "productsFreeId": []
+    }
+  ]
+}

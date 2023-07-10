@@ -26,7 +26,7 @@ export default function ProductsProvider(props: { children: React.ReactNode }) {
   async function getData() {
     try {
       const response = await window.fetch(
-        "https://orderoo-b6ce1-default-rtdb.europe-west1.firebasedatabase.app/items.json",
+        "/products.json",
         {
           method: "GET",
           headers: {
