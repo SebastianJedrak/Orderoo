@@ -232,7 +232,7 @@ export default function FormAddEdit(props: Props) {
                   onChange={(e) => changeYearPriceHandler("year", e)}
                   onClick={(e) => productPriceInYearTouched("year", e)}
                   defaultValue={
-                    product ? productFullPrice.productPrice[i].year : ""
+                    product ? productFullPrice.productPrice[i] ? productFullPrice.productPrice[i].year : "" : ""
                   }
                 />
                 <TextField
@@ -243,7 +243,7 @@ export default function FormAddEdit(props: Props) {
                   onChange={(e) => changeYearPriceHandler("price", e)}
                   onClick={(e) => productPriceInYearTouched("price", e)}
                   defaultValue={
-                    product ? productFullPrice.productPrice[i].price : ""
+                    product ? productFullPrice.productPrice[i] ? productFullPrice.productPrice[i].price : "" : ""
                   }
                 />
                 {i === arr.length - 1 && i > 0 ? (

@@ -259,7 +259,7 @@ export default function FormAddPackage(props: Props) {
                   onChange={(e) => changeYearPriceHandler("year", e)}
                   onClick={(e) => packagePriceInYearTouched("year", e)}
                   defaultValue={
-                    packet ? packageFullPrice.packagePrice[i].year : ""
+                    packet ? packageFullPrice.packagePrice[i] ? packageFullPrice.packagePrice[i].year : "" : ""
                   }
                 />
                 <TextField
@@ -270,7 +270,7 @@ export default function FormAddPackage(props: Props) {
                   onChange={(e) => changeYearPriceHandler("price", e)}
                   onClick={(e) => packagePriceInYearTouched("price", e)}
                   defaultValue={
-                    packet ? packageFullPrice.packagePrice[i].price : ""
+                    packet ? packageFullPrice.packagePrice[i] ? packageFullPrice.packagePrice[i].price : "" : ""
                   }
                 />
                 {i === arr.length - 1 && i > 0 ? (
