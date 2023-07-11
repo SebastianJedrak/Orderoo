@@ -77,7 +77,7 @@ export default function AdminView(props: Props) {
         >
           {productItems ? "Products" : "Packages"}
         </Typography>
-        <Stack spacing={1} my={4} onClick={productClickHandler}>
+        <Stack spacing={1} mt={4} onClick={productClickHandler}>
           <Stack direction={"row"}>
             <Typography width={"32px"} sx={{ fontWeight: "fontWeightBold" }}>
               ID

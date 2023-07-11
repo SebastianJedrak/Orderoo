@@ -78,9 +78,9 @@ export default function ItemList(props: Props) {
   const packages = props.packages;
   if (packages)
     return (
-      <>
+      <>   
         {packages!.map((item) => (
-          <Fragment key={item.packageId}>
+          <Fragment key={item.packageId} >
             <Stack
               direction={"row"}
               justifyContent={"space-between"}
@@ -116,7 +116,7 @@ export default function ItemList(props: Props) {
             <Divider />
           </Fragment>
         ))}
-        <Box textAlign={"center"}>
+        <Box textAlign={"center"} >
           <Button
             endIcon={<ControlPointIcon />}
             variant="contained"
