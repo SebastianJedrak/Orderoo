@@ -174,7 +174,7 @@ export default function OrderForm() {
     <Paper
       component="section"
       elevation={3}
-      sx={{ mx: "auto", mb: 5, padding: 5, maxWidth: 700 }}
+      sx={{ mx: "auto", mb: 5, px: "5vw", py:5, maxWidth: 700 }}
     >
       {/* Header */}
       <Typography variant="h5" gutterBottom textAlign="center" color="primary">
