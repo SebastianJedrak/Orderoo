@@ -2,8 +2,14 @@ import { Box } from "@mui/material";
 import bgImg from "../../img/bg/2000x3000.png";
 import OrderForm from "./Order/OrderForm";
 import PackagesAccordion from "./PackagesAccordion";
+import { ProductsContext } from "../../ctx/ProductsContext";
+import { useContext } from "react";
 
 export default function Order() {
+  const data = useContext(ProductsContext);
+  const productItems = data?.productInSelectedYear;
+  const packageItems = data?.packageInSelectedYear;
+
   return (
     <Box
       minHeight={"80vh"}
@@ -16,8 +22,9 @@ export default function Order() {
         backgroundColor: "rgba(255, 255, 255, 0.6)",
       }}
     >
-      <OrderForm />
-      <PackagesAccordion />
+      {productItems!.length > 0 && <OrderForm />}
+      {packageItems!.length > 0 && <PackagesAccordion />}
+      
     </Box>
   );
 }
