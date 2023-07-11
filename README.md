@@ -26,6 +26,17 @@ Feature that allows the admin to create an offer for any company.
 
 [![React][React.js]][React-url]
 
+<!-- USAGE EXAMPLES -->
+## Usage
+
+### View
+<img src="https://github.com/SebastianJedrak/Orderoo/assets/115486676/8a019cbe-4af6-4669-baaa-84eeed810ef1" alt="view">
+
+Orderoo allows you to change the view between user and admin. User view allows you to place an order from the available offer for a given year and view available packages. The admin panel allows you to edit both products and packages.
+
+#### As User
+
+#### As Admin
 
 ## Installation
 
