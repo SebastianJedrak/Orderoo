@@ -49,6 +49,12 @@ A list with drop-down options containing information about available packages. I
 
 ### As Admin
 
+#### Product Management
+<img src="https://github.com/SebastianJedrak/Orderoo/assets/115486676/11d10c68-61f9-4309-a436-c283dd13f061" alt="product management">
+
+#### Item Edit
+<img src="https://github.com/SebastianJedrak/Orderoo/assets/115486676/4738f80d-9da4-417c-b4a2-4397b5b44890" alt="item edit">
+
 ## Installation
 
 1. Clone the repo
