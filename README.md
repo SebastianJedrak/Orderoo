@@ -34,9 +34,20 @@ Feature that allows the admin to create an offer for any company.
 
 Orderoo allows you to change the view between user and admin. User view allows you to place an order from the available offer for a given year and view available packages. The admin panel allows you to edit both products and packages.
 
-#### As User
+### As User
 
-#### As Admin
+#### Order Products
+<img src="https://github.com/SebastianJedrak/Orderoo/assets/115486676/cc4daed8-35ed-4a4b-be2c-7b4db10d1b91" alt="user products">
+
+In the user section you can order products. The price of the order will dynamically change after selecting the product. Any promotions resulting from combining products into a package will be taken into account automatically. 
+
+
+#### List of Packages
+<img src="https://github.com/SebastianJedrak/Orderoo/assets/115486676/8e390900-d887-4f9b-9259-eb6c7fdf70f0" alt="user packages">
+
+A list with drop-down options containing information about available packages. Information about the size of the discount and free products is generated dynamically. Selected promotions cannot be combined. If you choose multiple products from the same package, the most advantageous one will be chosen.
+
+### As Admin
 
 ## Installation
 
