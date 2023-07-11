@@ -53,7 +53,7 @@ A list with drop-down options containing information about available packages. I
 
 1. Clone the repo
    ```sh
-   git clone https://github.com/SebastianJedrak/Orderoo/tree/demo
+   git clone https://github.com/SebastianJedrak/Orderoo.git
    ```
 2. Install NPM packages
    ```sh
