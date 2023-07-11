@@ -37,7 +37,7 @@ export default function ItemList(props: Props) {
                 <Typography>{item.productName}</Typography>
               </Stack>
 
-              <Box>
+              <Box minWidth={"80px"}>
                 <IconButton
                   aria-label="edit"
                   color="primary"
@@ -91,7 +91,7 @@ export default function ItemList(props: Props) {
                 <Typography>{item.packageName}</Typography>
               </Stack>
 
-              <Box>
+              <Box minWidth={"80px"}>
                 <IconButton
                   aria-label="edit"
                   color="primary"
