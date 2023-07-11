@@ -252,6 +252,7 @@ export default function FormAddPackage(props: Props) {
               <Stack key={i} direction={"row"} alignItems={"center"} width={"100%"}>
                 <TextField
                   label="Year"
+                  sx={{minWidth: "50%"}}
                   type="text"
                   placeholder=""
                   name={`year-${i}`}
