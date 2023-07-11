@@ -32,7 +32,7 @@ Feature that allows the admin to create an offer for any company.
 ### View
 <img src="https://github.com/SebastianJedrak/Orderoo/assets/115486676/8a019cbe-4af6-4669-baaa-84eeed810ef1" alt="view">
 
-Orderoo allows you to change the view between user and admin. User view allows you to place an order from the available offer for a given year and view available packages. The admin panel allows you to edit both products and packages.
+Orderoo allows you to change the view between user and admin. User view allows you to place an order from the available offer for a given year and view available packages. The admin panel allows you to manage both products and packages.
 
 ### As User
 
@@ -52,8 +52,12 @@ A list with drop-down options containing information about available packages. I
 #### Product Management
 <img src="https://github.com/SebastianJedrak/Orderoo/assets/115486676/11d10c68-61f9-4309-a436-c283dd13f061" alt="product management">
 
-#### Item Edit
+The admin section contains information about all products and packages sorted by their id. The panel allows you to add a new item or delete / edit an existing one. Deleting a product will delete any packages associated with it.
+
+#### Item Add / Edit
 <img src="https://github.com/SebastianJedrak/Orderoo/assets/115486676/4738f80d-9da4-417c-b4a2-4397b5b44890" alt="item edit">
+
+Using the admin panel, you can add and edit products and packages. By the dialog window, you can fill the form and after clicking on save the item will be created or edited. If the required fields are not filled or filled incorrectly, an error will be displayed and the process will be stopped. After successful editing, the changes will be visible to the user.
 
 ## Installation
 
