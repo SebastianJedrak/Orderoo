@@ -311,7 +311,7 @@ export default function FormAddPackage(props: Props) {
         </Stack>
 
         {/* Products Included */}
-        <Stack spacing={1} width={"calc(100% - 40px)"}>
+        <Stack spacing={1}>
           <Typography variant="body1">Products Included*</Typography>
           <Autocomplete
             multiple
@@ -342,7 +342,7 @@ export default function FormAddPackage(props: Props) {
         </Stack>
 
         {/* Free Products */}
-        <Stack spacing={1} width={"calc(100% - 40px)"}>
+        <Stack spacing={1}>
           <Typography variant="body1" gutterBottom>
             Free Products
           </Typography>

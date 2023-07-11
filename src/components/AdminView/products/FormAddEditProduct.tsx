@@ -284,7 +284,7 @@ export default function FormAddEdit(props: Props) {
         </Stack>
 
         {/* REQ */}
-        <Stack spacing={1} width={"calc(100% - 40px)"}>
+        <Stack spacing={1}>
           <Typography variant="body1" gutterBottom>
             Required Products
           </Typography>
