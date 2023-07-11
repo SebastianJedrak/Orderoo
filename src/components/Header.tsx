@@ -1,6 +1,7 @@
 import { Typography, Button, Box, Stack } from "@mui/material";
 import { SetStateAction } from "react";
-import CachedIcon from '@mui/icons-material/Cached';
+import CachedIcon from "@mui/icons-material/Cached";
+import Logo from "../img/logo.png"
 
 type Props = {
   view: string;
@@ -23,9 +24,13 @@ function Header(props: Props) {
       px={3}
     >
       <Box sx={{ width: "100px" }} />
-      <Typography py={2} textAlign="center" color="common.white" variant="h4">
-        Media Connect
-      </Typography>
+      <Stack direction={"row"} py={1} alignItems={"center"} >
+        <img src={Logo} alt="logo" height={"64px"}/>
+        <Typography color="common.white" variant="h4">
+          Media Connect
+        </Typography>
+      </Stack>
+
       <Button
         onClick={changeViewHandler}
         sx={{ width: "100px" }}
@@ -33,7 +38,8 @@ function Header(props: Props) {
         variant="contained"
         color="secondary"
       >
-       <CachedIcon sx={{ mr:0.5 }} /> {props.view === "admin" ? "user" : "admin"}
+        <CachedIcon sx={{ mr: 0.5 }} />{" "}
+        {props.view === "admin" ? "user" : "admin"}
       </Button>
     </Stack>
   );
