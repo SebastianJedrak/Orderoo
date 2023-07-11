@@ -1,6 +1,5 @@
 import {
   Autocomplete,
-  Box,
   FormHelperText,
   IconButton,
   Stack,
@@ -196,7 +195,7 @@ export default function FormAddEdit(props: Props) {
     <form method="POST">
       <Stack spacing={1}>
         {/* NAME */}
-        <Stack spacing={1} width={"calc(100% - 40px)"}>
+        <Stack spacing={1} >
           <Typography variant="body1">Product Name*</Typography>
           <TextField
             type="text"
@@ -221,9 +220,9 @@ export default function FormAddEdit(props: Props) {
         {/* Prices */}
         <Stack spacing={1}>
           <Typography variant="body1">Prices*</Typography>
-          <Stack spacing={1} alignItems={"center"}>
+          <Stack spacing={1} alignItems={"center"} >
             {yearsArr.map((el, i, arr) => (
-              <Stack key={i} direction={"row"} alignItems={"center"}>
+              <Stack key={i} direction={"row"} alignItems={"center"} width={"100%"}>
                 <TextField
                   label="Year"
                   type="text"
@@ -246,7 +245,7 @@ export default function FormAddEdit(props: Props) {
                     product ? productFullPrice.productPrice[i] ? productFullPrice.productPrice[i].price : "" : ""
                   }
                 />
-                {i === arr.length - 1 && i > 0 ? (
+                {i === arr.length - 1 && i > 0 && (
                   <IconButton
                     sx={{ width: "40px", height: "40px" }}
                     aria-label="add-year"
@@ -254,9 +253,7 @@ export default function FormAddEdit(props: Props) {
                   >
                     <RemoveCircleOutlineIcon />
                   </IconButton>
-                ) : (
-                  <Box sx={{ width: "40px", height: "40px" }} />
-                )}
+                ) }
               </Stack>
             ))}
 

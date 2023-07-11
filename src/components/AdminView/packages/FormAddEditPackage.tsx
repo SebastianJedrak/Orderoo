@@ -250,7 +250,7 @@ export default function FormAddPackage(props: Props) {
           <Typography variant="body1">Prices*</Typography>
           <Stack spacing={1} alignItems={"center"}>
             {yearsArr.map((el, i, arr) => (
-              <Stack key={i} direction={"row"} alignItems={"center"}>
+              <Stack key={i} direction={"row"} alignItems={"center"} width={"100%"}>
                 <TextField
                   label="Year"
                   type="text"
@@ -273,7 +273,7 @@ export default function FormAddPackage(props: Props) {
                     packet ? packageFullPrice.packagePrice[i] ? packageFullPrice.packagePrice[i].price : "" : ""
                   }
                 />
-                {i === arr.length - 1 && i > 0 ? (
+                {i === arr.length - 1 && i > 0 && (
                   <IconButton
                     sx={{ width: "40px", height: "40px" }}
                     aria-label="add-year"
@@ -281,8 +281,6 @@ export default function FormAddPackage(props: Props) {
                   >
                     <RemoveCircleOutlineIcon />
                   </IconButton>
-                ) : (
-                  <Box sx={{ width: "40px", height: "40px" }} />
                 )}
               </Stack>
             ))}
