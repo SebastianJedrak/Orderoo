@@ -10,6 +10,8 @@ export default function Order() {
   const productItems = data?.productInSelectedYear;
   const packageItems = data?.packageInSelectedYear;
 
+  if (!productItems || !packageItems) return <></>
+
   return (
     <Box
       minHeight={"80vh"}
