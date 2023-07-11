@@ -109,7 +109,7 @@ export default function DialogFormSubmit(props: Props) {
 
   return (
     <Dialog open={props.isOpen} onClose={closeHandler}>
-      <DialogTitle sx={{ px: 15, mb: 2 }} textAlign={"center"} color="primary">
+      <DialogTitle sx={{mb: 2 }} textAlign={"center"} color="primary">
         DELETE
       </DialogTitle>
       <DialogContent>

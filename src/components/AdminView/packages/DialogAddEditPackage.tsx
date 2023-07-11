@@ -68,7 +68,7 @@ export default function DialogAddPackage(props: Props) {
 
   return (
     <Dialog open={props.isOpen} onClose={closeHandler}>
-      <DialogTitle sx={{ px: 15 }} textAlign={"center"} color="primary">
+      <DialogTitle textAlign={"center"} color="primary">
         {packet ? `Edit ${packet.packageName}` : "Add New Package"}
         <FormHelperText
           error
