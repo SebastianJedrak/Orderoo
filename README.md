@@ -54,6 +54,9 @@ Project: https://mediaconnect-orderoo.netlify.app/
 
 Repository: https://github.com/SebastianJedrak/Orderoo
 
+## Acknowledgments
+
+Logo: Image by <a href="https://www.freepik.com/free-psd/gradient-arrows-design_41916004.htm#page=3&query=arrow%20connect&position=14&from_view=search&track=ais">Freepik</a>
 
 [React.js]: https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB
 [React-url]: https://reactjs.org/
