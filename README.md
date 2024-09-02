@@ -82,7 +82,7 @@ jedrak.sebastian@gmail.com
 
 <a href="https://www.linkedin.com/in/sebastian-j%C4%99drak-495127233/"> Linkedin </a>
 
-Project: https://mediaconnect-orderoo.netlify.app/
+Project: https://sjorderoo.netlify.app/
 
 Repository: https://github.com/SebastianJedrak/Orderoo
 
